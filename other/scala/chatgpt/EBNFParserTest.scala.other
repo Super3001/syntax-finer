@@ -1,0 +1,65 @@
+import org.scalatest.funsuite.AnyFunSuite
+
+class EBNFParserTest extends AnyFunSuite {
+  test("Parse a simple rule with a terminal") {
+    val ebnfExample = """
+      <digit> ::= "0"
+    """
+    val ast = EBNFParser.parseEBNF(ebnfExample)
+    assert(ast == Map("digit" -> Terminal("0")))
+  }
+
+  test("Parse a simple rule with a non-terminal") {
+    val ebnfExample = """
+      <digit> ::= <number>
+    """
+    val ast = EBNFParser.parseEBNF(ebnfExample)
+    assert(ast == Map("digit" -> NonTerminal("number")))
+  }
+
+  test("Parse a rule with a choice") {
+    val ebnfExample = """
+      <digit> ::= "0" | "1"
+    """
+    val ast = EBNFParser.parseEBNF(ebnfExample)
+    assert(ast == Map("digit" -> Choice(List(Terminal("0"), Terminal("1")))))
+  }
+
+  test("Parse a rule with a sequence") {
+    val ebnfExample = """
+      <number> ::= "1" "2" "3"
+    """
+    val ast = EBNFParser.parseEBNF(ebnfExample)
+    assert(ast == Map("number" -> Sequence(List(Terminal("1"), Terminal("2"), Terminal("3")))))
+  }
+
+  test("Parse a rule with optional element") {
+    val ebnfExample = """
+      <optional_test> ::= [ "optional" ]
+    """
+    val ast = EBNFParser.parseEBNF(ebnfExample)
+    assert(ast == Map("optional_test" -> Optional(Terminal("optional"))))
+  }
+
+}
+
+// Testing the Parser with a Simple EBNF Example
+object EBNFParserTest extends App {
+  val ebnfExample = """
+    <expression> ::= <term> | <expression> "+" <term>
+    <term> ::= <factor> | <term> "*" <factor>
+    <factor> ::= <digit> | "(" <expression> ")"
+    <digit> ::= "0" | "1" | "2" | "3" | "4" | "5" | "6" | "7" | "8" | "9"
+    <optional_test> ::= [ "optional" ]
+    <repetition_test> ::= { "repeated" }
+    <group_test> ::= "(" <digit> "+" <digit> ")"
+  """
+
+  try {
+    EBNFParser.checkBalancedBrackets(ebnfExample)
+    val ast = EBNFParser.parseEBNF(ebnfExample)
+    println(ast)
+  } catch {
+    case e: ParsingException => println(s"Parsing error: ${e.getMessage}")
+  }
+}

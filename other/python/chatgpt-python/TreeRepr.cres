@@ -1,0 +1,9 @@
+<expression>
+   -> <term> "+" <expression>
+   -> <factor> "+" <term> "+" <expression>
+   -> <number> "+" <factor> "*" <term> "+" <expression>
+   -> "3" "+" <number> "*" <factor> "+" <expression>
+   -> "3" "+" "5" "*" "(" <expression> ")" "+" <expression>
+   -> "3" "+" "5" "*" "(" <term> "-" <expression> ")" "+" <expression>
+   -> "3" "+" "5" "*" "(" <number> "-" <number> ")" "+" <expression>
+   -> "3" "+" "5" "*" "(" "2" "-" "1" ")" "+" <expression>

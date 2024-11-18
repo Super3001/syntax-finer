@@ -1,0 +1,33 @@
+{
+    "metadata": {},
+    "names": {
+        "LINE": {
+            "view": null,
+            "pat": "RegexpPattern(/\\S.*/)"
+        },
+        "WORD": {
+            "view": null,
+            "pat": "RegexpPattern(/\\w+/)"
+        },
+        "NL": {
+            "view": null,
+            "pat": "OrPattern([SimplePattern('\\n'), SimplePattern('\\r\\n')])"
+        },
+        "LineBlank": {
+            "view": null,
+            "pat": "RegexpPattern(/\\s*/)"
+        },
+        "LineSpace": {
+            "view": null,
+            "pat": "ConcatPattern([NamePattern(LineBlank), NamePattern(LINE)])"
+        },
+        "LineFull": {
+            "view": null,
+            "pat": "ConcatPattern([NamePattern(LineSpace), NamePattern(NL)])"
+        },
+        "File": {
+            "view": "file",
+            "pat": "ConcatPattern([StarPattern([NamePattern(LineFull)]), NamePattern(LineBlank)])"
+        }
+    }
+}

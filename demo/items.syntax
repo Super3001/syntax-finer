@@ -1,0 +1,22 @@
+.rootdir D:/0.family.Songyufan
+
+import demo.base
+// import .
+// import []
+// import *
+
+PhysicalPositionStarter ::= '*'
+
+PhysicalPositionHeader ::= PysicalPositionStarter LINE NL
+
+GroupName ::= /[A-Z]+ ?- ?[0-9]{2}/
+
+GroupSpec ::= GroupName ' ' LINE NL
+
+SetSpec[file] ::= PysicalPositionHeader GroupSpec*
+
+SetNumber = /[0-9]{2,3}/
+
+ItemsSpec[file] ::= SetNumber NL GroupName
+
+

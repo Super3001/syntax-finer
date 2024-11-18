@@ -1,0 +1,16 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"type": "cangjieDebugBuild",
+			"cmd": "D:\\Cangjie\\bin\\cjc.exe",
+			"args": [
+				"-g",
+				"e:\\BaiduSyncdisk\\modeling\\syntax\\src\\main\\cangjie\\com\\syf\\finer\\nodes\\positioned.cj",
+				"-o",
+				"e:\\BaiduSyncdisk\\modeling\\syntax\\src\\main\\cangjie\\com\\syf\\finer\\nodes\\positioned.exe"
+			],
+			"label": "cangjieDebug build task - 2QH82qDOyA"
+		}
+	]
+}

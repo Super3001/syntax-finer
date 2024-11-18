@@ -1,0 +1,21 @@
+
+\n		c.NL.0, s.1.0
+L		r.Identifier.0, c.SyntaxLine.0
+I		
+N
+E
+\x20	~r.Identifier, s.?.0
+:		s.DefSymbol.0
+:		
+=
+\x20
+/
+\
+S
+.
+*
+/
+\n		t.SyntaxLine.Blank.0.0.0
+\n		t.SyntaxLine.Blank.0.0.1
+W
+...

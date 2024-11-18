@@ -1,0 +1,149 @@
+{
+    "<expression>": {
+        "Choice": [
+            {
+                "Sequence": [
+                    {
+                        "NonTerminal": "<term>"
+                    },
+                    {
+                        "Repetition": [
+                            {
+                                "Terminal": "+"
+                            },
+                            {
+                                "NonTerminal": "<term>"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    },
+    "<term>": {
+        "Choice": [
+            {
+                "Sequence": [
+                    {
+                        "NonTerminal": "<factor>"
+                    },
+                    {
+                        "Repetition": [
+                            {
+                                "Terminal": "*"
+                            },
+                            {
+                                "NonTerminal": "<factor>"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    },
+    "<factor>": {
+        "Choice": [
+            {
+                "Sequence": [
+                    {
+                        "Terminal": "("
+                    },
+                    {
+                        "NonTerminal": "<expression>"
+                    },
+                    {
+                        "Terminal": ")"
+                    }
+                ]
+            },
+            {
+                "Sequence": [
+                    {
+                        "NonTerminal": "<digit>"
+                    },
+                    {
+                        "Repetition": [
+                            {
+                                "NonTerminal": "<digit>"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    },
+    "<digit>": {
+        "Choice": [
+            {
+                "Sequence": [
+                    {
+                        "Terminal": "0"
+                    }
+                ]
+            },
+            {
+                "Sequence": [
+                    {
+                        "Terminal": "1"
+                    }
+                ]
+            },
+            {
+                "Sequence": [
+                    {
+                        "Terminal": "2"
+                    }
+                ]
+            },
+            {
+                "Sequence": [
+                    {
+                        "Terminal": "3"
+                    }
+                ]
+            },
+            {
+                "Sequence": [
+                    {
+                        "Terminal": "4"
+                    }
+                ]
+            },
+            {
+                "Sequence": [
+                    {
+                        "Terminal": "5"
+                    }
+                ]
+            },
+            {
+                "Sequence": [
+                    {
+                        "Terminal": "6"
+                    }
+                ]
+            },
+            {
+                "Sequence": [
+                    {
+                        "Terminal": "7"
+                    }
+                ]
+            },
+            {
+                "Sequence": [
+                    {
+                        "Terminal": "8"
+                    }
+                ]
+            },
+            {
+                "Sequence": [
+                    {
+                        "Terminal": "9"
+                    }
+                ]
+            }
+        ]
+    }
+}

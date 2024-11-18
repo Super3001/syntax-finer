@@ -1,0 +1,9 @@
+// forwardx.log
+for Line
+
+:: /^\++ /
+    => $.watchdog_cmd[*]
+
+:: /^es( \\w*)? exception: (.*)/
+    _2 => $.es_error[*].errmsg
+    _1 => $.es_error[*].es_action

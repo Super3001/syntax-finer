@@ -1,0 +1,2500 @@
++ script_path=/data1/script/data-wise
++++ dirname ./dhl_beijing_ruixing/.watchdog
+++ cd ./dhl_beijing_ruixing
+++ pwd
++ pushd /data/source/warehouse/dhl_beijing_ruixing
+/data/source/warehouse/dhl_beijing_ruixing /data/source/warehouse
++ read FILENAME
++ inotifywait -m -e close_write -e moved_to --format %f .
+Setting up watches.
+Watches established.
++ echo 2024-07-09.tar.gz
+2024-07-09.tar.gz
++ [[ -f ./2024-07-09.tar.gz ]]
++ [[ tar.gz == \t\a\r\.\g\z ]]
+++ pwd
++ path=/data/source/warehouse/dhl_beijing_ruixing
++ project=dhl_beijing_ruixing
++ date_str=2024-07-09
++ [[ dhl_beijing_ruixing != '' ]]
++ [[ 2024-07-09 != '' ]]
++ echo 'unpack /data/source/warehouse/dhl_beijing_ruixing/2024-07-09.tar.gz'
+unpack /data/source/warehouse/dhl_beijing_ruixing/2024-07-09.tar.gz
++ /data1/script/data-wise/unpack_data_from_project.sh 2024-07-09 dhl_beijing_ruixing
+warehouse:dhl_beijing_ruixing
+/data/source/warehouse/dhl_beijing_ruixing/2024-07-09/log
+access.log.2024-07-09.0.gz
+cam_tracker2.log.2024-07-09
+cart_comm.log.2024-07-09
+cartographer_ros.log.2024-07-09
+check_wifi.log.2024-07-09.0.gz
+Combination_features.log.2024-07-09
+data_collect.log.2024-07-09
+detail.log.2024-07-09.0.gz
+dyob_track.log.2024-07-09
+forwardx_docking.log.2024-07-09
+forwardx_laser_tools.log.2024-07-09
+forwardx_move_base.log.2024-07-09
+galane_det.log.2024-07-09
+geofencing.log.2024-07-09.0.gz
+infer_cls.log.2024-07-09
+infer_det.log.2024-07-09
+infer_seg.log.2024-07-09
+iw.log.2024-07-09.0.gz
+job.log.2024-07-09.0.gz
+joystick.log.2024-07-09.0.gz
+keli_backward.log.2024-07-09
+keli_forward.log.2024-07-09
+localization_manager.log.2024-07-09
+map.log.2024-07-09.0.gz
+map_server_navi.log.2024-07-09
+marker.log.2024-07-09
+move_base_attribute_map.log.2024-07-09
+multi_message_fusion.log.2024-07-09
+navigating.log.2024-07-09.0.gz
+normal.log.2024-07-09.0.gz
+perception_roi_map.log.2024-07-09
+ping.log.2024-07-09.0.gz
+record_ros.log.2024-07-09
+relative_detection.log.2024-07-09
+rgbd_bot.log.2024-07-09
+rgbd_obstacles.log.2024-07-09
+robot_adapter.log.2024-07-09
+robotkit.log.2024-07-09.0.gz
+robot_localization.log.2024-07-09
+scan_cluster.log.2024-07-09
+tf_launcher.log.2024-07-09
+trajectory_prediction.log.2024-07-09
+usb_cam_left.log.2024-07-09
+usb_cam.log.2024-07-09
+usb_cam_right.log.2024-07-09
+/data/source/warehouse/dhl_beijing_ruixing/2024-07-09/log
+access.log.2024-07-09.0.gz
+cam_tracker2.log.2024-07-09
+cart_comm.log.2024-07-09
+cartographer_ros.log.2024-07-09
+check_wifi.log.2024-07-09.0.gz
+Combination_features.log.2024-07-09
+data_collect.log.2024-07-09
+detail.log.2024-07-09.0.gz
+dyob_track.log.2024-07-09
+forwardx_docking.log.2024-07-09
+forwardx_laser_tools.log.2024-07-09
+forwardx_move_base.log.2024-07-09
+galane_det.log.2024-07-09
+geofencing.log.2024-07-09.0.gz
+infer_cls.log.2024-07-09
+infer_det.log.2024-07-09
+infer_seg.log.2024-07-09
+iw.log.2024-07-09.0.gz
+job.log.2024-07-09.0.gz
+joystick.log.2024-07-09.0.gz
+keli_backward.log.2024-07-09
+keli_forward.log.2024-07-09
+localization_manager.log.2024-07-09
+map.log.2024-07-09.0.gz
+map_server_navi.log.2024-07-09
+marker.log.2024-07-09
+move_base_attribute_map.log.2024-07-09
+multi_message_fusion.log.2024-07-09
+navigating.log.2024-07-09.0.gz
+normal.log.2024-07-09.0.gz
+perception_roi_map.log.2024-07-09
+ping.log.2024-07-09.0.gz
+record_ros.log.2024-07-09
+relative_detection.log.2024-07-09
+rgbd_bot.log.2024-07-09
+rgbd_obstacles.log.2024-07-09
+robot_adapter.log.2024-07-09
+robotkit.log.2024-07-09.0.gz
+robot_localization.log.2024-07-09
+scan_cluster.log.2024-07-09
+tf_launcher.log.2024-07-09
+trajectory_prediction.log.2024-07-09
+usb_cam_left.log.2024-07-09
+usb_cam.log.2024-07-09
+usb_cam_right.log.2024-07-09
+/data/source/warehouse/dhl_beijing_ruixing/2024-07-09/log
+access.log.2024-07-09.0.gz
+cam_tracker2.log.2024-07-09
+cart_comm.log.2024-07-09
+cartographer_ros.log.2024-07-09
+check_wifi.log.2024-07-09.0.gz
+Combination_features.log.2024-07-09
+data_collect.log.2024-07-09
+detail.log.2024-07-09.0.gz
+dyob_track.log.2024-07-09
+forwardx_docking.log.2024-07-09
+forwardx_laser_tools.log.2024-07-09
+forwardx_move_base.log.2024-07-09
+galane_det.log.2024-07-09
+geofencing.log.2024-07-09.0.gz
+infer_cls.log.2024-07-09
+infer_det.log.2024-07-09
+infer_seg.log.2024-07-09
+iw.log.2024-07-09.0.gz
+job.log.2024-07-09.0.gz
+joystick.log.2024-07-09.0.gz
+keli_backward.log.2024-07-09
+keli_forward.log.2024-07-09
+localization_manager.log.2024-07-09
+map.log.2024-07-09.0.gz
+map_server_navi.log.2024-07-09
+marker.log.2024-07-09
+move_base_attribute_map.log.2024-07-09
+multi_message_fusion.log.2024-07-09
+navigating.log.2024-07-09.0.gz
+normal.log.2024-07-09.0.gz
+perception_roi_map.log.2024-07-09
+ping.log.2024-07-09.0.gz
+record_ros.log.2024-07-09
+relative_detection.log.2024-07-09
+rgbd_bot.log.2024-07-09
+rgbd_obstacles.log.2024-07-09
+robot_adapter.log.2024-07-09
+robotkit.log.2024-07-09.0.gz
+robot_localization.log.2024-07-09
+scan_cluster.log.2024-07-09
+tf_launcher.log.2024-07-09
+trajectory_prediction.log.2024-07-09
+usb_cam_left.log.2024-07-09
+usb_cam.log.2024-07-09
+usb_cam_right.log.2024-07-09
+/data/source/warehouse/dhl_beijing_ruixing/2024-07-09/log
+access.log.2024-07-09.0.gz
+cam_tracker2.log.2024-07-09
+cart_comm.log.2024-07-09
+cartographer_ros.log.2024-07-09
+check_wifi.log.2024-07-09.0.gz
+Combination_features.log.2024-07-09
+data_collect.log.2024-07-09
+detail.log.2024-07-09.0.gz
+dyob_track.log.2024-07-09
+forwardx_docking.log.2024-07-09
+forwardx_laser_tools.log.2024-07-09
+forwardx_move_base.log.2024-07-09
+galane_det.log.2024-07-09
+geofencing.log.2024-07-09.0.gz
+infer_cls.log.2024-07-09
+infer_det.log.2024-07-09
+infer_seg.log.2024-07-09
+iw.log.2024-07-09.0.gz
+job.log.2024-07-09.0.gz
+joystick.log.2024-07-09.0.gz
+keli_backward.log.2024-07-09
+keli_forward.log.2024-07-09
+localization_manager.log.2024-07-09
+map.log.2024-07-09.0.gz
+map_server_navi.log.2024-07-09
+marker.log.2024-07-09
+move_base_attribute_map.log.2024-07-09
+multi_message_fusion.log.2024-07-09
+navigating.log.2024-07-09.0.gz
+normal.log.2024-07-09.0.gz
+perception_roi_map.log.2024-07-09
+ping.log.2024-07-09.0.gz
+record_ros.log.2024-07-09
+relative_detection.log.2024-07-09
+rgbd_bot.log.2024-07-09
+rgbd_obstacles.log.2024-07-09
+robot_adapter.log.2024-07-09
+robotkit.log.2024-07-09.0.gz
+robot_localization.log.2024-07-09
+scan_cluster.log.2024-07-09
+tf_launcher.log.2024-07-09
+trajectory_prediction.log.2024-07-09
+usb_cam_left.log.2024-07-09
+usb_cam.log.2024-07-09
+usb_cam_right.log.2024-07-09
+/data/source/warehouse/dhl_beijing_ruixing/2024-07-09/log
+access.log.2024-07-09.0.gz
+cam_tracker2.log.2024-07-09
+cart_comm.log.2024-07-09
+cartographer_ros.log.2024-07-09
+check_wifi.log.2024-07-09.0.gz
+Combination_features.log.2024-07-09
+data_collect.log.2024-07-09
+detail.log.2024-07-09.0.gz
+dyob_track.log.2024-07-09
+forwardx_docking.log.2024-07-09
+forwardx_laser_tools.log.2024-07-09
+forwardx_move_base.log.2024-07-09
+galane_det.log.2024-07-09
+geofencing.log.2024-07-09.0.gz
+infer_cls.log.2024-07-09
+infer_det.log.2024-07-09
+infer_seg.log.2024-07-09
+iw.log.2024-07-09.0.gz
+job.log.2024-07-09.0.gz
+joystick.log.2024-07-09.0.gz
+keli_backward.log.2024-07-09
+keli_forward.log.2024-07-09
+localization_manager.log.2024-07-09
+map.log.2024-07-09.0.gz
+map_server_navi.log.2024-07-09
+marker.log.2024-07-09
+move_base_attribute_map.log.2024-07-09
+multi_message_fusion.log.2024-07-09
+navigating.log.2024-07-09.0.gz
+normal.log.2024-07-09.0.gz
+perception_roi_map.log.2024-07-09
+ping.log.2024-07-09.0.gz
+record_ros.log.2024-07-09
+relative_detection.log.2024-07-09
+rgbd_bot.log.2024-07-09
+rgbd_obstacles.log.2024-07-09
+robot_adapter.log.2024-07-09
+robotkit.log.2024-07-09.0.gz
+robot_localization.log.2024-07-09
+scan_cluster.log.2024-07-09
+tf_launcher.log.2024-07-09
+trajectory_prediction.log.2024-07-09
+usb_cam_left.log.2024-07-09
+usb_cam.log.2024-07-09
+usb_cam_right.log.2024-07-09
+/data/source/warehouse/dhl_beijing_ruixing/2024-07-09/log
+access.log.2024-07-09.0.gz
+cam_tracker2.log.2024-07-09
+cart_comm.log.2024-07-09
+cartographer_ros.log.2024-07-09
+check_wifi.log.2024-07-09.0.gz
+Combination_features.log.2024-07-09
+data_collect.log.2024-07-09
+detail.log.2024-07-09.0.gz
+dyob_track.log.2024-07-09
+forwardx_docking.log.2024-07-09
+forwardx_laser_tools.log.2024-07-09
+forwardx_move_base.log.2024-07-09
+galane_det.log.2024-07-09
+geofencing.log.2024-07-09.0.gz
+geofencing.log.2024-07-09.1.gz
+geofencing.log.2024-07-09.2.gz
+geofencing.log.2024-07-09.3.gz
+geofencing.log.2024-07-09.4.gz
+infer_cls.log.2024-07-09
+infer_det.log.2024-07-09
+infer_seg.log.2024-07-09
+iw.log.2024-07-09.0.gz
+job.log.2024-07-09.0.gz
+joystick.log.2024-07-09.0.gz
+keli_backward.log.2024-07-09
+keli_forward.log.2024-07-09
+localization_manager.log.2024-07-09
+map.log.2024-07-09.0.gz
+map_server_navi.log.2024-07-09
+marker.log.2024-07-09
+move_base_attribute_map.log.2024-07-09
+multi_message_fusion.log.2024-07-09
+navigating.log.2024-07-09.0.gz
+normal.log.2024-07-09.0.gz
+perception_roi_map.log.2024-07-09
+ping.log.2024-07-09.0.gz
+record_ros.log.2024-07-09
+relative_detection.log.2024-07-09
+rgbd_bot.log.2024-07-09
+rgbd_obstacles.log.2024-07-09
+robot_adapter.log.2024-07-09
+robotkit.log.2024-07-09.0.gz
+robot_localization.log.2024-07-09
+scan_cluster.log.2024-07-09
+tf_launcher.log.2024-07-09
+trajectory_prediction.log.2024-07-09
+usb_cam_left.log.2024-07-09
+usb_cam.log.2024-07-09
+usb_cam_right.log.2024-07-09
+/data/source/warehouse/dhl_beijing_ruixing/2024-07-09/log
+access.log.2024-07-09.0.gz
+cam_tracker2.log.2024-07-09
+cart_comm.log.2024-07-09
+cartographer_ros.log.2024-07-09
+check_wifi.log.2024-07-09.0.gz
+Combination_features.log.2024-07-09
+data_collect.log.2024-07-09
+detail.log.2024-07-09.0.gz
+dyob_track.log.2024-07-09
+forwardx_docking.log.2024-07-09
+forwardx_laser_tools.log.2024-07-09
+forwardx_move_base.log.2024-07-09
+galane_det.log.2024-07-09
+geofencing.log.2024-07-09.0.gz
+infer_cls.log.2024-07-09
+infer_det.log.2024-07-09
+infer_seg.log.2024-07-09
+iw.log.2024-07-09.0.gz
+job.log.2024-07-09.0.gz
+joystick.log.2024-07-09.0.gz
+keli_backward.log.2024-07-09
+keli_forward.log.2024-07-09
+localization_manager.log.2024-07-09
+map.log.2024-07-09.0.gz
+map_server_navi.log.2024-07-09
+marker.log.2024-07-09
+move_base_attribute_map.log.2024-07-09
+multi_message_fusion.log.2024-07-09
+navigating.log.2024-07-09.0.gz
+normal.log.2024-07-09.0.gz
+perception_roi_map.log.2024-07-09
+ping.log.2024-07-09.0.gz
+record_ros.log.2024-07-09
+relative_detection.log.2024-07-09
+rgbd_bot.log.2024-07-09
+rgbd_obstacles.log.2024-07-09
+robot_adapter.log.2024-07-09
+robotkit.log.2024-07-09.0.gz
+robot_localization.log.2024-07-09
+scan_cluster.log.2024-07-09
+tf_launcher.log.2024-07-09
+trajectory_prediction.log.2024-07-09
+usb_cam_left.log.2024-07-09
+usb_cam.log.2024-07-09
+usb_cam_right.log.2024-07-09
+/data/source/warehouse/dhl_beijing_ruixing/2024-07-09/log
+access.log.2024-07-09.0.gz
+cam_tracker2.log.2024-07-09
+cart_comm.log.2024-07-09
+cartographer_ros.log.2024-07-09
+check_wifi.log.2024-07-09.0.gz
+Combination_features.log.2024-07-09
+data_collect.log.2024-07-09
+detail.log.2024-07-09.0.gz
+dyob_track.log.2024-07-09
+forwardx_docking.log.2024-07-09
+forwardx_laser_tools.log.2024-07-09
+forwardx_move_base.log.2024-07-09
+galane_det.log.2024-07-09
+geofencing.log.2024-07-09.0.gz
+infer_cls.log.2024-07-09
+infer_det.log.2024-07-09
+infer_seg.log.2024-07-09
+iw.log.2024-07-09.0.gz
+job.log.2024-07-09.0.gz
+joystick.log.2024-07-09.0.gz
+keli_backward.log.2024-07-09
+keli_forward.log.2024-07-09
+localization_manager.log.2024-07-09
+map.log.2024-07-09.0.gz
+map_server_navi.log.2024-07-09
+marker.log.2024-07-09
+move_base_attribute_map.log.2024-07-09
+multi_message_fusion.log.2024-07-09
+navigating.log.2024-07-09.0.gz
+normal.log.2024-07-09.0.gz
+perception_roi_map.log.2024-07-09
+ping.log.2024-07-09.0.gz
+record_ros.log.2024-07-09
+relative_detection.log.2024-07-09
+rgbd_bot.log.2024-07-09
+rgbd_obstacles.log.2024-07-09
+robot_adapter.log.2024-07-09
+robotkit.log.2024-07-09.0.gz
+robot_localization.log.2024-07-09
+scan_cluster.log.2024-07-09
+tf_launcher.log.2024-07-09
+trajectory_prediction.log.2024-07-09
+usb_cam_left.log.2024-07-09
+usb_cam.log.2024-07-09
+usb_cam_right.log.2024-07-09
+/data/source/warehouse/dhl_beijing_ruixing/2024-07-09/log
+access.log.2024-07-09.0.gz
+cam_tracker2.log.2024-07-09
+cart_comm.log.2024-07-09
+cartographer_ros.log.2024-07-09
+check_wifi.log.2024-07-09.0.gz
+Combination_features.log.2024-07-09
+data_collect.log.2024-07-09
+detail.log.2024-07-09.0.gz
+dyob_track.log.2024-07-09
+forwardx_docking.log.2024-07-09
+forwardx_laser_tools.log.2024-07-09
+forwardx_move_base.log.2024-07-09
+galane_det.log.2024-07-09
+geofencing.log.2024-07-09.0.gz
+infer_cls.log.2024-07-09
+infer_det.log.2024-07-09
+infer_seg.log.2024-07-09
+iw.log.2024-07-09.0.gz
+job.log.2024-07-09.0.gz
+joystick.log.2024-07-09.0.gz
+keli_backward.log.2024-07-09
+keli_forward.log.2024-07-09
+localization_manager.log.2024-07-09
+map.log.2024-07-09.0.gz
+map_server_navi.log.2024-07-09
+marker.log.2024-07-09
+move_base_attribute_map.log.2024-07-09
+multi_message_fusion.log.2024-07-09
+navigating.log.2024-07-09.0.gz
+normal.log.2024-07-09.0.gz
+perception_roi_map.log.2024-07-09
+ping.log.2024-07-09.0.gz
+record_ros.log.2024-07-09
+relative_detection.log.2024-07-09
+rgbd_bot.log.2024-07-09
+rgbd_obstacles.log.2024-07-09
+robot_adapter.log.2024-07-09
+robotkit.log.2024-07-09.0.gz
+robot_localization.log.2024-07-09
+scan_cluster.log.2024-07-09
+tf_launcher.log.2024-07-09
+trajectory_prediction.log.2024-07-09
+usb_cam_left.log.2024-07-09
+usb_cam.log.2024-07-09
+usb_cam_right.log.2024-07-09
+/data/source/warehouse/dhl_beijing_ruixing/2024-07-09/log
+access.log.2024-07-09.0.gz
+cam_tracker2.log.2024-07-09
+cart_comm.log.2024-07-09
+cartographer_ros.log.2024-07-09
+check_wifi.log.2024-07-09.0.gz
+Combination_features.log.2024-07-09
+data_collect.log.2024-07-09
+detail.log.2024-07-09.0.gz
+dyob_track.log.2024-07-09
+forwardx_docking.log.2024-07-09
+forwardx_laser_tools.log.2024-07-09
+forwardx_move_base.log.2024-07-09
+galane_det.log.2024-07-09
+geofencing.log.2024-07-09.0.gz
+infer_cls.log.2024-07-09
+infer_det.log.2024-07-09
+infer_seg.log.2024-07-09
+iw.log.2024-07-09.0.gz
+job.log.2024-07-09.0.gz
+joystick.log.2024-07-09.0.gz
+keli_backward.log.2024-07-09
+keli_forward.log.2024-07-09
+localization_manager.log.2024-07-09
+map.log.2024-07-09.0.gz
+map_server_navi.log.2024-07-09
+marker.log.2024-07-09
+move_base_attribute_map.log.2024-07-09
+multi_message_fusion.log.2024-07-09
+navigating.log.2024-07-09.0.gz
+normal.log.2024-07-09.0.gz
+perception_roi_map.log.2024-07-09
+ping.log.2024-07-09.0.gz
+record_ros.log.2024-07-09
+relative_detection.log.2024-07-09
+rgbd_bot.log.2024-07-09
+rgbd_obstacles.log.2024-07-09
+robot_adapter.log.2024-07-09
+robotkit.log.2024-07-09.0.gz
+robot_localization.log.2024-07-09
+scan_cluster.log.2024-07-09
+tf_launcher.log.2024-07-09
+trajectory_prediction.log.2024-07-09
+usb_cam_left.log.2024-07-09
+usb_cam.log.2024-07-09
+usb_cam_right.log.2024-07-09
+/data/source/warehouse/dhl_beijing_ruixing/2024-07-09/log
+access.log.2024-07-09.0.gz
+cam_tracker2.log.2024-07-09
+cart_comm.log.2024-07-09
+cartographer_ros.log.2024-07-09
+check_wifi.log.2024-07-09.0.gz
+Combination_features.log.2024-07-09
+data_collect.log.2024-07-09
+detail.log.2024-07-09.0.gz
+dyob_track.log.2024-07-09
+forwardx_docking.log.2024-07-09
+forwardx_laser_tools.log.2024-07-09
+forwardx_move_base.log.2024-07-09
+galane_det.log.2024-07-09
+geofencing.log.2024-07-09.0.gz
+infer_cls.log.2024-07-09
+infer_det.log.2024-07-09
+infer_seg.log.2024-07-09
+iw.log.2024-07-09.0.gz
+job.log.2024-07-09.0.gz
+joystick.log.2024-07-09.0.gz
+keli_backward.log.2024-07-09
+keli_forward.log.2024-07-09
+localization_manager.log.2024-07-09
+map.log.2024-07-09.0.gz
+map_server_navi.log.2024-07-09
+marker.log.2024-07-09
+move_base_attribute_map.log.2024-07-09
+multi_message_fusion.log.2024-07-09
+navigating.log.2024-07-09.0.gz
+normal.log.2024-07-09.0.gz
+perception_roi_map.log.2024-07-09
+ping.log.2024-07-09.0.gz
+record_ros.log.2024-07-09
+relative_detection.log.2024-07-09
+rgbd_bot.log.2024-07-09
+rgbd_obstacles.log.2024-07-09
+robot_adapter.log.2024-07-09
+robotkit.log.2024-07-09.0.gz
+robot_localization.log.2024-07-09
+scan_cluster.log.2024-07-09
+tf_launcher.log.2024-07-09
+trajectory_prediction.log.2024-07-09
+usb_cam_left.log.2024-07-09
+usb_cam.log.2024-07-09
+usb_cam_right.log.2024-07-09
+/data/source/warehouse/dhl_beijing_ruixing/2024-07-09/log
+access.log.2024-07-09.0.gz
+cam_tracker2.log.2024-07-09
+cart_comm.log.2024-07-09
+cartographer_ros.log.2024-07-09
+check_wifi.log.2024-07-09.0.gz
+Combination_features.log.2024-07-09
+data_collect.log.2024-07-09
+detail.log.2024-07-09.0.gz
+dyob_track.log.2024-07-09
+forwardx_docking.log.2024-07-09
+forwardx_laser_tools.log.2024-07-09
+forwardx_move_base.log.2024-07-09
+galane_det.log.2024-07-09
+geofencing.log.2024-07-09.0.gz
+infer_cls.log.2024-07-09
+infer_det.log.2024-07-09
+infer_seg.log.2024-07-09
+iw.log.2024-07-09.0.gz
+job.log.2024-07-09.0.gz
+joystick.log.2024-07-09.0.gz
+keli_backward.log.2024-07-09
+keli_forward.log.2024-07-09
+localization_manager.log.2024-07-09
+map.log.2024-07-09.0.gz
+map_server_navi.log.2024-07-09
+marker.log.2024-07-09
+move_base_attribute_map.log.2024-07-09
+multi_message_fusion.log.2024-07-09
+navigating.log.2024-07-09.0.gz
+normal.log.2024-07-09.0.gz
+perception_roi_map.log.2024-07-09
+ping.log.2024-07-09.0.gz
+record_ros.log.2024-07-09
+relative_detection.log.2024-07-09
+rgbd_bot.log.2024-07-09
+rgbd_obstacles.log.2024-07-09
+robot_adapter.log.2024-07-09
+robotkit.log.2024-07-09.0.gz
+robot_localization.log.2024-07-09
+scan_cluster.log.2024-07-09
+tf_launcher.log.2024-07-09
+trajectory_prediction.log.2024-07-09
+usb_cam_left.log.2024-07-09
+usb_cam.log.2024-07-09
+usb_cam_right.log.2024-07-09
+/data/source/warehouse/dhl_beijing_ruixing/2024-07-09/log
+access.log.2024-07-09.0.gz
+cam_tracker2.log.2024-07-09
+cart_comm.log.2024-07-09
+cartographer_ros.log.2024-07-09
+check_wifi.log.2024-07-09.0.gz
+Combination_features.log.2024-07-09
+data_collect.log.2024-07-09
+detail.log.2024-07-09.0.gz
+dyob_track.log.2024-07-09
+forwardx_docking.log.2024-07-09
+forwardx_laser_tools.log.2024-07-09
+forwardx_move_base.log.2024-07-09
+galane_det.log.2024-07-09
+geofencing.log.2024-07-09.0.gz
+infer_cls.log.2024-07-09
+infer_det.log.2024-07-09
+infer_seg.log.2024-07-09
+iw.log.2024-07-09.0.gz
+job.log.2024-07-09.0.gz
+joystick.log.2024-07-09.0.gz
+keli_backward.log.2024-07-09
+keli_forward.log.2024-07-09
+localization_manager.log.2024-07-09
+map.log.2024-07-09.0.gz
+map_server_navi.log.2024-07-09
+marker.log.2024-07-09
+move_base_attribute_map.log.2024-07-09
+multi_message_fusion.log.2024-07-09
+navigating.log.2024-07-09.0.gz
+normal.log.2024-07-09.0.gz
+perception_roi_map.log.2024-07-09
+ping.log.2024-07-09.0.gz
+record_ros.log.2024-07-09
+relative_detection.log.2024-07-09
+rgbd_bot.log.2024-07-09
+rgbd_obstacles.log.2024-07-09
+robot_adapter.log.2024-07-09
+robotkit.log.2024-07-09.0.gz
+robot_localization.log.2024-07-09
+scan_cluster.log.2024-07-09
+tf_launcher.log.2024-07-09
+trajectory_prediction.log.2024-07-09
+usb_cam_left.log.2024-07-09
+usb_cam.log.2024-07-09
+usb_cam_right.log.2024-07-09
+/data/source/warehouse/dhl_beijing_ruixing/2024-07-09/log
+access.log.2024-07-09.0.gz
+cam_tracker2.log.2024-07-09
+cart_comm.log.2024-07-09
+cartographer_ros.log.2024-07-09
+check_wifi.log.2024-07-09.0.gz
+Combination_features.log.2024-07-09
+data_collect.log.2024-07-09
+detail.log.2024-07-09.0.gz
+dyob_track.log.2024-07-09
+forwardx_docking.log.2024-07-09
+forwardx_laser_tools.log.2024-07-09
+forwardx_move_base.log.2024-07-09
+galane_det.log.2024-07-09
+geofencing.log.2024-07-09.0.gz
+infer_cls.log.2024-07-09
+infer_det.log.2024-07-09
+infer_seg.log.2024-07-09
+iw.log.2024-07-09.0.gz
+job.log.2024-07-09.0.gz
+joystick.log.2024-07-09.0.gz
+keli_backward.log.2024-07-09
+keli_forward.log.2024-07-09
+localization_manager.log.2024-07-09
+map.log.2024-07-09.0.gz
+map_server_navi.log.2024-07-09
+marker.log.2024-07-09
+move_base_attribute_map.log.2024-07-09
+multi_message_fusion.log.2024-07-09
+navigating.log.2024-07-09.0.gz
+normal.log.2024-07-09.0.gz
+perception_roi_map.log.2024-07-09
+ping.log.2024-07-09.0.gz
+record_ros.log.2024-07-09
+relative_detection.log.2024-07-09
+rgbd_bot.log.2024-07-09
+rgbd_obstacles.log.2024-07-09
+robot_adapter.log.2024-07-09
+robotkit.log.2024-07-09.0.gz
+robot_localization.log.2024-07-09
+scan_cluster.log.2024-07-09
+tf_launcher.log.2024-07-09
+trajectory_prediction.log.2024-07-09
+usb_cam_left.log.2024-07-09
+usb_cam.log.2024-07-09
+usb_cam_right.log.2024-07-09
+/data/source/warehouse/dhl_beijing_ruixing/2024-07-09/log
+access.log.2024-07-09.0.gz
+cam_tracker2.log.2024-07-09
+cart_comm.log.2024-07-09
+cartographer_ros.log.2024-07-09
+check_wifi.log.2024-07-09.0.gz
+Combination_features.log.2024-07-09
+data_collect.log.2024-07-09
+detail.log.2024-07-09.0.gz
+dyob_track.log.2024-07-09
+forwardx_docking.log.2024-07-09
+forwardx_laser_tools.log.2024-07-09
+forwardx_move_base.log.2024-07-09
+galane_det.log.2024-07-09
+geofencing.log.2024-07-09.0.gz
+infer_cls.log.2024-07-09
+infer_det.log.2024-07-09
+infer_seg.log.2024-07-09
+iw.log.2024-07-09.0.gz
+job.log.2024-07-09.0.gz
+joystick.log.2024-07-09.0.gz
+keli_backward.log.2024-07-09
+keli_forward.log.2024-07-09
+localization_manager.log.2024-07-09
+map.log.2024-07-09.0.gz
+map_server_navi.log.2024-07-09
+marker.log.2024-07-09
+move_base_attribute_map.log.2024-07-09
+multi_message_fusion.log.2024-07-09
+navigating.log.2024-07-09.0.gz
+normal.log.2024-07-09.0.gz
+perception_roi_map.log.2024-07-09
+ping.log.2024-07-09.0.gz
+record_ros.log.2024-07-09
+relative_detection.log.2024-07-09
+rgbd_bot.log.2024-07-09
+rgbd_obstacles.log.2024-07-09
+robot_adapter.log.2024-07-09
+robotkit.log.2024-07-09.0.gz
+robot_localization.log.2024-07-09
+scan_cluster.log.2024-07-09
+tf_launcher.log.2024-07-09
+trajectory_prediction.log.2024-07-09
+usb_cam_left.log.2024-07-09
+usb_cam.log.2024-07-09
+usb_cam_right.log.2024-07-09
+/data/source/warehouse/dhl_beijing_ruixing/2024-07-09/log
+access.log.2024-07-09.0.gz
+cam_tracker2.log.2024-07-09
+cart_comm.log.2024-07-09
+cartographer_ros.log.2024-07-09
+check_wifi.log.2024-07-09.0.gz
+Combination_features.log.2024-07-09
+data_collect.log.2024-07-09
+detail.log.2024-07-09.0.gz
+dyob_track.log.2024-07-09
+forwardx_docking.log.2024-07-09
+forwardx_laser_tools.log.2024-07-09
+forwardx_move_base.log.2024-07-09
+galane_det.log.2024-07-09
+geofencing.log.2024-07-09.0.gz
+infer_cls.log.2024-07-09
+infer_det.log.2024-07-09
+infer_seg.log.2024-07-09
+iw.log.2024-07-09.0.gz
+job.log.2024-07-09.0.gz
+joystick.log.2024-07-09.0.gz
+keli_backward.log.2024-07-09
+keli_forward.log.2024-07-09
+localization_manager.log.2024-07-09
+map.log.2024-07-09.0.gz
+map_server_navi.log.2024-07-09
+marker.log.2024-07-09
+move_base_attribute_map.log.2024-07-09
+multi_message_fusion.log.2024-07-09
+navigating.log.2024-07-09.0.gz
+normal.log.2024-07-09.0.gz
+perception_roi_map.log.2024-07-09
+ping.log.2024-07-09.0.gz
+record_ros.log.2024-07-09
+relative_detection.log.2024-07-09
+rgbd_bot.log.2024-07-09
+rgbd_obstacles.log.2024-07-09
+robot_adapter.log.2024-07-09
+robotkit.log.2024-07-09.0.gz
+robot_localization.log.2024-07-09
+scan_cluster.log.2024-07-09
+tf_launcher.log.2024-07-09
+trajectory_prediction.log.2024-07-09
+usb_cam_left.log.2024-07-09
+usb_cam.log.2024-07-09
+usb_cam_right.log.2024-07-09
+/data/source/warehouse/dhl_beijing_ruixing/2024-07-09/log
+access.log.2024-07-09.0.gz
+cam_tracker2.log.2024-07-09
+cart_comm.log.2024-07-09
+cartographer_ros.log.2024-07-09
+check_wifi.log.2024-07-09.0.gz
+Combination_features.log.2024-07-09
+data_collect.log.2024-07-09
+detail.log.2024-07-09.0.gz
+dyob_track.log.2024-07-09
+forwardx_docking.log.2024-07-09
+forwardx_laser_tools.log.2024-07-09
+forwardx_move_base.log.2024-07-09
+galane_det.log.2024-07-09
+geofencing.log.2024-07-09.0.gz
+infer_cls.log.2024-07-09
+infer_det.log.2024-07-09
+infer_seg.log.2024-07-09
+iw.log.2024-07-09.0.gz
+job.log.2024-07-09.0.gz
+joystick.log.2024-07-09.0.gz
+keli_backward.log.2024-07-09
+keli_forward.log.2024-07-09
+localization_manager.log.2024-07-09
+map.log.2024-07-09.0.gz
+map_server_navi.log.2024-07-09
+marker.log.2024-07-09
+move_base_attribute_map.log.2024-07-09
+multi_message_fusion.log.2024-07-09
+navigating.log.2024-07-09.0.gz
+normal.log.2024-07-09.0.gz
+perception_roi_map.log.2024-07-09
+ping.log.2024-07-09.0.gz
+record_ros.log.2024-07-09
+relative_detection.log.2024-07-09
+rgbd_bot.log.2024-07-09
+rgbd_obstacles.log.2024-07-09
+robot_adapter.log.2024-07-09
+robotkit.log.2024-07-09.0.gz
+robot_localization.log.2024-07-09
+scan_cluster.log.2024-07-09
+tf_launcher.log.2024-07-09
+trajectory_prediction.log.2024-07-09
+usb_cam_left.log.2024-07-09
+usb_cam.log.2024-07-09
+usb_cam_right.log.2024-07-09
+/data/source/warehouse/dhl_beijing_ruixing/2024-07-09/log
+/data/source/warehouse/dhl_beijing_ruixing/2024-07-09/log
+access.log.2024-07-09.0.gz
+cam_tracker2.log.2024-07-09
+cart_comm.log.2024-07-09
+cartographer_ros.log.2024-07-09
+check_wifi.log.2024-07-09.0.gz
+Combination_features.log.2024-07-09
+data_collect.log.2024-07-09
+detail.log.2024-07-09.0.gz
+dyob_track.log.2024-07-09
+forwardx_docking.log.2024-07-09
+forwardx_laser_tools.log.2024-07-09
+forwardx_move_base.log.2024-07-09
+galane_det.log.2024-07-09
+geofencing.log.2024-07-09.0.gz
+infer_cls.log.2024-07-09
+infer_det.log.2024-07-09
+infer_seg.log.2024-07-09
+iw.log.2024-07-09.0.gz
+job.log.2024-07-09.0.gz
+joystick.log.2024-07-09.0.gz
+keli_backward.log.2024-07-09
+keli_forward.log.2024-07-09
+localization_manager.log.2024-07-09
+map.log.2024-07-09.0.gz
+map_server_navi.log.2024-07-09
+marker.log.2024-07-09
+move_base_attribute_map.log.2024-07-09
+multi_message_fusion.log.2024-07-09
+navigating.log.2024-07-09.0.gz
+normal.log.2024-07-09.0.gz
+perception_roi_map.log.2024-07-09
+ping.log.2024-07-09.0.gz
+record_ros.log.2024-07-09
+relative_detection.log.2024-07-09
+rgbd_bot.log.2024-07-09
+rgbd_obstacles.log.2024-07-09
+robot_adapter.log.2024-07-09
+robotkit.log.2024-07-09.0.gz
+robot_localization.log.2024-07-09
+scan_cluster.log.2024-07-09
+tf_launcher.log.2024-07-09
+trajectory_prediction.log.2024-07-09
+usb_cam_left.log.2024-07-09
+usb_cam.log.2024-07-09
+usb_cam_right.log.2024-07-09
+/data/source/warehouse/dhl_beijing_ruixing/2024-07-09/log
+access.log.2024-07-09.0.gz
+cam_tracker2.log.2024-07-09
+cart_comm.log.2024-07-09
+cartographer_ros.log.2024-07-09
+check_wifi.log.2024-07-09.0.gz
+Combination_features.log.2024-07-09
+data_collect.log.2024-07-09
+detail.log.2024-07-09.0.gz
+dyob_track.log.2024-07-09
+forwardx_docking.log.2024-07-09
+forwardx_laser_tools.log.2024-07-09
+forwardx_move_base.log.2024-07-09
+galane_det.log.2024-07-09
+geofencing.log.2024-07-09.0.gz
+infer_cls.log.2024-07-09
+infer_det.log.2024-07-09
+infer_seg.log.2024-07-09
+iw.log.2024-07-09.0.gz
+job.log.2024-07-09.0.gz
+joystick.log.2024-07-09.0.gz
+keli_backward.log.2024-07-09
+keli_forward.log.2024-07-09
+localization_manager.log.2024-07-09
+map.log.2024-07-09.0.gz
+map_server_navi.log.2024-07-09
+marker.log.2024-07-09
+move_base_attribute_map.log.2024-07-09
+multi_message_fusion.log.2024-07-09
+navigating.log.2024-07-09.0.gz
+normal.log.2024-07-09.0.gz
+perception_roi_map.log.2024-07-09
+ping.log.2024-07-09.0.gz
+record_ros.log.2024-07-09
+relative_detection.log.2024-07-09
+rgbd_bot.log.2024-07-09
+rgbd_obstacles.log.2024-07-09
+robot_adapter.log.2024-07-09
+robotkit.log.2024-07-09.0.gz
+robot_localization.log.2024-07-09
+scan_cluster.log.2024-07-09
+tf_launcher.log.2024-07-09
+trajectory_prediction.log.2024-07-09
+usb_cam_left.log.2024-07-09
+usb_cam.log.2024-07-09
+usb_cam_right.log.2024-07-09
+/data/source/warehouse/dhl_beijing_ruixing/2024-07-09/log
+access.log.2024-07-09.0.gz
+cam_tracker2.log.2024-07-09
+cart_comm.log.2024-07-09
+cartographer_ros.log.2024-07-09
+check_wifi.log.2024-07-09.0.gz
+Combination_features.log.2024-07-09
+data_collect.log.2024-07-09
+detail.log.2024-07-09.0.gz
+dyob_track.log.2024-07-09
+forwardx_docking.log.2024-07-09
+forwardx_laser_tools.log.2024-07-09
+forwardx_move_base.log.2024-07-09
+galane_det.log.2024-07-09
+geofencing.log.2024-07-09.0.gz
+infer_cls.log.2024-07-09
+infer_det.log.2024-07-09
+infer_seg.log.2024-07-09
+iw.log.2024-07-09.0.gz
+job.log.2024-07-09.0.gz
+joystick.log.2024-07-09.0.gz
+keli_backward.log.2024-07-09
+keli_forward.log.2024-07-09
+localization_manager.log.2024-07-09
+map.log.2024-07-09.0.gz
+map_server_navi.log.2024-07-09
+marker.log.2024-07-09
+move_base_attribute_map.log.2024-07-09
+multi_message_fusion.log.2024-07-09
+navigating.log.2024-07-09.0.gz
+normal.log.2024-07-09.0.gz
+perception_roi_map.log.2024-07-09
+ping.log.2024-07-09.0.gz
+record_ros.log.2024-07-09
+relative_detection.log.2024-07-09
+rgbd_bot.log.2024-07-09
+rgbd_obstacles.log.2024-07-09
+robot_adapter.log.2024-07-09
+robotkit.log.2024-07-09.0.gz
+robot_localization.log.2024-07-09
+scan_cluster.log.2024-07-09
+tf_launcher.log.2024-07-09
+trajectory_prediction.log.2024-07-09
+usb_cam_left.log.2024-07-09
+usb_cam.log.2024-07-09
+usb_cam_right.log.2024-07-09
+/data/source/warehouse/dhl_beijing_ruixing/2024-07-09/log
+access.log.2024-07-09.0.gz
+cam_tracker2.log.2024-07-09
+cart_comm.log.2024-07-09
+cartographer_ros.log.2024-07-09
+check_wifi.log.2024-07-09.0.gz
+Combination_features.log.2024-07-09
+data_collect.log.2024-07-09
+detail.log.2024-07-09.0.gz
+dyob_track.log.2024-07-09
+forwardx_docking.log.2024-07-09
+forwardx_laser_tools.log.2024-07-09
+forwardx_move_base.log.2024-07-09
+galane_det.log.2024-07-09
+geofencing.log.2024-07-09.0.gz
+infer_cls.log.2024-07-09
+infer_det.log.2024-07-09
+infer_seg.log.2024-07-09
+iw.log.2024-07-09.0.gz
+job.log.2024-07-09.0.gz
+joystick.log.2024-07-09.0.gz
+keli_backward.log.2024-07-09
+keli_forward.log.2024-07-09
+localization_manager.log.2024-07-09
+map.log.2024-07-09.0.gz
+map_server_navi.log.2024-07-09
+marker.log.2024-07-09
+move_base_attribute_map.log.2024-07-09
+multi_message_fusion.log.2024-07-09
+navigating.log.2024-07-09.0.gz
+normal.log.2024-07-09.0.gz
+perception_roi_map.log.2024-07-09
+ping.log.2024-07-09.0.gz
+record_ros.log.2024-07-09
+relative_detection.log.2024-07-09
+rgbd_bot.log.2024-07-09
+rgbd_obstacles.log.2024-07-09
+robot_adapter.log.2024-07-09
+robotkit.log.2024-07-09.0.gz
+robot_localization.log.2024-07-09
+scan_cluster.log.2024-07-09
+tf_launcher.log.2024-07-09
+trajectory_prediction.log.2024-07-09
+usb_cam_left.log.2024-07-09
+usb_cam.log.2024-07-09
+usb_cam_right.log.2024-07-09
+/data/source/warehouse/dhl_beijing_ruixing/2024-07-09/log
+cam_tracker2.log.2024-07-09
+cart_comm.log.2024-07-09
+cartographer_ros.log.2024-07-09
+check_wifi.log.2024-07-09.0.gz
+Combination_features.log.2024-07-09
+data_collect.log.2024-07-09
+detail.log.2024-07-09.0.gz
+dm_down_reader.log.2024-07-09
+dyob_track.log.2024-07-09
+forwardx_docking.log.2024-07-09
+forwardx_laser_tools.log.2024-07-09
+forwardx_move_base.log.2024-07-09
+galane_det.log.2024-07-09
+infer_cls.log.2024-07-09
+infer_det.log.2024-07-09
+infer_seg.log.2024-07-09
+iw.log.2024-07-09.0.gz
+job.log.2024-07-09.0.gz
+joystick.log.2024-07-09.0.gz
+keli_backward.log.2024-07-09
+localization_manager.log.2024-07-09
+map.log.2024-07-09.0.gz
+map_server_navi.log.2024-07-09
+marker.log.2024-07-09
+move_base_attribute_map.log.2024-07-09
+multi_message_fusion.log.2024-07-09
+perception_roi_map.log.2024-07-09
+record_ros.log.2024-07-09
+relative_detection.log.2024-07-09
+robot_adapter.log.2024-07-09
+robot_localization.log.2024-07-09
+scan_cluster.log.2024-07-09
+tf_launcher.log.2024-07-09
+trajectory_prediction.log.2024-07-09
+usb_cam.log.2024-07-09
+usb_cam_right.log.2024-07-09
+/data/source/warehouse/dhl_beijing_ruixing/2024-07-09/log
+cam_tracker2.log.2024-07-09
+cart_comm.log.2024-07-09
+cartographer_ros.log.2024-07-09
+check_wifi.log.2024-07-09.0.gz
+Combination_features.log.2024-07-09
+data_collect.log.2024-07-09
+detail.log.2024-07-09.0.gz
+dm_down_reader.log.2024-07-09
+dyob_track.log.2024-07-09
+forwardx_docking.log.2024-07-09
+forwardx_laser_tools.log.2024-07-09
+forwardx_move_base.log.2024-07-09
+galane_det.log.2024-07-09
+infer_cls.log.2024-07-09
+infer_det.log.2024-07-09
+infer_seg.log.2024-07-09
+iw.log.2024-07-09.0.gz
+job.log.2024-07-09.0.gz
+joystick.log.2024-07-09.0.gz
+keli_backward.log.2024-07-09
+localization_manager.log.2024-07-09
+map.log.2024-07-09.0.gz
+map_server_navi.log.2024-07-09
+marker.log.2024-07-09
+move_base_attribute_map.log.2024-07-09
+multi_message_fusion.log.2024-07-09
+perception_roi_map.log.2024-07-09
+record_ros.log.2024-07-09
+relative_detection.log.2024-07-09
+robot_adapter.log.2024-07-09
+robot_localization.log.2024-07-09
+scan_cluster.log.2024-07-09
+tf_launcher.log.2024-07-09
+trajectory_prediction.log.2024-07-09
+usb_cam.log.2024-07-09
+usb_cam_right.log.2024-07-09
+/data/source/warehouse/dhl_beijing_ruixing/2024-07-09/log
+cam_tracker2.log.2024-07-09
+cart_comm.log.2024-07-09
+cartographer_ros.log.2024-07-09
+check_wifi.log.2024-07-09.0.gz
+Combination_features.log.2024-07-09
+data_collect.log.2024-07-09
+detail.log.2024-07-09.0.gz
+dm_down_reader.log.2024-07-09
+dyob_track.log.2024-07-09
+forwardx_docking.log.2024-07-09
+forwardx_laser_tools.log.2024-07-09
+forwardx_move_base.log.2024-07-09
+galane_det.log.2024-07-09
+infer_cls.log.2024-07-09
+infer_det.log.2024-07-09
+infer_seg.log.2024-07-09
+iw.log.2024-07-09.0.gz
+job.log.2024-07-09.0.gz
+joystick.log.2024-07-09.0.gz
+keli_backward.log.2024-07-09
+localization_manager.log.2024-07-09
+map.log.2024-07-09.0.gz
+map_server_navi.log.2024-07-09
+marker.log.2024-07-09
+move_base_attribute_map.log.2024-07-09
+multi_message_fusion.log.2024-07-09
+perception_roi_map.log.2024-07-09
+record_ros.log.2024-07-09
+relative_detection.log.2024-07-09
+robot_adapter.log.2024-07-09
+robotkit.log.2024-07-09.0.gz
+robot_localization.log.2024-07-09
+scan_cluster.log.2024-07-09
+tf_launcher.log.2024-07-09
+trajectory_prediction.log.2024-07-09
+usb_cam.log.2024-07-09
+usb_cam_right.log.2024-07-09
++ echo 'stats indic ...'
+stats indic ...
++ /data1/script/data-wise/robot_stats_indic_project.sh All 2024-07-09 dhl_beijing_ruixing
+date:2024-07-09
+indic:All
+index is: forwardx_odom_daily_stats
+project is: dhl_beijing_ruixing
+timestamp from 1720454400 to 1720540800
+index is: forwardx_error_daily_stats
+project is: dhl_beijing_ruixing
+timestamp from 1720454400 to 1720540800
+index is: forwardx_system_error_info
+project is: dhl_beijing_ruixing
+timestamp from 1720454400 to 1720540800
+index is: forwardx_syserr_daily_stats
+project is: dhl_beijing_ruixing
+timestamp from 1720454400 to 1720540800
+index is: forwardx_ci_daily_stats
+project is: dhl_beijing_ruixing
+timestamp from 1720454400 to 1720540800
+index is: forwardx_robot_ci_info
+project is: dhl_beijing_ruixing
+timestamp from 1720454400 to 1720540800
+index is: forwardx_fsize_daily_stats
+project is: dhl_beijing_ruixing
+timestamp from 1720454400 to 1720540800
+index is: forwardx_miss_daily_stats
+project is: dhl_beijing_ruixing
+timestamp from 1720454400 to 1720540800
+index is: forwardx_robot_miss_info
+project is: dhl_beijing_ruixing
+timestamp from 1720454400 to 1720540800
+index is: forwardx_initpose_daily_stats
+project is: dhl_beijing_ruixing
+timestamp from 1720454400 to 1720540800
+index is: forwardx_camerr_daily_stats
+project is: dhl_beijing_ruixing
+timestamp from 1720454400 to 1720540800
+index is: forwardx_robot_camerr_info
+project is: dhl_beijing_ruixing
+timestamp from 1720454400 to 1720540800
+index is: forwardx_robot_charging_info
+project is: dhl_beijing_ruixing
+timestamp from 1720454400 to 1720540800
+index is: forwardx_docking_daily_stats
+project is: dhl_beijing_ruixing
+timestamp from 1720454400 to 1720540800
+index is: forwardx_robot_docking_info
+project is: dhl_beijing_ruixing
+timestamp from 1720454400 to 1720540800
+index is: forwardx_navigation_daily_stats
+project is: dhl_beijing_ruixing
+timestamp from 1720454400 to 1720540800
+index is: forwardx_robot_navigation_info
+project is: dhl_beijing_ruixing
+timestamp from 1720454400 to 1720540800
+index is: forwardx_block_daily_stats
+project is: dhl_beijing_ruixing
+timestamp from 1720454400 to 1720540800
+index is: forwardx_robot_block_info
+project is: dhl_beijing_ruixing
+timestamp from 1720454400 to 1720540800
+index is: forwardx_marker_daily_stats
+project is: dhl_beijing_ruixing
+timestamp from 1720454400 to 1720540800
+index is: forwardx_robot_marker_info
+project is: dhl_beijing_ruixing
+timestamp from 1720454400 to 1720540800
+index is: forwardx_robot_dyobfail_info
+project is: dhl_beijing_ruixing
+timestamp from 1720454400 to 1720540800
+index is: forwardx_robot_version_info
+project is: dhl_beijing_ruixing
+timestamp from 1720454400 to 1720540800
+index is: forwardx_robot_map_info
+project is: dhl_beijing_ruixing
+timestamp from 1720454400 to 1720540800
+index is: forwardx_robot_battery_info
+project is: dhl_beijing_ruixing
+timestamp from 1720454400 to 1720540800
+index is: forwardx_robot_battery_exception_info
+project is: dhl_beijing_ruixing
+timestamp from 1720454400 to 1720540800
+index is: forwardx_robot_tdev_info
+project is: dhl_beijing_ruixing
+timestamp from 1720454400 to 1720540800
+index is: forwardx_network_daily_stats
+project is: dhl_beijing_ruixing
+timestamp from 1720454400 to 1720540800
+index is: forwardx_robot_network_wifi_info
+project is: dhl_beijing_ruixing
+timestamp from 1720454400 to 1720540800
+index is: forwardx_robot_network_ping_info
+project is: dhl_beijing_ruixing
+timestamp from 1720454400 to 1720540800
+index is: forwardx_robot_network_p2p_info
+project is: dhl_beijing_ruixing
+timestamp from 1720454400 to 1720540800
+index is: forwardx_robot_network_disconnect_info
+project is: dhl_beijing_ruixing
+timestamp from 1720454400 to 1720540800
+index is: forwardx_robot_disk_info
+project is: dhl_beijing_ruixing
+timestamp from 1720454400 to 1720540800
+index is: forwardx_health_daily_stats
+project is: dhl_beijing_ruixing
+timestamp from 1720454400 to 1720540800
+index is: forwardx_job_daily_stats
+project is: dhl_beijing_ruixing
+timestamp from 1720454400 to 1720540800
+index is: forwardx_robot_job_info
+project is: dhl_beijing_ruixing
+timestamp from 1720454400 to 1720540800
+index is: forwardx_lift_daily_stats
+project is: dhl_beijing_ruixing
+timestamp from 1720454400 to 1720540800
+index is: forwardx_shutdown_daily_stats
+project is: dhl_beijing_ruixing
+timestamp from 1720454400 to 1720540800
+index is: forwardx_power_action_info
+project is: dhl_beijing_ruixing
+timestamp from 1720454400 to 1720540800
+date_str: 2024-07-09
+odom_result_file: /data/output/output_odom/odom_result.txt
+start warehouse: dhl_beijing_ruixing
+start robot id: 001
+file_path: /data/source/warehouse/dhl_beijing_ruixing/2024-07-09/log/001/cart_comm.log.2024-07-09
+odom is: 4590.402471665884
+start robot id: 002
+file_path: /data/source/warehouse/dhl_beijing_ruixing/2024-07-09/log/002/cart_comm.log.2024-07-09
+odom is: 4831.146811127056
+start robot id: 003
+file_path: /data/source/warehouse/dhl_beijing_ruixing/2024-07-09/log/003/cart_comm.log.2024-07-09
+odom is: 4166.84873860171
+start robot id: 004
+file_path: /data/source/warehouse/dhl_beijing_ruixing/2024-07-09/log/004/cart_comm.log.2024-07-09
+odom is: 3263.1536495548085
+start robot id: 005
+file_path: /data/source/warehouse/dhl_beijing_ruixing/2024-07-09/log/005/cart_comm.log.2024-07-09
+odom is: 4429.992283045265
+start robot id: 006
+file_path: /data/source/warehouse/dhl_beijing_ruixing/2024-07-09/log/006/cart_comm.log.2024-07-09
+odom is: 3664.715568104974
+start robot id: 007
+file_path: /data/source/warehouse/dhl_beijing_ruixing/2024-07-09/log/007/cart_comm.log.2024-07-09
+odom is: 3886.052823159462
+start robot id: 008
+file_path: /data/source/warehouse/dhl_beijing_ruixing/2024-07-09/log/008/cart_comm.log.2024-07-09
+odom is: 3604.2888510547587
+start robot id: 009
+file_path: /data/source/warehouse/dhl_beijing_ruixing/2024-07-09/log/009/cart_comm.log.2024-07-09
+odom is: 3202.24814032189
+start robot id: 010
+file_path: /data/source/warehouse/dhl_beijing_ruixing/2024-07-09/log/010/cart_comm.log.2024-07-09
+odom is: 4011.805814283381
+start robot id: 011
+file_path: /data/source/warehouse/dhl_beijing_ruixing/2024-07-09/log/011/cart_comm.log.2024-07-09
+odom is: 4646.190617799743
+start robot id: 012
+file_path: /data/source/warehouse/dhl_beijing_ruixing/2024-07-09/log/012/cart_comm.log.2024-07-09
+odom is: 3602.356494045442
+start robot id: 013
+file_path: /data/source/warehouse/dhl_beijing_ruixing/2024-07-09/log/013/cart_comm.log.2024-07-09
+odom is: 3752.5284617300235
+start robot id: 014
+file_path: /data/source/warehouse/dhl_beijing_ruixing/2024-07-09/log/014/cart_comm.log.2024-07-09
+odom is: 4168.273590296192
+start robot id: 015
+file_path: /data/source/warehouse/dhl_beijing_ruixing/2024-07-09/log/015/cart_comm.log.2024-07-09
+odom is: 2875.4406680757625
+start robot id: 016
+file_path: /data/source/warehouse/dhl_beijing_ruixing/2024-07-09/log/016/cart_comm.log.2024-07-09
+odom is: 3818.577884205617
+start robot id: 017
+file_path: /data/source/warehouse/dhl_beijing_ruixing/2024-07-09/log/017/cart_comm.log.2024-07-09
+odom is: 4086.5793580212603
+start robot id: 018
+start robot id: 019
+file_path: /data/source/warehouse/dhl_beijing_ruixing/2024-07-09/log/019/cart_comm.log.2024-07-09
+odom is: 4554.619775205428
+start robot id: 020
+file_path: /data/source/warehouse/dhl_beijing_ruixing/2024-07-09/log/020/cart_comm.log.2024-07-09
+odom is: 4141.569783361394
+start robot id: 021
+file_path: /data/source/warehouse/dhl_beijing_ruixing/2024-07-09/log/021/cart_comm.log.2024-07-09
+odom is: 3965.259073128112
+start robot id: 022
+file_path: /data/source/warehouse/dhl_beijing_ruixing/2024-07-09/log/022/cart_comm.log.2024-07-09
+odom is: 3975.655673716476
+start robot id: 023
+file_path: /data/source/warehouse/dhl_beijing_ruixing/2024-07-09/log/023/cart_comm.log.2024-07-09
+odom is: 1737.9978226720013
+start robot id: 024
+file_path: /data/source/warehouse/dhl_beijing_ruixing/2024-07-09/log/024/cart_comm.log.2024-07-09
+odom is: 1951.0783293783074
+start robot id: 025
+file_path: /data/source/warehouse/dhl_beijing_ruixing/2024-07-09/log/025/cart_comm.log.2024-07-09
+odom is: 2112.0680349034055
+date_str: 2024-07-09
+error_result_file: /data/output/output_error/error_result.txt
+start warehouse: dhl_beijing_ruixing
+start robot id: 001
+file_path: /data/source/warehouse/dhl_beijing_ruixing/2024-07-09/log/001/record_ros.log.2024-07-09
+error_info	 loc_initial_pose 	 1
+error_info	 nav-5008 	 9
+error_info	 nav-5003 	 7
+error_info	 nav-5002 	 1
+error_info	 nav-5004 	 1
+start robot id: 002
+file_path: /data/source/warehouse/dhl_beijing_ruixing/2024-07-09/log/002/record_ros.log.2024-07-09
+error_info	 loc_initial_pose 	 1
+error_info	 nav-5008 	 8
+error_info	 nav-5003 	 9
+error_info	 loc_0x20263 	 2
+error_info	 nav-5002 	 1
+error_info	 nav-5004 	 1
+start robot id: 003
+file_path: /data/source/warehouse/dhl_beijing_ruixing/2024-07-09/log/003/record_ros.log.2024-07-09
+error_info	 loc_initial_pose 	 1
+error_info	 nav-5008 	 8
+error_info	 nav-5002 	 1
+error_info	 nav-5003 	 9
+error_info	 loc_0x20263 	 1
+error_info	 nav-5004 	 1
+start robot id: 004
+file_path: /data/source/warehouse/dhl_beijing_ruixing/2024-07-09/log/004/record_ros.log.2024-07-09
+error_info	 loc_initial_pose 	 1
+error_info	 loc_0x20003 	 1
+error_info	 loc_0x20263 	 3
+error_info	 nav-5008 	 12
+error_info	 nav-5003 	 6
+error_info	 nav-5004 	 2
+start robot id: 005
+file_path: /data/source/warehouse/dhl_beijing_ruixing/2024-07-09/log/005/record_ros.log.2024-07-09
+error_info	 loc_initial_pose 	 1
+error_info	 nav-5003 	 4
+error_info	 loc_0x20263 	 1
+error_info	 nav-5008 	 5
+error_info	 nav-5004 	 1
+start robot id: 006
+file_path: /data/source/warehouse/dhl_beijing_ruixing/2024-07-09/log/006/record_ros.log.2024-07-09
+error_info	 loc_0x20263 	 3
+error_info	 nav-5008 	 4
+error_info	 nav-5003 	 3
+error_info	 nav-5002 	 1
+error_info	 nav-5004 	 1
+start robot id: 007
+file_path: /data/source/warehouse/dhl_beijing_ruixing/2024-07-09/log/007/record_ros.log.2024-07-09
+error_info	 loc_initial_pose 	 1
+error_info	 nav-5008 	 12
+error_info	 nav-5003 	 9
+error_info	 nav-5004 	 3
+error_info	 loc_0x20003 	 1
+error_info	 loc_0x20263 	 2
+start robot id: 008
+file_path: /data/source/warehouse/dhl_beijing_ruixing/2024-07-09/log/008/record_ros.log.2024-07-09
+error_info	 loc_initial_pose 	 1
+error_info	 nav-5003 	 6
+error_info	 loc_0x20003 	 1
+error_info	 loc_0x20263 	 1
+error_info	 nav-5008 	 4
+start robot id: 009
+file_path: /data/source/warehouse/dhl_beijing_ruixing/2024-07-09/log/009/record_ros.log.2024-07-09
+error_info	 loc_initial_pose 	 1
+error_info	 nav-5008 	 12
+error_info	 nav-5004 	 6
+error_info	 nav-5003 	 4
+start robot id: 010
+file_path: /data/source/warehouse/dhl_beijing_ruixing/2024-07-09/log/010/record_ros.log.2024-07-09
+error_info	 loc_initial_pose 	 1
+error_info	 nav-5003 	 5
+error_info	 loc_0x20263 	 3
+error_info	 nav-5008 	 4
+error_info	 nav-5004 	 1
+start robot id: 011
+file_path: /data/source/warehouse/dhl_beijing_ruixing/2024-07-09/log/011/record_ros.log.2024-07-09
+error_info	 loc_initial_pose 	 1
+error_info	 nav-5008 	 5
+error_info	 loc_0x20003 	 12
+error_info	 loc_0x20263 	 5
+error_info	 nav-5003 	 2
+error_info	 nav-5004 	 1
+start robot id: 012
+file_path: /data/source/warehouse/dhl_beijing_ruixing/2024-07-09/log/012/record_ros.log.2024-07-09
+error_info	 nav-5008 	 10
+error_info	 nav-5003 	 5
+error_info	 loc_0x20003 	 1
+error_info	 nav-5002 	 1
+error_info	 nav-5004 	 2
+error_info	 loc_0x20263 	 1
+start robot id: 013
+file_path: /data/source/warehouse/dhl_beijing_ruixing/2024-07-09/log/013/record_ros.log.2024-07-09
+error_info	 nav-5008 	 6
+error_info	 nav-5004 	 3
+error_info	 loc_0x20263 	 2
+error_info	 nav-5003 	 5
+start robot id: 014
+file_path: /data/source/warehouse/dhl_beijing_ruixing/2024-07-09/log/014/record_ros.log.2024-07-09
+error_info	 nav-5002 	 1
+error_info	 nav-5008 	 8
+error_info	 nav-5003 	 3
+error_info	 nav-5004 	 1
+start robot id: 015
+file_path: /data/source/warehouse/dhl_beijing_ruixing/2024-07-09/log/015/record_ros.log.2024-07-09
+error_info	 loc_initial_pose 	 1
+error_info	 nav-5008 	 5
+error_info	 loc_0x20003 	 1
+error_info	 nav-5003 	 2
+error_info	 loc_0x20263 	 1
+error_info	 nav-5002 	 1
+error_info	 nav-5004 	 1
+start robot id: 016
+file_path: /data/source/warehouse/dhl_beijing_ruixing/2024-07-09/log/016/record_ros.log.2024-07-09
+error_info	 loc_initial_pose 	 1
+error_info	 nav-5003 	 11
+error_info	 loc_0x20263 	 2
+error_info	 nav-5008 	 8
+error_info	 nav-5004 	 2
+start robot id: 017
+file_path: /data/source/warehouse/dhl_beijing_ruixing/2024-07-09/log/017/record_ros.log.2024-07-09
+error_info	 nav-5003 	 4
+error_info	 nav-5008 	 7
+error_info	 nav-5004 	 2
+error_info	 loc_0x20263 	 2
+error_info	 loc_0x20003 	 2
+error_info	 loc_0x20260 	 1
+error_info	 loc_initial_pose 	 1
+start robot id: 018
+start robot id: 019
+file_path: /data/source/warehouse/dhl_beijing_ruixing/2024-07-09/log/019/record_ros.log.2024-07-09
+error_info	 loc_initial_pose 	 1
+error_info	 nav-5003 	 5
+error_info	 nav-5002 	 1
+error_info	 nav-5008 	 4
+error_info	 nav-5005 	 2
+start robot id: 020
+file_path: /data/source/warehouse/dhl_beijing_ruixing/2024-07-09/log/020/record_ros.log.2024-07-09
+error_info	 nav-5008 	 8
+error_info	 loc_0x20003 	 4
+error_info	 loc_0x20263 	 4
+error_info	 nav-5003 	 5
+start robot id: 021
+file_path: /data/source/warehouse/dhl_beijing_ruixing/2024-07-09/log/021/record_ros.log.2024-07-09
+error_info	 loc_initial_pose 	 1
+error_info	 nav-5003 	 3
+error_info	 nav-5008 	 3
+error_info	 nav-5004 	 1
+error_info	 loc_0x20263 	 2
+start robot id: 022
+file_path: /data/source/warehouse/dhl_beijing_ruixing/2024-07-09/log/022/record_ros.log.2024-07-09
+error_info	 nav-5008 	 4
+error_info	 nav-5003 	 5
+error_info	 loc_0x20263 	 1
+error_info	 nav-5005 	 1
+start robot id: 023
+file_path: /data/source/warehouse/dhl_beijing_ruixing/2024-07-09/log/023/record_ros.log.2024-07-09
+error_info	 nav-5003 	 4
+error_info	 nav-5008 	 2
+error_info	 loc_0x20263 	 2
+error_info	 nav-5002 	 1
+start robot id: 024
+file_path: /data/source/warehouse/dhl_beijing_ruixing/2024-07-09/log/024/record_ros.log.2024-07-09
+error_info	 nav-5003 	 4
+error_info	 nav-5002 	 2
+error_info	 nav-5008 	 3
+error_info	 loc_0x20263 	 1
+start robot id: 025
+file_path: /data/source/warehouse/dhl_beijing_ruixing/2024-07-09/log/025/record_ros.log.2024-07-09
+error_info	 nav-5003 	 5
+error_info	 nav-5008 	 3
+error_info	 loc_0x20263 	 1
+date_str: 2024-07-09
+start warehouse: dhl_beijing_ruixing 2024-07-09
+/data/source/warehouse/dhl_beijing_ruixing/2024-07-09/erms/mo_hardware_event.csv
+/data/source/warehouse/dhl_beijing_ruixing/erms/bm_robot_resource.csv
+robot_resources 25
+hardware_event 1370
+/data/source/warehouse/dhl_beijing_ruixing/2024-07-09/version.txt
+start warehouse: dhl_beijing_ruixing
+/data/source/warehouse/dhl_beijing_ruixing/2024-07-09/log/001/localization_manager.log.2024-07-09
+results loc length is 0
+results loc old length is 0
+results loc new length is 65030
+/data/source/warehouse/dhl_beijing_ruixing/2024-07-09/log/001/forwardx_move_base.log.2024-07-09
+/data/source/warehouse/dhl_beijing_ruixing/2024-07-09/log/001/forwardx_docking.log.2024-07-09
+/data/source/warehouse/dhl_beijing_ruixing/2024-07-09/log/002/localization_manager.log.2024-07-09
+results loc length is 0
+results loc old length is 0
+results loc new length is 63745
+/data/source/warehouse/dhl_beijing_ruixing/2024-07-09/log/002/forwardx_move_base.log.2024-07-09
+/data/source/warehouse/dhl_beijing_ruixing/2024-07-09/log/002/forwardx_docking.log.2024-07-09
+/data/source/warehouse/dhl_beijing_ruixing/2024-07-09/log/003/localization_manager.log.2024-07-09
+results loc length is 0
+results loc old length is 0
+results loc new length is 65030
+/data/source/warehouse/dhl_beijing_ruixing/2024-07-09/log/003/forwardx_move_base.log.2024-07-09
+/data/source/warehouse/dhl_beijing_ruixing/2024-07-09/log/003/forwardx_docking.log.2024-07-09
+/data/source/warehouse/dhl_beijing_ruixing/2024-07-09/log/004/localization_manager.log.2024-07-09
+results loc length is 0
+results loc old length is 0
+results loc new length is 59995
+/data/source/warehouse/dhl_beijing_ruixing/2024-07-09/log/004/forwardx_move_base.log.2024-07-09
+/data/source/warehouse/dhl_beijing_ruixing/2024-07-09/log/004/forwardx_docking.log.2024-07-09
+/data/source/warehouse/dhl_beijing_ruixing/2024-07-09/log/005/localization_manager.log.2024-07-09
+results loc length is 0
+results loc old length is 0
+results loc new length is 64978
+/data/source/warehouse/dhl_beijing_ruixing/2024-07-09/log/005/forwardx_move_base.log.2024-07-09
+/data/source/warehouse/dhl_beijing_ruixing/2024-07-09/log/005/forwardx_docking.log.2024-07-09
+/data/source/warehouse/dhl_beijing_ruixing/2024-07-09/log/006/localization_manager.log.2024-07-09
+results loc length is 0
+results loc old length is 0
+results loc new length is 60233
+/data/source/warehouse/dhl_beijing_ruixing/2024-07-09/log/006/forwardx_move_base.log.2024-07-09
+/data/source/warehouse/dhl_beijing_ruixing/2024-07-09/log/006/forwardx_docking.log.2024-07-09
+/data/source/warehouse/dhl_beijing_ruixing/2024-07-09/log/007/localization_manager.log.2024-07-09
+results loc length is 0
+results loc old length is 0
+results loc new length is 60197
+/data/source/warehouse/dhl_beijing_ruixing/2024-07-09/log/007/forwardx_move_base.log.2024-07-09
+/data/source/warehouse/dhl_beijing_ruixing/2024-07-09/log/007/forwardx_docking.log.2024-07-09
+/data/source/warehouse/dhl_beijing_ruixing/2024-07-09/log/008/localization_manager.log.2024-07-09
+results loc length is 0
+results loc old length is 0
+results loc new length is 51123
+/data/source/warehouse/dhl_beijing_ruixing/2024-07-09/log/008/forwardx_move_base.log.2024-07-09
+/data/source/warehouse/dhl_beijing_ruixing/2024-07-09/log/008/forwardx_docking.log.2024-07-09
+/data/source/warehouse/dhl_beijing_ruixing/2024-07-09/log/009/localization_manager.log.2024-07-09
+results loc length is 0
+results loc old length is 0
+results loc new length is 63525
+/data/source/warehouse/dhl_beijing_ruixing/2024-07-09/log/009/forwardx_move_base.log.2024-07-09
+/data/source/warehouse/dhl_beijing_ruixing/2024-07-09/log/009/forwardx_docking.log.2024-07-09
+/data/source/warehouse/dhl_beijing_ruixing/2024-07-09/log/010/localization_manager.log.2024-07-09
+results loc length is 0
+results loc old length is 0
+results loc new length is 60128
+/data/source/warehouse/dhl_beijing_ruixing/2024-07-09/log/010/forwardx_move_base.log.2024-07-09
+/data/source/warehouse/dhl_beijing_ruixing/2024-07-09/log/010/forwardx_docking.log.2024-07-09
+/data/source/warehouse/dhl_beijing_ruixing/2024-07-09/log/011/localization_manager.log.2024-07-09
+results loc length is 0
+results loc old length is 0
+results loc new length is 64686
+/data/source/warehouse/dhl_beijing_ruixing/2024-07-09/log/011/forwardx_move_base.log.2024-07-09
+/data/source/warehouse/dhl_beijing_ruixing/2024-07-09/log/011/forwardx_docking.log.2024-07-09
+/data/source/warehouse/dhl_beijing_ruixing/2024-07-09/log/012/localization_manager.log.2024-07-09
+results loc length is 0
+results loc old length is 0
+results loc new length is 59928
+/data/source/warehouse/dhl_beijing_ruixing/2024-07-09/log/012/forwardx_move_base.log.2024-07-09
+/data/source/warehouse/dhl_beijing_ruixing/2024-07-09/log/012/forwardx_docking.log.2024-07-09
+/data/source/warehouse/dhl_beijing_ruixing/2024-07-09/log/013/localization_manager.log.2024-07-09
+results loc length is 0
+results loc old length is 0
+results loc new length is 56343
+/data/source/warehouse/dhl_beijing_ruixing/2024-07-09/log/013/forwardx_move_base.log.2024-07-09
+/data/source/warehouse/dhl_beijing_ruixing/2024-07-09/log/013/forwardx_docking.log.2024-07-09
+/data/source/warehouse/dhl_beijing_ruixing/2024-07-09/log/014/localization_manager.log.2024-07-09
+results loc length is 0
+results loc old length is 0
+results loc new length is 65139
+/data/source/warehouse/dhl_beijing_ruixing/2024-07-09/log/014/forwardx_move_base.log.2024-07-09
+/data/source/warehouse/dhl_beijing_ruixing/2024-07-09/log/014/forwardx_docking.log.2024-07-09
+/data/source/warehouse/dhl_beijing_ruixing/2024-07-09/log/015/localization_manager.log.2024-07-09
+results loc length is 0
+results loc old length is 0
+results loc new length is 56129
+/data/source/warehouse/dhl_beijing_ruixing/2024-07-09/log/015/forwardx_move_base.log.2024-07-09
+/data/source/warehouse/dhl_beijing_ruixing/2024-07-09/log/015/forwardx_docking.log.2024-07-09
+/data/source/warehouse/dhl_beijing_ruixing/2024-07-09/log/016/localization_manager.log.2024-07-09
+results loc length is 0
+results loc old length is 0
+results loc new length is 59948
+/data/source/warehouse/dhl_beijing_ruixing/2024-07-09/log/016/forwardx_move_base.log.2024-07-09
+/data/source/warehouse/dhl_beijing_ruixing/2024-07-09/log/016/forwardx_docking.log.2024-07-09
+/data/source/warehouse/dhl_beijing_ruixing/2024-07-09/log/017/localization_manager.log.2024-07-09
+results loc length is 0
+results loc old length is 0
+results loc new length is 55152
+/data/source/warehouse/dhl_beijing_ruixing/2024-07-09/log/017/forwardx_move_base.log.2024-07-09
+/data/source/warehouse/dhl_beijing_ruixing/2024-07-09/log/017/forwardx_docking.log.2024-07-09
+/data/source/warehouse/dhl_beijing_ruixing/2024-07-09/log/019/localization_manager.log.2024-07-09
+results loc length is 0
+results loc old length is 0
+results loc new length is 80252
+/data/source/warehouse/dhl_beijing_ruixing/2024-07-09/log/019/forwardx_move_base.log.2024-07-09
+/data/source/warehouse/dhl_beijing_ruixing/2024-07-09/log/019/forwardx_docking.log.2024-07-09
+/data/source/warehouse/dhl_beijing_ruixing/2024-07-09/log/020/localization_manager.log.2024-07-09
+results loc length is 0
+results loc old length is 0
+results loc new length is 56337
+/data/source/warehouse/dhl_beijing_ruixing/2024-07-09/log/020/forwardx_move_base.log.2024-07-09
+/data/source/warehouse/dhl_beijing_ruixing/2024-07-09/log/020/forwardx_docking.log.2024-07-09
+/data/source/warehouse/dhl_beijing_ruixing/2024-07-09/log/021/localization_manager.log.2024-07-09
+results loc length is 0
+results loc old length is 0
+results loc new length is 56246
+/data/source/warehouse/dhl_beijing_ruixing/2024-07-09/log/021/forwardx_move_base.log.2024-07-09
+/data/source/warehouse/dhl_beijing_ruixing/2024-07-09/log/021/forwardx_docking.log.2024-07-09
+/data/source/warehouse/dhl_beijing_ruixing/2024-07-09/log/022/localization_manager.log.2024-07-09
+results loc length is 0
+results loc old length is 0
+results loc new length is 56407
+/data/source/warehouse/dhl_beijing_ruixing/2024-07-09/log/022/forwardx_move_base.log.2024-07-09
+/data/source/warehouse/dhl_beijing_ruixing/2024-07-09/log/022/forwardx_docking.log.2024-07-09
+system_error_stat.py:180: DeprecationWarning: `np.float` is a deprecated alias for the builtin `float`. To silence this warning, use `float` by itself. Doing this will not modify any behavior and is safe. If you specifically wanted the numpy scalar type, use `np.float64` here.
+Deprecated in NumPy 1.20; for more details and guidance: https://numpy.org/devdocs/release/1.20.0-notes.html#deprecations
+  index = (np.abs(version_array[:,0].astype(np.float) - item[0])).argmin()
+system_error_stat.py:283: VisibleDeprecationWarning: Creating an ndarray from ragged nested sequences (which is a list-or-tuple of lists-or-tuples-or ndarrays with different lengths or shapes) is deprecated. If you meant to do this, you must specify 'dtype=object' when creating the ndarray.
+  array = np.array(buffer)
+/data/source/warehouse/dhl_beijing_ruixing/2024-07-09/log/023/localization_manager.log.2024-07-09
+results loc length is 0
+results loc old length is 0
+results loc new length is 48469
+/data/source/warehouse/dhl_beijing_ruixing/2024-07-09/log/023/forwardx_move_base.log.2024-07-09
+/data/source/warehouse/dhl_beijing_ruixing/2024-07-09/log/023/forwardx_docking.log.2024-07-09
+/data/source/warehouse/dhl_beijing_ruixing/2024-07-09/log/024/localization_manager.log.2024-07-09
+results loc length is 0
+results loc old length is 0
+results loc new length is 48495
+/data/source/warehouse/dhl_beijing_ruixing/2024-07-09/log/024/forwardx_move_base.log.2024-07-09
+/data/source/warehouse/dhl_beijing_ruixing/2024-07-09/log/024/forwardx_docking.log.2024-07-09
+/data/source/warehouse/dhl_beijing_ruixing/2024-07-09/log/025/localization_manager.log.2024-07-09
+results loc length is 0
+results loc old length is 0
+results loc new length is 48377
+/data/source/warehouse/dhl_beijing_ruixing/2024-07-09/log/025/forwardx_move_base.log.2024-07-09
+/data/source/warehouse/dhl_beijing_ruixing/2024-07-09/log/025/forwardx_docking.log.2024-07-09
+014 blocking 1
+file_path: /data/source/warehouse/dhl_beijing_ruixing/2024-07-09/log/022/job.log.2024-07-09.0.gz
+len audio: 0
+022 blocking 1
+007 blocking 2
+003 blocking 5
+010 blocking 1
+001 blocking 5
+013 blocking 2
+012 blocking 5
+file_path: /data/source/warehouse/dhl_beijing_ruixing/2024-07-09/log/019/job.log.2024-07-09.0.gz
+len audio: 0
+019 blocking 3
+005 blocking 1
+016 blocking 3
+020 blocking 2
+015 blocking 2
+011 blocking 3
+017 loc_lost 1
+017 blocking 1
+009 blocking 2
+023 blocking 1
+025 blocking 1
+hardware_event count =  1342
+date_str: 2024-07-09
+start warehouse: dhl_beijing_ruixing
+/data/source/warehouse/dhl_beijing_ruixing/2024-07-09/version.txt
+load_dump_table 25
+load_dump_table 1370
+get_hardware_loc_lost_sub loc_lost_buffer length is 1
+loc_lost_buffer length is 1
+start robot id: 001
+/data/source/warehouse/dhl_beijing_ruixing/2024-07-09/log/001/forwardx_move_base.log.2024-07-09
+/data/source/warehouse/dhl_beijing_ruixing/2024-07-09/log/001/localization_manager.log.2024-07-09
+results loc length is 0
+results loc old length is 0
+results loc new length is 65030
+/data/source/warehouse/dhl_beijing_ruixing/2024-07-09/log/001/forwardx_move_base.log.2024-07-09
+/data/source/warehouse/dhl_beijing_ruixing/2024-07-09/log/001/forwardx_docking.log.2024-07-09
+len(pose_info.pose_array)= 72742
+/data/source/warehouse/dhl_beijing_ruixing/2024-07-09/log/001/forwardx_move_base.log.2024-07-09
+docking start bumper
+/data/source/warehouse/dhl_beijing_ruixing/2024-07-09/log/001/forwardx_docking.log.2024-07-09
+docking start bumper
+start robot id: 002
+/data/source/warehouse/dhl_beijing_ruixing/2024-07-09/log/002/forwardx_move_base.log.2024-07-09
+/data/source/warehouse/dhl_beijing_ruixing/2024-07-09/log/002/localization_manager.log.2024-07-09
+results loc length is 0
+results loc old length is 0
+results loc new length is 63745
+/data/source/warehouse/dhl_beijing_ruixing/2024-07-09/log/002/forwardx_move_base.log.2024-07-09
+/data/source/warehouse/dhl_beijing_ruixing/2024-07-09/log/002/forwardx_docking.log.2024-07-09
+len(pose_info.pose_array)= 72326
+/data/source/warehouse/dhl_beijing_ruixing/2024-07-09/log/002/forwardx_move_base.log.2024-07-09
+docking start bumper
+/data/source/warehouse/dhl_beijing_ruixing/2024-07-09/log/002/forwardx_docking.log.2024-07-09
+docking start bumper
+start robot id: 003
+/data/source/warehouse/dhl_beijing_ruixing/2024-07-09/log/003/forwardx_move_base.log.2024-07-09
+/data/source/warehouse/dhl_beijing_ruixing/2024-07-09/log/003/localization_manager.log.2024-07-09
+results loc length is 0
+results loc old length is 0
+results loc new length is 65030
+/data/source/warehouse/dhl_beijing_ruixing/2024-07-09/log/003/forwardx_move_base.log.2024-07-09
+/data/source/warehouse/dhl_beijing_ruixing/2024-07-09/log/003/forwardx_docking.log.2024-07-09
+len(pose_info.pose_array)= 74076
+/data/source/warehouse/dhl_beijing_ruixing/2024-07-09/log/003/forwardx_move_base.log.2024-07-09
+docking start bumper
+/data/source/warehouse/dhl_beijing_ruixing/2024-07-09/log/003/forwardx_docking.log.2024-07-09
+docking start bumper
+start robot id: 004
+/data/source/warehouse/dhl_beijing_ruixing/2024-07-09/log/004/forwardx_move_base.log.2024-07-09
+/data/source/warehouse/dhl_beijing_ruixing/2024-07-09/log/004/localization_manager.log.2024-07-09
+results loc length is 0
+results loc old length is 0
+results loc new length is 59995
+/data/source/warehouse/dhl_beijing_ruixing/2024-07-09/log/004/forwardx_move_base.log.2024-07-09
+/data/source/warehouse/dhl_beijing_ruixing/2024-07-09/log/004/forwardx_docking.log.2024-07-09
+len(pose_info.pose_array)= 65853
+/data/source/warehouse/dhl_beijing_ruixing/2024-07-09/log/004/forwardx_move_base.log.2024-07-09
+docking start bumper
+/data/source/warehouse/dhl_beijing_ruixing/2024-07-09/log/004/forwardx_docking.log.2024-07-09
+start robot id: 005
+/data/source/warehouse/dhl_beijing_ruixing/2024-07-09/log/005/forwardx_move_base.log.2024-07-09
+/data/source/warehouse/dhl_beijing_ruixing/2024-07-09/log/005/localization_manager.log.2024-07-09
+results loc length is 0
+results loc old length is 0
+results loc new length is 64978
+/data/source/warehouse/dhl_beijing_ruixing/2024-07-09/log/005/forwardx_move_base.log.2024-07-09
+/data/source/warehouse/dhl_beijing_ruixing/2024-07-09/log/005/forwardx_docking.log.2024-07-09
+len(pose_info.pose_array)= 72773
+/data/source/warehouse/dhl_beijing_ruixing/2024-07-09/log/005/forwardx_move_base.log.2024-07-09
+docking start bumper
+/data/source/warehouse/dhl_beijing_ruixing/2024-07-09/log/005/forwardx_docking.log.2024-07-09
+start robot id: 006
+/data/source/warehouse/dhl_beijing_ruixing/2024-07-09/log/006/forwardx_move_base.log.2024-07-09
+/data/source/warehouse/dhl_beijing_ruixing/2024-07-09/log/006/localization_manager.log.2024-07-09
+results loc length is 0
+results loc old length is 0
+results loc new length is 60233
+/data/source/warehouse/dhl_beijing_ruixing/2024-07-09/log/006/forwardx_move_base.log.2024-07-09
+/data/source/warehouse/dhl_beijing_ruixing/2024-07-09/log/006/forwardx_docking.log.2024-07-09
+len(pose_info.pose_array)= 66982
+/data/source/warehouse/dhl_beijing_ruixing/2024-07-09/log/006/forwardx_move_base.log.2024-07-09
+docking start bumper
+/data/source/warehouse/dhl_beijing_ruixing/2024-07-09/log/006/forwardx_docking.log.2024-07-09
+docking start bumper
+start robot id: 007
+/data/source/warehouse/dhl_beijing_ruixing/2024-07-09/log/007/forwardx_move_base.log.2024-07-09
+/data/source/warehouse/dhl_beijing_ruixing/2024-07-09/log/007/localization_manager.log.2024-07-09
+results loc length is 0
+results loc old length is 0
+results loc new length is 60197
+/data/source/warehouse/dhl_beijing_ruixing/2024-07-09/log/007/forwardx_move_base.log.2024-07-09
+/data/source/warehouse/dhl_beijing_ruixing/2024-07-09/log/007/forwardx_docking.log.2024-07-09
+len(pose_info.pose_array)= 66995
+/data/source/warehouse/dhl_beijing_ruixing/2024-07-09/log/007/forwardx_move_base.log.2024-07-09
+docking start bumper
+/data/source/warehouse/dhl_beijing_ruixing/2024-07-09/log/007/forwardx_docking.log.2024-07-09
+start robot id: 008
+/data/source/warehouse/dhl_beijing_ruixing/2024-07-09/log/008/forwardx_move_base.log.2024-07-09
+/data/source/warehouse/dhl_beijing_ruixing/2024-07-09/log/008/localization_manager.log.2024-07-09
+results loc length is 0
+results loc old length is 0
+results loc new length is 51123
+/data/source/warehouse/dhl_beijing_ruixing/2024-07-09/log/008/forwardx_move_base.log.2024-07-09
+/data/source/warehouse/dhl_beijing_ruixing/2024-07-09/log/008/forwardx_docking.log.2024-07-09
+len(pose_info.pose_array)= 57007
+/data/source/warehouse/dhl_beijing_ruixing/2024-07-09/log/008/forwardx_move_base.log.2024-07-09
+docking start bumper
+/data/source/warehouse/dhl_beijing_ruixing/2024-07-09/log/008/forwardx_docking.log.2024-07-09
+docking start bumper
+start robot id: 009
+/data/source/warehouse/dhl_beijing_ruixing/2024-07-09/log/009/forwardx_move_base.log.2024-07-09
+/data/source/warehouse/dhl_beijing_ruixing/2024-07-09/log/009/localization_manager.log.2024-07-09
+results loc length is 0
+results loc old length is 0
+results loc new length is 63525
+/data/source/warehouse/dhl_beijing_ruixing/2024-07-09/log/009/forwardx_move_base.log.2024-07-09
+/data/source/warehouse/dhl_beijing_ruixing/2024-07-09/log/009/forwardx_docking.log.2024-07-09
+len(pose_info.pose_array)= 77060
+/data/source/warehouse/dhl_beijing_ruixing/2024-07-09/log/009/forwardx_move_base.log.2024-07-09
+docking start bumper
+/data/source/warehouse/dhl_beijing_ruixing/2024-07-09/log/009/forwardx_docking.log.2024-07-09
+start robot id: 010
+/data/source/warehouse/dhl_beijing_ruixing/2024-07-09/log/010/forwardx_move_base.log.2024-07-09
+/data/source/warehouse/dhl_beijing_ruixing/2024-07-09/log/010/localization_manager.log.2024-07-09
+results loc length is 0
+results loc old length is 0
+results loc new length is 60128
+/data/source/warehouse/dhl_beijing_ruixing/2024-07-09/log/010/forwardx_move_base.log.2024-07-09
+/data/source/warehouse/dhl_beijing_ruixing/2024-07-09/log/010/forwardx_docking.log.2024-07-09
+len(pose_info.pose_array)= 67738
+/data/source/warehouse/dhl_beijing_ruixing/2024-07-09/log/010/forwardx_move_base.log.2024-07-09
+docking start bumper
+/data/source/warehouse/dhl_beijing_ruixing/2024-07-09/log/010/forwardx_docking.log.2024-07-09
+start robot id: 011
+/data/source/warehouse/dhl_beijing_ruixing/2024-07-09/log/011/forwardx_move_base.log.2024-07-09
+/data/source/warehouse/dhl_beijing_ruixing/2024-07-09/log/011/localization_manager.log.2024-07-09
+results loc length is 0
+results loc old length is 0
+results loc new length is 64686
+/data/source/warehouse/dhl_beijing_ruixing/2024-07-09/log/011/forwardx_move_base.log.2024-07-09
+/data/source/warehouse/dhl_beijing_ruixing/2024-07-09/log/011/forwardx_docking.log.2024-07-09
+len(pose_info.pose_array)= 72438
+/data/source/warehouse/dhl_beijing_ruixing/2024-07-09/log/011/forwardx_move_base.log.2024-07-09
+docking start bumper
+/data/source/warehouse/dhl_beijing_ruixing/2024-07-09/log/011/forwardx_docking.log.2024-07-09
+start robot id: 012
+/data/source/warehouse/dhl_beijing_ruixing/2024-07-09/log/012/forwardx_move_base.log.2024-07-09
+/data/source/warehouse/dhl_beijing_ruixing/2024-07-09/log/012/localization_manager.log.2024-07-09
+results loc length is 0
+results loc old length is 0
+results loc new length is 59928
+/data/source/warehouse/dhl_beijing_ruixing/2024-07-09/log/012/forwardx_move_base.log.2024-07-09
+/data/source/warehouse/dhl_beijing_ruixing/2024-07-09/log/012/forwardx_docking.log.2024-07-09
+len(pose_info.pose_array)= 67178
+/data/source/warehouse/dhl_beijing_ruixing/2024-07-09/log/012/forwardx_move_base.log.2024-07-09
+docking start bumper
+/data/source/warehouse/dhl_beijing_ruixing/2024-07-09/log/012/forwardx_docking.log.2024-07-09
+docking start bumper
+start robot id: 013
+/data/source/warehouse/dhl_beijing_ruixing/2024-07-09/log/013/forwardx_move_base.log.2024-07-09
+/data/source/warehouse/dhl_beijing_ruixing/2024-07-09/log/013/localization_manager.log.2024-07-09
+results loc length is 0
+results loc old length is 0
+results loc new length is 56343
+/data/source/warehouse/dhl_beijing_ruixing/2024-07-09/log/013/forwardx_move_base.log.2024-07-09
+/data/source/warehouse/dhl_beijing_ruixing/2024-07-09/log/013/forwardx_docking.log.2024-07-09
+len(pose_info.pose_array)= 62579
+/data/source/warehouse/dhl_beijing_ruixing/2024-07-09/log/013/forwardx_move_base.log.2024-07-09
+docking start bumper
+/data/source/warehouse/dhl_beijing_ruixing/2024-07-09/log/013/forwardx_docking.log.2024-07-09
+start robot id: 014
+/data/source/warehouse/dhl_beijing_ruixing/2024-07-09/log/014/forwardx_move_base.log.2024-07-09
+/data/source/warehouse/dhl_beijing_ruixing/2024-07-09/log/014/localization_manager.log.2024-07-09
+results loc length is 0
+results loc old length is 0
+results loc new length is 65139
+/data/source/warehouse/dhl_beijing_ruixing/2024-07-09/log/014/forwardx_move_base.log.2024-07-09
+/data/source/warehouse/dhl_beijing_ruixing/2024-07-09/log/014/forwardx_docking.log.2024-07-09
+len(pose_info.pose_array)= 72851
+/data/source/warehouse/dhl_beijing_ruixing/2024-07-09/log/014/forwardx_move_base.log.2024-07-09
+docking start bumper
+/data/source/warehouse/dhl_beijing_ruixing/2024-07-09/log/014/forwardx_docking.log.2024-07-09
+docking start bumper
+start robot id: 015
+/data/source/warehouse/dhl_beijing_ruixing/2024-07-09/log/015/forwardx_move_base.log.2024-07-09
+/data/source/warehouse/dhl_beijing_ruixing/2024-07-09/log/015/localization_manager.log.2024-07-09
+results loc length is 0
+results loc old length is 0
+results loc new length is 56129
+/data/source/warehouse/dhl_beijing_ruixing/2024-07-09/log/015/forwardx_move_base.log.2024-07-09
+/data/source/warehouse/dhl_beijing_ruixing/2024-07-09/log/015/forwardx_docking.log.2024-07-09
+len(pose_info.pose_array)= 61040
+/data/source/warehouse/dhl_beijing_ruixing/2024-07-09/log/015/forwardx_move_base.log.2024-07-09
+docking start bumper
+/data/source/warehouse/dhl_beijing_ruixing/2024-07-09/log/015/forwardx_docking.log.2024-07-09
+docking start bumper
+start robot id: 016
+/data/source/warehouse/dhl_beijing_ruixing/2024-07-09/log/016/forwardx_move_base.log.2024-07-09
+/data/source/warehouse/dhl_beijing_ruixing/2024-07-09/log/016/localization_manager.log.2024-07-09
+results loc length is 0
+results loc old length is 0
+results loc new length is 59948
+/data/source/warehouse/dhl_beijing_ruixing/2024-07-09/log/016/forwardx_move_base.log.2024-07-09
+/data/source/warehouse/dhl_beijing_ruixing/2024-07-09/log/016/forwardx_docking.log.2024-07-09
+len(pose_info.pose_array)= 66950
+/data/source/warehouse/dhl_beijing_ruixing/2024-07-09/log/016/forwardx_move_base.log.2024-07-09
+docking start bumper
+/data/source/warehouse/dhl_beijing_ruixing/2024-07-09/log/016/forwardx_docking.log.2024-07-09
+docking start bumper
+start robot id: 017
+/data/source/warehouse/dhl_beijing_ruixing/2024-07-09/log/017/forwardx_move_base.log.2024-07-09
+/data/source/warehouse/dhl_beijing_ruixing/2024-07-09/log/017/localization_manager.log.2024-07-09
+results loc length is 0
+results loc old length is 0
+results loc new length is 55152
+/data/source/warehouse/dhl_beijing_ruixing/2024-07-09/log/017/forwardx_move_base.log.2024-07-09
+/data/source/warehouse/dhl_beijing_ruixing/2024-07-09/log/017/forwardx_docking.log.2024-07-09
+len(pose_info.pose_array)= 62563
+/data/source/warehouse/dhl_beijing_ruixing/2024-07-09/log/017/forwardx_move_base.log.2024-07-09
+docking start bumper
+/data/source/warehouse/dhl_beijing_ruixing/2024-07-09/log/017/forwardx_docking.log.2024-07-09
+docking start bumper
+start robot id: 018
+len(pose_info.pose_array)= 0
+start robot id: 019
+/data/source/warehouse/dhl_beijing_ruixing/2024-07-09/log/019/forwardx_move_base.log.2024-07-09
+/data/source/warehouse/dhl_beijing_ruixing/2024-07-09/log/019/localization_manager.log.2024-07-09
+results loc length is 0
+results loc old length is 0
+results loc new length is 80252
+/data/source/warehouse/dhl_beijing_ruixing/2024-07-09/log/019/forwardx_move_base.log.2024-07-09
+/data/source/warehouse/dhl_beijing_ruixing/2024-07-09/log/019/forwardx_docking.log.2024-07-09
+len(pose_info.pose_array)= 88863
+/data/source/warehouse/dhl_beijing_ruixing/2024-07-09/log/019/forwardx_move_base.log.2024-07-09
+docking start bumper
+/data/source/warehouse/dhl_beijing_ruixing/2024-07-09/log/019/forwardx_docking.log.2024-07-09
+docking start bumper
+start robot id: 020
+/data/source/warehouse/dhl_beijing_ruixing/2024-07-09/log/020/forwardx_move_base.log.2024-07-09
+/data/source/warehouse/dhl_beijing_ruixing/2024-07-09/log/020/localization_manager.log.2024-07-09
+results loc length is 0
+results loc old length is 0
+results loc new length is 56337
+/data/source/warehouse/dhl_beijing_ruixing/2024-07-09/log/020/forwardx_move_base.log.2024-07-09
+/data/source/warehouse/dhl_beijing_ruixing/2024-07-09/log/020/forwardx_docking.log.2024-07-09
+len(pose_info.pose_array)= 63362
+/data/source/warehouse/dhl_beijing_ruixing/2024-07-09/log/020/forwardx_move_base.log.2024-07-09
+docking start bumper
+/data/source/warehouse/dhl_beijing_ruixing/2024-07-09/log/020/forwardx_docking.log.2024-07-09
+docking start bumper
+start robot id: 021
+/data/source/warehouse/dhl_beijing_ruixing/2024-07-09/log/021/forwardx_move_base.log.2024-07-09
+/data/source/warehouse/dhl_beijing_ruixing/2024-07-09/log/021/localization_manager.log.2024-07-09
+results loc length is 0
+results loc old length is 0
+results loc new length is 56246
+/data/source/warehouse/dhl_beijing_ruixing/2024-07-09/log/021/forwardx_move_base.log.2024-07-09
+/data/source/warehouse/dhl_beijing_ruixing/2024-07-09/log/021/forwardx_docking.log.2024-07-09
+len(pose_info.pose_array)= 62706
+/data/source/warehouse/dhl_beijing_ruixing/2024-07-09/log/021/forwardx_move_base.log.2024-07-09
+docking start bumper
+/data/source/warehouse/dhl_beijing_ruixing/2024-07-09/log/021/forwardx_docking.log.2024-07-09
+docking start bumper
+start robot id: 022
+/data/source/warehouse/dhl_beijing_ruixing/2024-07-09/log/022/forwardx_move_base.log.2024-07-09
+/data/source/warehouse/dhl_beijing_ruixing/2024-07-09/log/022/localization_manager.log.2024-07-09
+results loc length is 0
+results loc old length is 0
+results loc new length is 56407
+/data/source/warehouse/dhl_beijing_ruixing/2024-07-09/log/022/forwardx_move_base.log.2024-07-09
+/data/source/warehouse/dhl_beijing_ruixing/2024-07-09/log/022/forwardx_docking.log.2024-07-09
+len(pose_info.pose_array)= 63477
+/data/source/warehouse/dhl_beijing_ruixing/2024-07-09/log/022/forwardx_move_base.log.2024-07-09
+docking start bumper
+/data/source/warehouse/dhl_beijing_ruixing/2024-07-09/log/022/forwardx_docking.log.2024-07-09
+docking start bumper
+start robot id: 023
+/data/source/warehouse/dhl_beijing_ruixing/2024-07-09/log/023/forwardx_move_base.log.2024-07-09
+/data/source/warehouse/dhl_beijing_ruixing/2024-07-09/log/023/localization_manager.log.2024-07-09
+results loc length is 0
+results loc old length is 0
+results loc new length is 48469
+/data/source/warehouse/dhl_beijing_ruixing/2024-07-09/log/023/forwardx_move_base.log.2024-07-09
+ci_stat.py:285: DeprecationWarning: `np.float` is a deprecated alias for the builtin `float`. To silence this warning, use `float` by itself. Doing this will not modify any behavior and is safe. If you specifically wanted the numpy scalar type, use `np.float64` here.
+Deprecated in NumPy 1.20; for more details and guidance: https://numpy.org/devdocs/release/1.20.0-notes.html#deprecations
+  index = (np.abs(self.footprint_array[:,0].astype(np.float) - pose_item[0])).argmin()
+ci_stat.py:1311: DeprecationWarning: `np.float` is a deprecated alias for the builtin `float`. To silence this warning, use `float` by itself. Doing this will not modify any behavior and is safe. If you specifically wanted the numpy scalar type, use `np.float64` here.
+Deprecated in NumPy 1.20; for more details and guidance: https://numpy.org/devdocs/release/1.20.0-notes.html#deprecations
+  index = (np.abs(version_array[:,0].astype(np.float) - timestamp)).argmin()
+/data/source/warehouse/dhl_beijing_ruixing/2024-07-09/log/023/forwardx_docking.log.2024-07-09
+len(pose_info.pose_array)= 51182
+/data/source/warehouse/dhl_beijing_ruixing/2024-07-09/log/023/forwardx_move_base.log.2024-07-09
+docking start bumper
+/data/source/warehouse/dhl_beijing_ruixing/2024-07-09/log/023/forwardx_docking.log.2024-07-09
+docking start bumper
+start robot id: 024
+/data/source/warehouse/dhl_beijing_ruixing/2024-07-09/log/024/forwardx_move_base.log.2024-07-09
+/data/source/warehouse/dhl_beijing_ruixing/2024-07-09/log/024/localization_manager.log.2024-07-09
+results loc length is 0
+results loc old length is 0
+results loc new length is 48495
+/data/source/warehouse/dhl_beijing_ruixing/2024-07-09/log/024/forwardx_move_base.log.2024-07-09
+/data/source/warehouse/dhl_beijing_ruixing/2024-07-09/log/024/forwardx_docking.log.2024-07-09
+len(pose_info.pose_array)= 51516
+/data/source/warehouse/dhl_beijing_ruixing/2024-07-09/log/024/forwardx_move_base.log.2024-07-09
+docking start bumper
+/data/source/warehouse/dhl_beijing_ruixing/2024-07-09/log/024/forwardx_docking.log.2024-07-09
+docking start bumper
+start robot id: 025
+/data/source/warehouse/dhl_beijing_ruixing/2024-07-09/log/025/forwardx_move_base.log.2024-07-09
+/data/source/warehouse/dhl_beijing_ruixing/2024-07-09/log/025/localization_manager.log.2024-07-09
+results loc length is 0
+results loc old length is 0
+results loc new length is 48377
+/data/source/warehouse/dhl_beijing_ruixing/2024-07-09/log/025/forwardx_move_base.log.2024-07-09
+/data/source/warehouse/dhl_beijing_ruixing/2024-07-09/log/025/forwardx_docking.log.2024-07-09
+len(pose_info.pose_array)= 51431
+/data/source/warehouse/dhl_beijing_ruixing/2024-07-09/log/025/forwardx_move_base.log.2024-07-09
+docking start bumper
+/data/source/warehouse/dhl_beijing_ruixing/2024-07-09/log/025/forwardx_docking.log.2024-07-09
+docking start bumper
+2024-07-09 11:19:30.872 014 24.281 72.041 -0.936 TriggerType.BUMPER 1
+2024-07-09 11:21:28.614 003 -28.913 24.302 1.61 TriggerType.BUMPER 1
+2024-07-09 11:33:50.285 024 -12.792 25.041 -1.567 TriggerType.BUMPER 1
+2024-07-09 11:34:14.006 001 -12.608 22.639 -3.039 TriggerType.BUMPER 1
+2024-07-09 13:26:08.686 023 41.57 54.341 1.561 TriggerType.BUMPER 1
+2024-07-09 15:02:41.361 002 40.558 71.314 -1.535 TriggerType.BUMPER 1
+2024-07-09 15:42:04.476 015 41.475 24.089 1.384 TriggerType.BUMPER 1
+2024-07-09 15:57:13.119 006 24.394 72.064 -1.21 TriggerType.BUMPER 1
+datetime:2024-07-09 11:19:30.872,robot_id:014,slave_robot_id:014,ci_type:bumper,posx:24.281,posy:72.041,theta:-0.936,duration:0,version:unknow
+datetime:2024-07-09 11:21:28.614,robot_id:003,slave_robot_id:003,ci_type:bumper,posx:-28.913,posy:24.302,theta:1.61,duration:0,version:unknow
+datetime:2024-07-09 11:33:50.285,robot_id:024,slave_robot_id:024,ci_type:bumper,posx:-12.792,posy:25.041,theta:-1.567,duration:0,version:unknow
+datetime:2024-07-09 11:34:14.006,robot_id:001,slave_robot_id:001,ci_type:bumper,posx:-12.608,posy:22.639,theta:-3.039,duration:0,version:unknow
+datetime:2024-07-09 13:26:08.686,robot_id:023,slave_robot_id:023,ci_type:bumper,posx:41.57,posy:54.341,theta:1.561,duration:0,version:unknow
+datetime:2024-07-09 15:02:41.361,robot_id:002,slave_robot_id:002,ci_type:bumper,posx:40.558,posy:71.314,theta:-1.535,duration:0,version:unknow
+datetime:2024-07-09 15:42:04.476,robot_id:015,slave_robot_id:015,ci_type:bumper,posx:41.475,posy:24.089,theta:1.384,duration:0,version:unknow
+datetime:2024-07-09 15:57:13.119,robot_id:006,slave_robot_id:006,ci_type:bumper,posx:24.394,posy:72.064,theta:-1.21,duration:0,version:unknow
+------------------------------------------------------------------------------------
+es_search es exception, ConnectionError((<urllib3.connection.HTTPSConnection object at 0x00000190450C1510>, 'Connection to 192.168.190.128 timed out. (connect timeout=20)')) caused by: ConnectTimeoutError((<urllib3.connection.HTTPSConnection object at 0x00000190450C1510>, 'Connection to 192.168.190.128 timed out. (connect timeout=20)'))
+------------------------------------------------------------------------------------
+es exception, extract_network_key_logs is 2024-07-01 project is dhl_beijing_ruixing
+es exception, extract_network_key_logs : ConnectionError((<urllib3.connection.HTTPSConnection object at 0x0000023F42871A50>, 'Connection to 192.168.190.128 timed out. (connect timeout=120)')) caused by: ConnectTimeoutError((<urllib3.connection.HTTPSConnection object at 0x0000023F42871A50>, 'Connection to 192.168.190.128 timed out. (connect timeout=120)'))
+------------------------------------------------------------------------------------
+('001', {'bumper': 1, 'lost_loc': 0, 'collided': 0})
+('002', {'bumper': 1, 'lost_loc': 0, 'collided': 0})
+('003', {'bumper': 1, 'lost_loc': 0, 'collided': 0})
+('004', {'bumper': 0, 'lost_loc': 0, 'collided': 0})
+('005', {'bumper': 0, 'lost_loc': 0, 'collided': 0})
+('006', {'bumper': 1, 'lost_loc': 0, 'collided': 0})
+('007', {'bumper': 0, 'lost_loc': 0, 'collided': 0})
+('008', {'bumper': 0, 'lost_loc': 0, 'collided': 0})
+('009', {'bumper': 0, 'lost_loc': 0, 'collided': 0})
+('010', {'bumper': 0, 'lost_loc': 0, 'collided': 0})
+('011', {'bumper': 0, 'lost_loc': 0, 'collided': 0})
+('012', {'bumper': 0, 'lost_loc': 0, 'collided': 0})
+('013', {'bumper': 0, 'lost_loc': 0, 'collided': 0})
+('014', {'bumper': 1, 'lost_loc': 0, 'collided': 0})
+('015', {'bumper': 1, 'lost_loc': 0, 'collided': 0})
+('016', {'bumper': 0, 'lost_loc': 0, 'collided': 0})
+('017', {'bumper': 0, 'lost_loc': 1, 'collided': 0})
+('018', {'bumper': 0, 'lost_loc': 0, 'collided': 0})
+('019', {'bumper': 0, 'lost_loc': 0, 'collided': 0})
+('020', {'bumper': 0, 'lost_loc': 0, 'collided': 0})
+('021', {'bumper': 0, 'lost_loc': 0, 'collided': 0})
+('022', {'bumper': 0, 'lost_loc': 0, 'collided': 0})
+('023', {'bumper': 1, 'lost_loc': 0, 'collided': 0})
+('024', {'bumper': 1, 'lost_loc': 0, 'collided': 0})
+('025', {'bumper': 0, 'lost_loc': 0, 'collided': 0})
+write_lines lenght is 0
+date_str: 2024-07-09
+fsize_result_file: /data/output/output_fsize/fsize_result.txt
+start warehouse: dhl_beijing_ruixing
+miss_stat.py:5: DeprecationWarning: the imp module is deprecated in favour of importlib; see the module's documentation for alternative uses
+  import imp
+date_str: 2024-07-09
+miss_result_file: /data/output/output_miss/miss_result.txt
+start warehouse: dhl_beijing_ruixing
+start robot id: 001
+file_path: /data/source/warehouse/dhl_beijing_ruixing/2024-07-09/log/001/robot_localization.log.2024-07-09
+start robot id: 002
+file_path: /data/source/warehouse/dhl_beijing_ruixing/2024-07-09/log/002/robot_localization.log.2024-07-09
+start robot id: 003
+file_path: /data/source/warehouse/dhl_beijing_ruixing/2024-07-09/log/003/robot_localization.log.2024-07-09
+start robot id: 004
+file_path: /data/source/warehouse/dhl_beijing_ruixing/2024-07-09/log/004/robot_localization.log.2024-07-09
+start robot id: 005
+file_path: /data/source/warehouse/dhl_beijing_ruixing/2024-07-09/log/005/robot_localization.log.2024-07-09
+start robot id: 006
+file_path: /data/source/warehouse/dhl_beijing_ruixing/2024-07-09/log/006/robot_localization.log.2024-07-09
+start robot id: 007
+file_path: /data/source/warehouse/dhl_beijing_ruixing/2024-07-09/log/007/robot_localization.log.2024-07-09
+start robot id: 008
+file_path: /data/source/warehouse/dhl_beijing_ruixing/2024-07-09/log/008/robot_localization.log.2024-07-09
+start robot id: 009
+file_path: /data/source/warehouse/dhl_beijing_ruixing/2024-07-09/log/009/robot_localization.log.2024-07-09
+start robot id: 010
+file_path: /data/source/warehouse/dhl_beijing_ruixing/2024-07-09/log/010/robot_localization.log.2024-07-09
+start robot id: 011
+file_path: /data/source/warehouse/dhl_beijing_ruixing/2024-07-09/log/011/robot_localization.log.2024-07-09
+start robot id: 012
+file_path: /data/source/warehouse/dhl_beijing_ruixing/2024-07-09/log/012/robot_localization.log.2024-07-09
+start robot id: 013
+file_path: /data/source/warehouse/dhl_beijing_ruixing/2024-07-09/log/013/robot_localization.log.2024-07-09
+start robot id: 014
+file_path: /data/source/warehouse/dhl_beijing_ruixing/2024-07-09/log/014/robot_localization.log.2024-07-09
+start robot id: 015
+file_path: /data/source/warehouse/dhl_beijing_ruixing/2024-07-09/log/015/robot_localization.log.2024-07-09
+start robot id: 016
+file_path: /data/source/warehouse/dhl_beijing_ruixing/2024-07-09/log/016/robot_localization.log.2024-07-09
+start robot id: 017
+file_path: /data/source/warehouse/dhl_beijing_ruixing/2024-07-09/log/017/robot_localization.log.2024-07-09
+start robot id: 018
+start robot id: 019
+file_path: /data/source/warehouse/dhl_beijing_ruixing/2024-07-09/log/019/robot_localization.log.2024-07-09
+start robot id: 020
+file_path: /data/source/warehouse/dhl_beijing_ruixing/2024-07-09/log/020/robot_localization.log.2024-07-09
+start robot id: 021
+file_path: /data/source/warehouse/dhl_beijing_ruixing/2024-07-09/log/021/robot_localization.log.2024-07-09
+start robot id: 022
+file_path: /data/source/warehouse/dhl_beijing_ruixing/2024-07-09/log/022/robot_localization.log.2024-07-09
+start robot id: 023
+file_path: /data/source/warehouse/dhl_beijing_ruixing/2024-07-09/log/023/robot_localization.log.2024-07-09
+start robot id: 024
+file_path: /data/source/warehouse/dhl_beijing_ruixing/2024-07-09/log/024/robot_localization.log.2024-07-09
+start robot id: 025
+file_path: /data/source/warehouse/dhl_beijing_ruixing/2024-07-09/log/025/robot_localization.log.2024-07-09
+date_str: 2024-07-09
+error_result_file: /data/output/output_init_pose/init_pose_result.txt
+start warehouse: dhl_beijing_ruixing
+start robot id: 001
+file_path: /data/source/warehouse/dhl_beijing_ruixing/2024-07-09/log/001/localization_manager.log.2024-07-09
+loc_manager_node_init failed 0
+loc_manager_node_init successful 0
+loc_manager_node_reset failed 0
+loc_manager_node_reset successful 0
+set_initial_pose failed 0
+set_initial_pose successful 0
+start robot id: 002
+file_path: /data/source/warehouse/dhl_beijing_ruixing/2024-07-09/log/002/localization_manager.log.2024-07-09
+loc_manager_node_init failed 0
+loc_manager_node_init successful 0
+loc_manager_node_reset failed 0
+loc_manager_node_reset successful 0
+set_initial_pose failed 0
+set_initial_pose successful 0
+start robot id: 003
+file_path: /data/source/warehouse/dhl_beijing_ruixing/2024-07-09/log/003/localization_manager.log.2024-07-09
+loc_manager_node_init failed 0
+loc_manager_node_init successful 0
+loc_manager_node_reset failed 0
+loc_manager_node_reset successful 0
+set_initial_pose failed 0
+set_initial_pose successful 0
+start robot id: 004
+file_path: /data/source/warehouse/dhl_beijing_ruixing/2024-07-09/log/004/localization_manager.log.2024-07-09
+loc_manager_node_init failed 0
+loc_manager_node_init successful 0
+loc_manager_node_reset failed 0
+loc_manager_node_reset successful 0
+set_initial_pose failed 0
+set_initial_pose successful 0
+start robot id: 005
+file_path: /data/source/warehouse/dhl_beijing_ruixing/2024-07-09/log/005/localization_manager.log.2024-07-09
+loc_manager_node_init failed 0
+loc_manager_node_init successful 0
+loc_manager_node_reset failed 0
+loc_manager_node_reset successful 0
+set_initial_pose failed 0
+set_initial_pose successful 0
+start robot id: 006
+file_path: /data/source/warehouse/dhl_beijing_ruixing/2024-07-09/log/006/localization_manager.log.2024-07-09
+loc_manager_node_init failed 0
+loc_manager_node_init successful 0
+loc_manager_node_reset failed 0
+loc_manager_node_reset successful 0
+set_initial_pose failed 0
+set_initial_pose successful 0
+start robot id: 007
+file_path: /data/source/warehouse/dhl_beijing_ruixing/2024-07-09/log/007/localization_manager.log.2024-07-09
+loc_manager_node_init failed 0
+loc_manager_node_init successful 0
+loc_manager_node_reset failed 0
+loc_manager_node_reset successful 0
+set_initial_pose failed 0
+set_initial_pose successful 0
+start robot id: 008
+file_path: /data/source/warehouse/dhl_beijing_ruixing/2024-07-09/log/008/localization_manager.log.2024-07-09
+loc_manager_node_init failed 0
+loc_manager_node_init successful 0
+loc_manager_node_reset failed 0
+loc_manager_node_reset successful 0
+set_initial_pose failed 0
+set_initial_pose successful 0
+start robot id: 009
+file_path: /data/source/warehouse/dhl_beijing_ruixing/2024-07-09/log/009/localization_manager.log.2024-07-09
+loc_manager_node_init failed 0
+loc_manager_node_init successful 0
+loc_manager_node_reset failed 0
+loc_manager_node_reset successful 0
+set_initial_pose failed 0
+set_initial_pose successful 0
+start robot id: 010
+file_path: /data/source/warehouse/dhl_beijing_ruixing/2024-07-09/log/010/localization_manager.log.2024-07-09
+loc_manager_node_init failed 0
+loc_manager_node_init successful 0
+loc_manager_node_reset failed 0
+loc_manager_node_reset successful 0
+set_initial_pose failed 0
+set_initial_pose successful 0
+start robot id: 011
+file_path: /data/source/warehouse/dhl_beijing_ruixing/2024-07-09/log/011/localization_manager.log.2024-07-09
+loc_manager_node_init failed 0
+loc_manager_node_init successful 0
+loc_manager_node_reset failed 0
+loc_manager_node_reset successful 0
+set_initial_pose failed 0
+set_initial_pose successful 0
+start robot id: 012
+file_path: /data/source/warehouse/dhl_beijing_ruixing/2024-07-09/log/012/localization_manager.log.2024-07-09
+loc_manager_node_init failed 0
+loc_manager_node_init successful 0
+loc_manager_node_reset failed 0
+loc_manager_node_reset successful 0
+set_initial_pose failed 0
+set_initial_pose successful 0
+start robot id: 013
+file_path: /data/source/warehouse/dhl_beijing_ruixing/2024-07-09/log/013/localization_manager.log.2024-07-09
+loc_manager_node_init failed 0
+loc_manager_node_init successful 0
+loc_manager_node_reset failed 0
+loc_manager_node_reset successful 0
+set_initial_pose failed 0
+set_initial_pose successful 0
+start robot id: 014
+file_path: /data/source/warehouse/dhl_beijing_ruixing/2024-07-09/log/014/localization_manager.log.2024-07-09
+loc_manager_node_init failed 0
+loc_manager_node_init successful 0
+loc_manager_node_reset failed 0
+loc_manager_node_reset successful 0
+set_initial_pose failed 0
+set_initial_pose successful 0
+start robot id: 015
+file_path: /data/source/warehouse/dhl_beijing_ruixing/2024-07-09/log/015/localization_manager.log.2024-07-09
+loc_manager_node_init failed 0
+loc_manager_node_init successful 0
+loc_manager_node_reset failed 0
+loc_manager_node_reset successful 0
+set_initial_pose failed 0
+set_initial_pose successful 0
+start robot id: 016
+file_path: /data/source/warehouse/dhl_beijing_ruixing/2024-07-09/log/016/localization_manager.log.2024-07-09
+loc_manager_node_init failed 0
+loc_manager_node_init successful 0
+loc_manager_node_reset failed 0
+loc_manager_node_reset successful 0
+set_initial_pose failed 0
+set_initial_pose successful 0
+start robot id: 017
+file_path: /data/source/warehouse/dhl_beijing_ruixing/2024-07-09/log/017/localization_manager.log.2024-07-09
+loc_manager_node_init failed 0
+loc_manager_node_init successful 0
+loc_manager_node_reset failed 0
+loc_manager_node_reset successful 0
+set_initial_pose failed 0
+set_initial_pose successful 0
+start robot id: 018
+start robot id: 019
+file_path: /data/source/warehouse/dhl_beijing_ruixing/2024-07-09/log/019/localization_manager.log.2024-07-09
+loc_manager_node_init failed 0
+loc_manager_node_init successful 0
+loc_manager_node_reset failed 0
+loc_manager_node_reset successful 0
+set_initial_pose failed 0
+set_initial_pose successful 0
+start robot id: 020
+file_path: /data/source/warehouse/dhl_beijing_ruixing/2024-07-09/log/020/localization_manager.log.2024-07-09
+loc_manager_node_init failed 0
+loc_manager_node_init successful 0
+loc_manager_node_reset failed 0
+loc_manager_node_reset successful 0
+set_initial_pose failed 0
+set_initial_pose successful 0
+start robot id: 021
+file_path: /data/source/warehouse/dhl_beijing_ruixing/2024-07-09/log/021/localization_manager.log.2024-07-09
+loc_manager_node_init failed 0
+loc_manager_node_init successful 0
+loc_manager_node_reset failed 0
+loc_manager_node_reset successful 0
+set_initial_pose failed 0
+set_initial_pose successful 0
+start robot id: 022
+file_path: /data/source/warehouse/dhl_beijing_ruixing/2024-07-09/log/022/localization_manager.log.2024-07-09
+loc_manager_node_init failed 0
+loc_manager_node_init successful 0
+loc_manager_node_reset failed 0
+loc_manager_node_reset successful 0
+set_initial_pose failed 0
+set_initial_pose successful 0
+start robot id: 023
+file_path: /data/source/warehouse/dhl_beijing_ruixing/2024-07-09/log/023/localization_manager.log.2024-07-09
+loc_manager_node_init failed 0
+loc_manager_node_init successful 0
+loc_manager_node_reset failed 0
+loc_manager_node_reset successful 0
+set_initial_pose failed 0
+set_initial_pose successful 0
+start robot id: 024
+file_path: /data/source/warehouse/dhl_beijing_ruixing/2024-07-09/log/024/localization_manager.log.2024-07-09
+loc_manager_node_init failed 0
+loc_manager_node_init successful 0
+loc_manager_node_reset failed 0
+loc_manager_node_reset successful 0
+set_initial_pose failed 0
+set_initial_pose successful 0
+start robot id: 025
+file_path: /data/source/warehouse/dhl_beijing_ruixing/2024-07-09/log/025/localization_manager.log.2024-07-09
+loc_manager_node_init failed 0
+loc_manager_node_init successful 0
+loc_manager_node_reset failed 0
+loc_manager_node_reset successful 0
+set_initial_pose failed 0
+set_initial_pose successful 0
+date_str: 2024-07-09
+cam_error_result_file: /data/output/output_cam_error/cam_error_result.txt
+start warehouse: dhl_beijing_ruixing
+file_path: /data/source/warehouse/dhl_beijing_ruixing/2024-07-09/log/001/usb_cam.log.2024-07-09
+('select_timeout', [])
+('disconnect', [])
+file_path: /data/source/warehouse/dhl_beijing_ruixing/2024-07-09/log/001/usb_cam_left.log.2024-07-09
+('select_timeout', [])
+('disconnect', [])
+file_path: /data/source/warehouse/dhl_beijing_ruixing/2024-07-09/log/001/usb_cam_right.log.2024-07-09
+('select_timeout', [])
+('disconnect', [])
+file_path: /data/source/warehouse/dhl_beijing_ruixing/2024-07-09/log/002/usb_cam.log.2024-07-09
+('select_timeout', [])
+('disconnect', [])
+file_path: /data/source/warehouse/dhl_beijing_ruixing/2024-07-09/log/002/usb_cam_left.log.2024-07-09
+('select_timeout', [])
+('disconnect', [])
+file_path: /data/source/warehouse/dhl_beijing_ruixing/2024-07-09/log/002/usb_cam_right.log.2024-07-09
+('select_timeout', [])
+('disconnect', [])
+file_path: /data/source/warehouse/dhl_beijing_ruixing/2024-07-09/log/003/usb_cam.log.2024-07-09
+('select_timeout', [])
+('disconnect', [])
+file_path: /data/source/warehouse/dhl_beijing_ruixing/2024-07-09/log/003/usb_cam_left.log.2024-07-09
+('select_timeout', [])
+('disconnect', [])
+file_path: /data/source/warehouse/dhl_beijing_ruixing/2024-07-09/log/003/usb_cam_right.log.2024-07-09
+('select_timeout', [])
+('disconnect', [])
+file_path: /data/source/warehouse/dhl_beijing_ruixing/2024-07-09/log/004/usb_cam.log.2024-07-09
+('select_timeout', [])
+('disconnect', [])
+file_path: /data/source/warehouse/dhl_beijing_ruixing/2024-07-09/log/004/usb_cam_left.log.2024-07-09
+('select_timeout', [])
+('disconnect', [])
+file_path: /data/source/warehouse/dhl_beijing_ruixing/2024-07-09/log/004/usb_cam_right.log.2024-07-09
+('select_timeout', [])
+('disconnect', [])
+file_path: /data/source/warehouse/dhl_beijing_ruixing/2024-07-09/log/005/usb_cam.log.2024-07-09
+('select_timeout', [])
+('disconnect', [])
+file_path: /data/source/warehouse/dhl_beijing_ruixing/2024-07-09/log/005/usb_cam_left.log.2024-07-09
+('select_timeout', [])
+('disconnect', [])
+file_path: /data/source/warehouse/dhl_beijing_ruixing/2024-07-09/log/005/usb_cam_right.log.2024-07-09
+('select_timeout', [])
+('disconnect', [])
+file_path: /data/source/warehouse/dhl_beijing_ruixing/2024-07-09/log/006/usb_cam.log.2024-07-09
+('select_timeout', [])
+('disconnect', [])
+file_path: /data/source/warehouse/dhl_beijing_ruixing/2024-07-09/log/006/usb_cam_left.log.2024-07-09
+('select_timeout', [])
+('disconnect', [])
+file_path: /data/source/warehouse/dhl_beijing_ruixing/2024-07-09/log/006/usb_cam_right.log.2024-07-09
+('select_timeout', [])
+('disconnect', [])
+file_path: /data/source/warehouse/dhl_beijing_ruixing/2024-07-09/log/007/usb_cam.log.2024-07-09
+('select_timeout', [])
+('disconnect', [])
+file_path: /data/source/warehouse/dhl_beijing_ruixing/2024-07-09/log/007/usb_cam_left.log.2024-07-09
+('select_timeout', [])
+('disconnect', [])
+file_path: /data/source/warehouse/dhl_beijing_ruixing/2024-07-09/log/007/usb_cam_right.log.2024-07-09
+('select_timeout', [])
+('disconnect', [])
+file_path: /data/source/warehouse/dhl_beijing_ruixing/2024-07-09/log/008/usb_cam.log.2024-07-09
+('select_timeout', [])
+('disconnect', [])
+file_path: /data/source/warehouse/dhl_beijing_ruixing/2024-07-09/log/008/usb_cam_left.log.2024-07-09
+('select_timeout', [])
+('disconnect', [])
+file_path: /data/source/warehouse/dhl_beijing_ruixing/2024-07-09/log/008/usb_cam_right.log.2024-07-09
+('select_timeout', [])
+('disconnect', [])
+file_path: /data/source/warehouse/dhl_beijing_ruixing/2024-07-09/log/009/usb_cam.log.2024-07-09
+('select_timeout', [])
+('disconnect', [])
+file_path: /data/source/warehouse/dhl_beijing_ruixing/2024-07-09/log/009/usb_cam_left.log.2024-07-09
+('select_timeout', [])
+('disconnect', [])
+file_path: /data/source/warehouse/dhl_beijing_ruixing/2024-07-09/log/009/usb_cam_right.log.2024-07-09
+('select_timeout', [])
+('disconnect', [])
+file_path: /data/source/warehouse/dhl_beijing_ruixing/2024-07-09/log/010/usb_cam.log.2024-07-09
+('select_timeout', [])
+('disconnect', [])
+file_path: /data/source/warehouse/dhl_beijing_ruixing/2024-07-09/log/010/usb_cam_left.log.2024-07-09
+('select_timeout', [])
+('disconnect', [])
+file_path: /data/source/warehouse/dhl_beijing_ruixing/2024-07-09/log/010/usb_cam_right.log.2024-07-09
+('select_timeout', [])
+('disconnect', [])
+file_path: /data/source/warehouse/dhl_beijing_ruixing/2024-07-09/log/011/usb_cam.log.2024-07-09
+('select_timeout', [])
+('disconnect', [])
+file_path: /data/source/warehouse/dhl_beijing_ruixing/2024-07-09/log/011/usb_cam_left.log.2024-07-09
+('select_timeout', [])
+('disconnect', [])
+file_path: /data/source/warehouse/dhl_beijing_ruixing/2024-07-09/log/011/usb_cam_right.log.2024-07-09
+('select_timeout', [])
+('disconnect', [])
+file_path: /data/source/warehouse/dhl_beijing_ruixing/2024-07-09/log/012/usb_cam.log.2024-07-09
+('select_timeout', [])
+('disconnect', [])
+file_path: /data/source/warehouse/dhl_beijing_ruixing/2024-07-09/log/012/usb_cam_left.log.2024-07-09
+('select_timeout', [])
+('disconnect', [])
+file_path: /data/source/warehouse/dhl_beijing_ruixing/2024-07-09/log/012/usb_cam_right.log.2024-07-09
+('select_timeout', [])
+('disconnect', [])
+file_path: /data/source/warehouse/dhl_beijing_ruixing/2024-07-09/log/013/usb_cam.log.2024-07-09
+('select_timeout', [])
+('disconnect', [])
+file_path: /data/source/warehouse/dhl_beijing_ruixing/2024-07-09/log/013/usb_cam_left.log.2024-07-09
+('select_timeout', [])
+('disconnect', [])
+file_path: /data/source/warehouse/dhl_beijing_ruixing/2024-07-09/log/013/usb_cam_right.log.2024-07-09
+('select_timeout', [])
+('disconnect', [])
+file_path: /data/source/warehouse/dhl_beijing_ruixing/2024-07-09/log/014/usb_cam.log.2024-07-09
+('select_timeout', [])
+('disconnect', [])
+file_path: /data/source/warehouse/dhl_beijing_ruixing/2024-07-09/log/014/usb_cam_left.log.2024-07-09
+('select_timeout', [])
+('disconnect', [])
+file_path: /data/source/warehouse/dhl_beijing_ruixing/2024-07-09/log/014/usb_cam_right.log.2024-07-09
+('select_timeout', [])
+('disconnect', [])
+file_path: /data/source/warehouse/dhl_beijing_ruixing/2024-07-09/log/015/usb_cam.log.2024-07-09
+('select_timeout', [])
+('disconnect', [])
+file_path: /data/source/warehouse/dhl_beijing_ruixing/2024-07-09/log/015/usb_cam_left.log.2024-07-09
+('select_timeout', [])
+('disconnect', [])
+file_path: /data/source/warehouse/dhl_beijing_ruixing/2024-07-09/log/015/usb_cam_right.log.2024-07-09
+('select_timeout', [])
+('disconnect', [])
+file_path: /data/source/warehouse/dhl_beijing_ruixing/2024-07-09/log/016/usb_cam.log.2024-07-09
+('select_timeout', [])
+('disconnect', [])
+file_path: /data/source/warehouse/dhl_beijing_ruixing/2024-07-09/log/016/usb_cam_left.log.2024-07-09
+('select_timeout', [])
+('disconnect', [])
+file_path: /data/source/warehouse/dhl_beijing_ruixing/2024-07-09/log/016/usb_cam_right.log.2024-07-09
+('select_timeout', [])
+('disconnect', [])
+file_path: /data/source/warehouse/dhl_beijing_ruixing/2024-07-09/log/017/usb_cam.log.2024-07-09
+('select_timeout', [])
+('disconnect', [])
+file_path: /data/source/warehouse/dhl_beijing_ruixing/2024-07-09/log/017/usb_cam_left.log.2024-07-09
+('select_timeout', [])
+('disconnect', [])
+file_path: /data/source/warehouse/dhl_beijing_ruixing/2024-07-09/log/017/usb_cam_right.log.2024-07-09
+('select_timeout', [])
+('disconnect', [])
+file_path: /data/source/warehouse/dhl_beijing_ruixing/2024-07-09/log/019/usb_cam.log.2024-07-09
+('select_timeout', [])
+('disconnect', [])
+file_path: /data/source/warehouse/dhl_beijing_ruixing/2024-07-09/log/019/usb_cam_left.log.2024-07-09
+('select_timeout', [])
+('disconnect', [])
+file_path: /data/source/warehouse/dhl_beijing_ruixing/2024-07-09/log/019/usb_cam_right.log.2024-07-09
+('select_timeout', [])
+('disconnect', [])
+file_path: /data/source/warehouse/dhl_beijing_ruixing/2024-07-09/log/020/usb_cam.log.2024-07-09
+('select_timeout', [])
+('disconnect', [])
+file_path: /data/source/warehouse/dhl_beijing_ruixing/2024-07-09/log/020/usb_cam_left.log.2024-07-09
+('select_timeout', [])
+('disconnect', ['2024-07-09 10:05:57', '2024-07-09 16:35:07'])
+file_path: /data/source/warehouse/dhl_beijing_ruixing/2024-07-09/log/020/usb_cam_right.log.2024-07-09
+('select_timeout', [])
+('disconnect', [])
+file_path: /data/source/warehouse/dhl_beijing_ruixing/2024-07-09/log/021/usb_cam.log.2024-07-09
+('select_timeout', [])
+('disconnect', [])
+file_path: /data/source/warehouse/dhl_beijing_ruixing/2024-07-09/log/021/usb_cam_left.log.2024-07-09
+('select_timeout', [])
+('disconnect', [])
+file_path: /data/source/warehouse/dhl_beijing_ruixing/2024-07-09/log/021/usb_cam_right.log.2024-07-09
+('select_timeout', [])
+('disconnect', [])
+file_path: /data/source/warehouse/dhl_beijing_ruixing/2024-07-09/log/022/usb_cam.log.2024-07-09
+('select_timeout', [])
+('disconnect', [])
+file_path: /data/source/warehouse/dhl_beijing_ruixing/2024-07-09/log/022/usb_cam_left.log.2024-07-09
+('select_timeout', [])
+('disconnect', [])
+file_path: /data/source/warehouse/dhl_beijing_ruixing/2024-07-09/log/022/usb_cam_right.log.2024-07-09
+('select_timeout', [])
+('disconnect', [])
+file_path: /data/source/warehouse/dhl_beijing_ruixing/2024-07-09/log/023/usb_cam.log.2024-07-09
+('select_timeout', [])
+('disconnect', [])
+file_path: /data/source/warehouse/dhl_beijing_ruixing/2024-07-09/log/023/usb_cam_right.log.2024-07-09
+('select_timeout', [])
+('disconnect', [])
+file_path: /data/source/warehouse/dhl_beijing_ruixing/2024-07-09/log/024/usb_cam.log.2024-07-09
+('select_timeout', [])
+('disconnect', [])
+file_path: /data/source/warehouse/dhl_beijing_ruixing/2024-07-09/log/024/usb_cam_right.log.2024-07-09
+('select_timeout', [])
+('disconnect', [])
+file_path: /data/source/warehouse/dhl_beijing_ruixing/2024-07-09/log/025/usb_cam.log.2024-07-09
+('select_timeout', [])
+('disconnect', [])
+file_path: /data/source/warehouse/dhl_beijing_ruixing/2024-07-09/log/025/usb_cam_right.log.2024-07-09
+('select_timeout', [])
+('disconnect', [])
+date_str: 2024-07-09
+charge_result_file: /data/output/output_charge/odom_charge.txt
+mm_markers 14007
+start warehouse: dhl_beijing_ruixing
+dhl_beijing_ruixing 001 2024-07-09
+start robot id: 001
+/data/source/warehouse/dhl_beijing_ruixing/2024-07-09/log/001/forwardx_docking.log.2024-07-09
+/data/source/warehouse/dhl_beijing_ruixing/2024-07-09/log/001/localization_manager.log.2024-07-09
+/data/source/warehouse/dhl_beijing_ruixing/2024-07-09/log/001/forwardx_move_base.log.2024-07-09
+2024-06-06 18:27:41.715][INFO ] - [ros.localization_manager.localization_manager_cpp.localizationManagerStatusCallback]: inited_level_probability: [1  0  0.736]	fused_pose: [89.121  -1.099  1.675]	velocity: [0.000  0.000] 

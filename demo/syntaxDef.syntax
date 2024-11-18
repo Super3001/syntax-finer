@@ -1,0 +1,45 @@
+.rootdir &builtin
+
+DefSymbol ::= ' ::= '
+
+Identifier ::= /\w+/
+
+NL ::= '\n' | '\r\n'
+
+Blank ::= '\n' | ' ' | '\t' | '\r'
+
+OneLine ::= /.*/
+
+SimplePattern ::= '\'' OneLine '\''
+
+RegexpPattern ::= '/' OneLine '/'
+
+NamePattern ::= Identifier
+
+StarPattern ::= Identifier '*'
+
+OptPattern ::= Identifier '?'
+
+BasicPattern ::= SimplePattern | NamePattern | StarPattern | OptPattern
+
+ConcatPatternCont ::= ' ' BasicPattern
+
+ConcatPattern ::= BasicPattern ConcatPatternCont*
+
+OrPatternCont ::= ' | ' ConcatPattern
+
+OrPattern ::= ConcatPattern OrPatternCont*
+
+Pattern ::= OrPattern | RegexpPattern
+
+Comment ::= '//' OneLine Blank*
+
+LineHeader ::= '[' OneLine ']'
+
+DotHeader ::= '.' WORD ' ' OneLine
+
+Header ::= LineHeader | DotHeader
+
+SyntaxLine ::= Identifier DefSymbol Pattern Blank*
+
+SyntaxFile[file] ::= Header* Blank* Comment* SyntaxLine*

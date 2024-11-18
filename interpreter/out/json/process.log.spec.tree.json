@@ -1,0 +1,474 @@
+[
+    {
+        "header": "// handle.log.spec\n",
+        "content": {
+            "metadata": [
+                "%(PROJ, DATE, INDEX)\n"
+            ],
+            "content": [
+                {
+                    "header": "\n- (.)",
+                    "content": [
+                        {
+                            "header": "",
+                            "content": [
+                                {
+                                    "pos": "{.watchdog[16]}",
+                                    "code": "echo \"unpack ${path}/$FILENAME\"\n"
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "header": "\n- (.)",
+                    "content": [
+                        {
+                            "header": "",
+                            "content": [
+                                {
+                                    "pos": "{unpack_data_from_project.sh[27,0]}",
+                                    "code": "echo warehouse:$warehouse"
+                                }
+                            ]
+                        },
+                        {
+                            "header": " ::= ",
+                            "content": "'warehouse:' PROJ NL"
+                        },
+                        {
+                            "header": " :=> ",
+                            "content": "\"warehouse:.*\" \n\t"
+                        }
+                    ]
+                },
+                {
+                    "header": "\n\t- (|,+)",
+                    "content": [
+                        {
+                            "header": "",
+                            "content": [
+                                {
+                                    "pos": "{unpack_data_from_project.sh[41,8]}",
+                                    "code": "$date_str\".tar.gz Error is not recoverable\""
+                                }
+                            ]
+                        },
+                        {
+                            "header": " ::= ",
+                            "content": "DATE '.tar.gz Error is not recoverable' NL"
+                        },
+                        {
+                            "header": " :=> ",
+                            "content": "\"[0-9]{4}-[0-9]{2}-[0-9]{2}.tar.gz Error is not recoverable\""
+                        },
+                        {
+                            "header": "\n\t\t=> ",
+                            "content": "sig(\"Transmission Error\"), %PROJ, %DATE\n\t"
+                        }
+                    ]
+                },
+                {
+                    "header": "\n\t- (|,+)",
+                    "content": [
+                        {
+                            "header": "",
+                            "content": [
+                                {
+                                    "pos": "{unpack_data_from_project.sh[79,4]}",
+                                    "code": "$date_str\".tar.gz is not exist\""
+                                }
+                            ]
+                        },
+                        {
+                            "header": " ::= ",
+                            "content": "DATE '.tar.gz is not exist' NL"
+                        },
+                        {
+                            "header": " :=> ",
+                            "content": ""
+                        },
+                        {
+                            "header": "\n\t\t=> ",
+                            "content": "sig(\"FileNotExist Error\"), %PROJ, %DATE\n"
+                        }
+                    ]
+                },
+                {
+                    "header": "\n- (.)",
+                    "content": [
+                        {
+                            "header": "",
+                            "content": [
+                                {
+                                    "pos": "",
+                                    "code": "echo date:$date"
+                                }
+                            ]
+                        },
+                        {
+                            "header": " ::= ",
+                            "content": "'date:' DATE"
+                        },
+                        {
+                            "header": " :=> ",
+                            "content": "\"date:[0-9]{4}-[0-9]{2}-[0-9]{2}\"\n"
+                        }
+                    ]
+                },
+                {
+                    "header": "\n- (.)",
+                    "content": [
+                        {
+                            "header": "",
+                            "content": [
+                                {
+                                    "pos": "",
+                                    "code": "echo indic:All"
+                                }
+                            ]
+                        },
+                        {
+                            "header": " ::= ",
+                            "content": "'indic:All'"
+                        },
+                        {
+                            "header": " :=> ",
+                            "content": "\"indic:All\"\n\n-..(index <- %INDEX%) (.,>[1.subflow]($index))python3 delete_data_from_index_by_project_date.py $index $date $project"
+                        },
+                        {
+                            "header": " ::= ",
+                            "content": "SUBFLOW_1*"
+                        },
+                        {
+                            "header": " :=> ",
+                            "content": "...\n\n- (.,>[2.subflow])python3 odom_stat.py $date $project"
+                        },
+                        {
+                            "header": " ::= ",
+                            "content": "SUBFLOW_2"
+                        },
+                        {
+                            "header": " :=> ",
+                            "content": "...\n\n"
+                        }
+                    ]
+                }
+            ]
+        }
+    },
+    {
+        "header": "// 1.subflow.log.spec\n",
+        "content": {
+            "metadata": [
+                "#(index)\n",
+                "%(PROJ, DATE, INDEX, TS)\n",
+                "%-> SUBFLOW_1\n"
+            ],
+            "content": [
+                {
+                    "header": "\n- (.)",
+                    "content": [
+                        {
+                            "header": "",
+                            "content": [
+                                {
+                                    "pos": "",
+                                    "code": "print(\"index is:\", index)"
+                                }
+                            ]
+                        },
+                        {
+                            "header": " ::= ",
+                            "content": "'index is:' INDEX\n    "
+                        }
+                    ]
+                },
+                {
+                    "header": "\n- (.)",
+                    "content": [
+                        {
+                            "header": "",
+                            "content": [
+                                {
+                                    "pos": "",
+                                    "code": "print(\"project is:\", project)"
+                                }
+                            ]
+                        },
+                        {
+                            "header": " ::= ",
+                            "content": "'project is:' PROJ\n    "
+                        }
+                    ]
+                },
+                {
+                    "header": "\n- (.)",
+                    "content": [
+                        {
+                            "header": "",
+                            "content": [
+                                {
+                                    "pos": "",
+                                    "code": "print(\"timestamp from\", timestamp, \"to\", totimestamp)"
+                                }
+                            ]
+                        },
+                        {
+                            "header": " ::= ",
+                            "content": "'timestamp from' TS 'to' TS\n"
+                        }
+                    ]
+                },
+                {
+                    "header": "\n- (+)",
+                    "content": [
+                        {
+                            "header": "",
+                            "content": [
+                                {
+                                    "pos": "",
+                                    "code": "es.delete_by_query(index=index, body=doc)"
+                                }
+                            ]
+                        },
+                        {
+                            "header": " ::= ",
+                            "content": "PYES_ERRORMSG"
+                        },
+                        {
+                            "header": " :=> ",
+                            "content": "...\n\n"
+                        }
+                    ]
+                }
+            ]
+        }
+    },
+    {
+        "header": "// agentkl.subflow.log.spec\n",
+        "content": {
+            "metadata": [],
+            "content": [
+                {
+                    "header": "\n- (.)",
+                    "content": [
+                        {
+                            "header": "",
+                            "content": [
+                                {
+                                    "pos": "{extract_agent_key_logs.py[147]}",
+                                    "code": "print(\"date_str:\",date_str)\n\n-..(project <- %PROJECT_IN_DIR%)\n\t"
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "header": "\n\t- (|,+)",
+                    "content": [
+                        {
+                            "header": "",
+                            "content": [
+                                {
+                                    "pos": "{extract_agent_key_logs.py[96]}",
+                                    "code": "es = Elasticsearch(es_name_passward+\"@\"+es_host, use_ssl=True, ca_certs='es01_ca.crt')"
+                                }
+                            ]
+                        },
+                        {
+                            "header": " ::= ",
+                            "content": "PYES_ERRORMSG"
+                        },
+                        {
+                            "header": " :=> ",
+                            "content": "...\n\t"
+                        }
+                    ]
+                },
+                {
+                    "header": "\n\t- (|)",
+                    "content": [
+                        {
+                            "header": "",
+                            "content": [
+                                {
+                                    "pos": "",
+                                    "code": "\n\t"
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "header": "\n\t\t- (.)",
+                    "content": [
+                        {
+                            "header": "",
+                            "content": [
+                                {
+                                    "pos": "{extract_agent_key_logs.py[104]}",
+                                    "code": "print(\"start warehouse:\", project)\n\t\t\n\t\t-..(robotid <- %ROBOT_ID%)\n\t\t"
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "header": "\n\t\t\t- (.)",
+                    "content": [
+                        {
+                            "header": "",
+                            "content": [
+                                {
+                                    "pos": "",
+                                    "code": "print(\"start robot id:\", robot_id)\n\t\t\t"
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "header": "\n\t\t\t- (.)",
+                    "content": [
+                        {
+                            "header": "",
+                            "content": [
+                                {
+                                    "pos": "",
+                                    "code": "print(\"file_path:\", file_path)\n\t\t\t"
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "header": "\n\t\t\t- (+)",
+                    "content": [
+                        {
+                            "header": "",
+                            "content": [
+                                {
+                                    "pos": "",
+                                    "code": "\n\t\t\t"
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "header": "\n\t\t\t\t- (.)",
+                    "content": [
+                        {
+                            "header": "",
+                            "content": [
+                                {
+                                    "pos": "",
+                                    "code": "print(\"len receive:\", len(results))\n\t\t\t"
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "header": "\n\t\t\t\t- (.)",
+                    "content": [
+                        {
+                            "header": "",
+                            "content": [
+                                {
+                                    "pos": "",
+                                    "code": "print(\"len finish:\", len(result_finish))\n\t\t\t"
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "header": "\n\t\t\t\t- (.)",
+                    "content": [
+                        {
+                            "header": "",
+                            "content": [
+                                {
+                                    "pos": "",
+                                    "code": "print(\"len audio:\", len(audio_result))\n\t\t\t"
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "header": "\n\t\t\t\t- (.)",
+                    "content": [
+                        {
+                            "header": "",
+                            "content": [
+                                {
+                                    "pos": "",
+                                    "code": "print(\"len results:\", len(results))\n\t\t\t"
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "header": "\n\t\t\t- (+)",
+                    "content": [
+                        {
+                            "header": "",
+                            "content": [
+                                {
+                                    "pos": "",
+                                    "code": "[131]es_write(es=es, actions=actions, date_str=date_str, project=project)\n\t\t\t"
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "header": "\n\t\t\t\t- (+)",
+                    "content": [
+                        {
+                            "header": "",
+                            "content": [
+                                {
+                                    "pos": "",
+                                    "code": "[89]print(\"es exception, extra_agent_key_logs date is\", date_str, \"project is\", project); print(\"es exception, extra_agent_key_logs :\", ex)\n\t\t\t"
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "header": "\n\t\t- (+)",
+                    "content": [
+                        {
+                            "header": "",
+                            "content": [
+                                {
+                                    "pos": "",
+                                    "code": "[135]es_write(es=es, actions=actions, date_str=date_str, project=project)\n\t\t\t"
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "header": "\n\t\t\t- (+)",
+                    "content": [
+                        {
+                            "header": "",
+                            "content": [
+                                {
+                                    "pos": "",
+                                    "code": "[89]print(\"es exception, extra_agent_key_logs date is\", date_str, \"project is\", project); print(\"es exception, extra_agent_key_logs :\", ex)\n\t\t\t\n\n\t\t\t\n\t\t\t\n"
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        }
+    }
+]

@@ -1,0 +1,14 @@
+
+LINE ::= /\S.*/
+
+WORD ::= /\w+/
+
+NL ::= '\n' | '\r\n'
+
+LineBlank ::= /\s*/
+
+LineSpace ::= LineBlank LINE
+
+LineFull ::= LineSpace NL
+
+File[file] ::= LineFull* LineBlank

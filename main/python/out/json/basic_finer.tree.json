@@ -1,0 +1,56 @@
+{
+    "File": {
+        "LineFull": [
+            {
+                "LineSpace": {
+                    "LineBlank": "\n",
+                    "LINE": "LINE ::= /\\S.*/"
+                },
+                "NL": "\n"
+            },
+            {
+                "LineSpace": {
+                    "LineBlank": "\n",
+                    "LINE": "WORD ::= /\\w+/"
+                },
+                "NL": "\n"
+            },
+            {
+                "LineSpace": {
+                    "LineBlank": "\n",
+                    "LINE": "NL ::= '\\n' | '\\r\\n'"
+                },
+                "NL": "\n"
+            },
+            {
+                "LineSpace": {
+                    "LineBlank": "\n",
+                    "LINE": "LineBlank ::= /\\s*/"
+                },
+                "NL": "\n"
+            },
+            {
+                "LineSpace": {
+                    "LineBlank": "\n",
+                    "LINE": "LineSpace ::= LineBlank LINE"
+                },
+                "NL": "\n"
+            },
+            {
+                "LineSpace": {
+                    "LineBlank": "\n",
+                    "LINE": "LineFull ::= LineSpace NL"
+                },
+                "NL": "\n"
+            },
+            {
+                "LineSpace": {
+                    "LineBlank": "\n",
+                    "LINE": "File[file] ::= LineFull* LineBlank"
+                },
+                "NL": "\n"
+            }
+        ],
+        "LineBlank": ""
+    }
+}

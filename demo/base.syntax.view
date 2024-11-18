@@ -1,0 +1,22 @@
+
+===symbols
+f: file
+d: drop
+x: hex representation
+o: fold
+p: preserve (default)
+
+===
+
+$LINE
+
+d$NL
+
+d$LineBlank
+
+o$LineSpace
+
+o$LineFull
+
+f$File 
+    => *(1) > "lines"

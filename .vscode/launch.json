@@ -1,0 +1,14 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Cangjie (CJNative): positioned.exe",
+            "program": "e:\\BaiduSyncdisk\\modeling\\syntax\\src\\main\\cangjie\\com\\syf\\finer\\nodes\\positioned.exe",
+            "request": "launch",
+            "type": "cangjieDebug",
+            "externalConsole": false,
+            "env": {},
+            "preLaunchTask": "cangjieDebug build task - 2QH82qDOyA"
+        }
+    ]
+}

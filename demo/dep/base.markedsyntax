@@ -1,0 +1,23 @@
+
+===symbols
+f: file
+d: drop
+x: hex representation
+c: comment
+o: fold
+
+===
+
+LINE ::= /\\S.*/
+
+WORD ::= /\\w+/
+
+NL[hex] ::= '\n' | '\r\n'
+
+LineBlank[hex] ::= /\\s*/
+
+LineSpace ::= LineBlank LINE
+
+LineFull ::= LineSpace NL
+
+File[file] ::= LineFull* LineBlank

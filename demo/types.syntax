@@ -1,0 +1,14 @@
+.rootdir &builtin
+
+// types.syntax
+
+ZERO ::= '0'
+
+POS_INT ::= /[1-9][0-9]*/
+
+NEG_INT ::= /-[1-9][0-9]*/
+
+INT ::= POS_INT | ZERO | NEG_INT
+
+String ::= /"[^"]*"/
+

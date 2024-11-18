@@ -1,0 +1,87 @@
+{
+    "metadata": {
+        "rootdir": "&builtin"
+    },
+    "names": {
+        "DefSymbol": {
+            "view": null,
+            "pat": "SimplePattern(' ::= ')"
+        },
+        "Identifier": {
+            "view": null,
+            "pat": "RegexpPattern(/\\w+/)"
+        },
+        "NL": {
+            "view": null,
+            "pat": "OrPattern([SimplePattern('\\n'), SimplePattern('\\r\\n')])"
+        },
+        "Blank": {
+            "view": null,
+            "pat": "OrPattern([SimplePattern('\\n'), SimplePattern(' '), SimplePattern('\\t'), SimplePattern('\\r')])"
+        },
+        "OneLine": {
+            "view": null,
+            "pat": "RegexpPattern(/.*/)"
+        },
+        "SimplePattern": {
+            "view": null,
+            "pat": "SimplePattern('\\'' OneLine '\\'')"
+        },
+        "RegexpPattern": {
+            "view": null,
+            "pat": "ConcatPattern([SimplePattern('/'), NamePattern(OneLine), SimplePattern('/')])"
+        },
+        "NamePattern": {
+            "view": null,
+            "pat": "NamePattern(Identifier)"
+        },
+        "StarPattern": {
+            "view": null,
+            "pat": "ConcatPattern([NamePattern(Identifier), SimplePattern('*')])"
+        },
+        "OptPattern": {
+            "view": null,
+            "pat": "ConcatPattern([NamePattern(Identifier), SimplePattern('?')])"
+        },
+        "BasicPattern": {
+            "view": null,
+            "pat": "OrPattern([NamePattern(SimplePattern), NamePattern(NamePattern), NamePattern(StarPattern), NamePattern(OptPattern)])"
+        },
+        "ConcatPatternCont": {
+            "view": null,
+            "pat": "ConcatPattern([SimplePattern(' '), NamePattern(BasicPattern)])"
+        },
+        "ConcatPattern": {
+            "view": null,
+            "pat": "ConcatPattern([NamePattern(BasicPattern), StarPattern([NamePattern(ConcatPatternCont)])])"
+        },
+        "OrPatternCont": {
+            "view": null,
+            "pat": "ConcatPattern([SimplePattern(' | '), NamePattern(ConcatPattern)])"
+        },
+        "OrPattern": {
+            "view": null,
+            "pat": "ConcatPattern([NamePattern(ConcatPattern), StarPattern([NamePattern(OrPatternCont)])])"
+        },
+        "Pattern": {
+            "view": null,
+            "pat": "OrPattern([NamePattern(OrPattern), NamePattern(RegexpPattern)])"
+        },
+        "Comment": {
+            "view": null,
+            "pat": "ConcatPattern([SimplePattern('//'), NamePattern(OneLine), StarPattern([NamePattern(Blank)])])"
+        },
+        "Metadata": {
+            "view": null,
+            "pat": "ConcatPattern([SimplePattern('['), NamePattern(OneLine), SimplePattern(']')])"
+        },
+        "SyntaxLine": {
+            "view": null,
+            "pat": "ConcatPattern([NamePattern(Identifier), NamePattern(DefSymbol), NamePattern(Pattern), StarPattern([NamePattern(Blank)])])"
+        },
+        "SyntaxFile": {
+            "view": "file",
+            "pat": "ConcatPattern([OptPattern([NamePattern(Metadata)]), StarPattern([NamePattern(Blank)]), StarPattern([NamePattern(Comment)]), StarPattern([NamePattern(SyntaxLine)])])"
+        }
+    }
+}
