@@ -1,21 +1,21 @@
 
 # Introduction
 
-Text-Finer works to transform plain text to structural text (in json formmat), according to a dynamic BNF grammer template.
+Text-Finer works to transform plain text to structural text (in JSON format) according to a dynamic BNF grammar template.
 
 # Inputs and Outputs
 
-input two files: *filename*.syntax, *filename*.txt
+input two files: `<filename>`.syntax, `<filename>`.txt
 
-where .syntax file contains the user-defined BNF grammer (or pre-defined ones), and .txt file contains the plain text.
+where the .syntax file contains the user-defined BNF grammar (or pre-defined ones), and the .txt file contains the plain text.
 
-and output one file: *filename*.tree.json
+and output one file (default at project root dir): `<filename>`.tree.json
 
 # Usage
 
-python run.py *filename*.syntax *filename*.txt--interpret
+`python run.py *filename*.syntax *filename*.txt --interpret`
 
-*Currently, the interpreter version (in python) is available, compile version (in Go, or Cangjie in the future) is still under development*
+*Currently, the interpreter version (in Python) is available; the compile version (in Go, or Cangjie in the future) is still under development*
 
 # Advanced features
 
@@ -33,9 +33,9 @@ python run.py *filename*.syntax *filename*.txt--interpret
 
 # Examples
 
-```
-# base.syntax
+`input file: base.syntax`
 
+```
 LINE ::= /\S.*/
 
 WORD ::= /\w+/
@@ -52,13 +52,13 @@ File[file] ::= LineFull* LineBlank
 
 ```
 
-python run.py --interpret demo/base.syntax demo/base.syntax
+`python run.py demo/base.syntax demo/base.syntax --interpret`
 
 **output:**
 
-```
-# base.tree.json
+`output file: base.tree.json`
 
+```
 {
     "File": {
         "LineFull": [
