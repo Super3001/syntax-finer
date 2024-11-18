@@ -10,12 +10,12 @@ from nodes.TreeModule import *
 from nodes.TreeEncoder import TreeJsonEncoder
 from SyntaxImport import SyntaxImporter
 
-BASE_DIR = r"E:\BaiduSyncDisk\modeling\\syntax"
-FILEPATH = BASE_DIR + r"\\demo\base.syntax"
-PROJ_DIR = BASE_DIR + r"\\main\\python"
-SAVE_DIR = PROJ_DIR + r"\\out"
-OBJECT_DIR = SAVE_DIR + "\\object"
-OBJECT_DIR_GLOBAL = OBJECT_DIR+ "\\global"
+BASE_DIR = r"E:\BaiduSyncDisk\modeling\syntax"
+FILEPATH = BASE_DIR + r"\demo\base.syntax"
+PROJ_DIR = BASE_DIR + r"\main\python"
+SAVE_DIR = PROJ_DIR + r"\out"
+OBJECT_DIR = SAVE_DIR + r"\object"
+OBJECT_DIR_GLOBAL = OBJECT_DIR+ r"\global"
 
 class SyntaxReader:
     '''
@@ -58,7 +58,7 @@ class SyntaxReader:
                 "metadata": metadata,
                 "names": names,
             }
-            filename = filepath.replace(os.sep, '$') + '.pkl'
+            filename = filepath.replace('/', '$').replace('\\', '$') + '.pkl'
             if os.path.exists(OBJECT_DIR):
                 object_dir = OBJECT_DIR
             else:

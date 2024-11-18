@@ -167,10 +167,12 @@ class BasicFiner:
     
     def save_json(self, save_dir="", filename=""):
         if save_dir == "":
-            save_dir = os.path.join(".", "syntax", "out")
+            save_dir = os.path.join(".", "syntax", "out", "json")
         if filename == "":
             filename = 'basic_finer'
-        filename = os.path.join(save_dir, 'json', filename + '.tree.json')
+        filename = os.path.join(save_dir, filename + '.tree.json')
+        # if not os.path.exists(os.path.join(save_dir, 'json')):
+            # os.makedirs(os.path.join(save_dir, 'json')) 
         with open(filename, 'w', encoding='utf-8') as f:
             f.write(self.to_json())
 
