@@ -1,0 +1,59 @@
+[first]
+<file>               : BracketLine | DotLine
+<metadata>           : BracketLine | DotLine
+<body>               : Identifier
+<line>               : Newline
+<identWhole>         : Identifier
+<identType>          : IdentType
+<right-value>        : Identifier | Literal | RegExp | LeftParen
+<or-item-cond>       : Or
+<or-item>            : Identifier | Literal | RegExp | LeftParen
+<seq-item-cond>      : Space
+<seq-item>           : Identifier | Literal | RegExp | LeftParen
+<trailing-item>      : Star | Plus | Question
+<parentheses-item>   : LeftParen
+
+[nullable]
+<file>               : false
+<metadata>           : true
+<body>               : true
+<line>               : false
+<identWhole>         : false
+<identType>          : true
+<right-value>        : false
+<or-item-cond>       : true
+<or-item>            : false
+<seq-item-cond>      : true
+<seq-item>           : false
+<trailing-item>      : true
+<parentheses-item>   : false
+
+[follow]
+<file>               : EmptySet
+<metadata>           : Identifier
+<body>               : EOF
+<line>               : Newline | EOF
+<identWhole>         : Assignment
+<identType>          : Assignment
+<right-value>        : Newline
+<or-item-cond>       : Or | Newline
+<or-item>            : Or | Newline
+<seq-item-cond>      : Space | Or | Newline
+<seq-item>           : Space | Or | Newline
+<trailing-item>      : Space | Or | Newline
+<parentheses-item>   : Space | Or | Newline
+
+(now)               IdentType Identifier Literal RegExp Assignment Or LeftParen RightParen Star Question Plus Space Newline DotLine BracketLine EOF
+<file>              0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0
+<metadata>          0,3,0,0,0,0,0,0,0,0,0,0,0,1,2,0
+<body>              0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,2
+<line>              0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+<identWhole>        0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+<identType>         1,0,0,0,2,0,0,0,0,0,0,0,0,0,0,0
+<right-value>       0,1,1,1,0,0,1,0,0,0,0,0,0,0,0,0
+<or-item-cond>      0,0,0,0,0,1,0,0,0,0,0,0,2,0,0,0
+<or-item>           0,1,1,1,0,0,1,0,0,0,0,0,0,0,0,0
+<seq-item-cond>     0,0,0,0,0,2,0,0,0,0,0,1,2,0,0,0
+<seq-item>          0,2,3,4,0,0,1,0,0,0,0,0,0,0,0,0
+<trailing-item>     0,0,0,0,0,4,0,0,1,2,3,4,4,0,0,0
+<parentheses-item>  0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0

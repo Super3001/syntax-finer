@@ -1,0 +1,53 @@
+{
+    "dot_headers": {
+        "rootdir": "&builtin"
+    },
+    "id table": {
+        "DefSymbol": "SimplePattern( ::= )",
+        "Identifier": "RegexpPattern(\\w+)",
+        "NL": "OrPattern{SimplePattern(\\n), SimplePattern(\\r\\n)}",
+        "Blank": "OrPattern{SimplePattern(\\n), SimplePattern( ), SimplePattern(\\t), SimplePattern(\\r)}",
+        "OneLine": "RegexpPattern(.*)",
+        "SimplePattern": "SequencePattern{SimplePattern('), NamePattern(OneLine), SimplePattern(')}",
+        "RegexpPattern": "SequencePattern{SimplePattern(/), NamePattern(OneLine), SimplePattern(/)}",
+        "NamePattern": "NamePattern(Identifier)",
+        "StarPattern": "SequencePattern{NamePattern(Identifier), SimplePattern(*)}",
+        "OptPattern": "SequencePattern{NamePattern(Identifier), SimplePattern(?)}",
+        "BasicPattern": "OrPattern{NamePattern(SimplePattern), NamePattern(NamePattern), NamePattern(StarPattern), NamePattern(OptPattern)}",
+        "ConcatPatternCont": "SequencePattern{SimplePattern( ), NamePattern(BasicPattern)}",
+        "ConcatPattern": "SequencePattern{NamePattern(BasicPattern), StarPattern(NamePattern(ConcatPatternCont))}",
+        "OrPatternCont": "SequencePattern{SimplePattern( | ), NamePattern(ConcatPattern)}",
+        "OrPattern": "SequencePattern{NamePattern(ConcatPattern), StarPattern(NamePattern(OrPatternCont))}",
+        "Pattern": "OrPattern{NamePattern(OrPattern), NamePattern(RegexpPattern)}",
+        "Comment": "SequencePattern{SimplePattern(//), NamePattern(OneLine), StarPattern(NamePattern(Blank))}",
+        "LineHeader": "SequencePattern{SimplePattern([), NamePattern(OneLine), SimplePattern(])}",
+        "DotHeader": "SequencePattern{SimplePattern(.), NamePattern(WORD), SimplePattern( ), NamePattern(OneLine)}",
+        "Header": "OrPattern{NamePattern(LineHeader), NamePattern(DotHeader)}",
+        "SyntaxLine": "SequencePattern{NamePattern(Identifier), NamePattern(DefSymbol), NamePattern(Pattern), StarPattern(NamePattern(Blank))}",
+        "SyntaxFile": "SequencePattern{StarPattern(NamePattern(Header)), StarPattern(NamePattern(Blank)), StarPattern(NamePattern(Comment)), StarPattern(NamePattern(SyntaxLine))}"
+    },
+    "s-tag table": {
+        "DefSymbol": "",
+        "Identifier": "",
+        "NL": "",
+        "Blank": "",
+        "OneLine": "",
+        "SimplePattern": "",
+        "RegexpPattern": "",
+        "NamePattern": "",
+        "StarPattern": "",
+        "OptPattern": "",
+        "BasicPattern": "",
+        "ConcatPatternCont": "",
+        "ConcatPattern": "",
+        "OrPatternCont": "",
+        "OrPattern": "",
+        "Pattern": "",
+        "Comment": "",
+        "LineHeader": "",
+        "DotHeader": "",
+        "Header": "",
+        "SyntaxLine": "",
+        "SyntaxFile": "file"
+    }
+}

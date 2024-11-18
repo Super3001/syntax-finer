@@ -1,0 +1,26 @@
+
+<file> ::= <metadata> <body> EOF
+
+<metadata> ::= BracketLine <metadata> | DotLine <metadata> | ε
+
+<body> ::= <line> <body> | ε
+
+<line> ::= Newline <identWhole> Assignment <right-value>
+
+<identWhole> ::= Identifier <identType>
+
+<identType> ::= IdentType | ε
+
+<right-value> ::= <or-item> <or-item-cond>
+
+<or-item-cond> ::= Or <right-value> | ε
+
+<or-item> ::= <seq-item> <seq-item-cond>
+
+<seq-item-cond> ::= Space <or-item> | ε
+
+<seq-item> ::= <parentheses-item> | Identifier <trailing-item> | Literal | RegExp
+
+<trailing-item> ::= Star | Question | Plus | ε
+
+<parentheses-item> ::= LeftParen <right-value> RightParen
