@@ -1,0 +1,22 @@
+{
+  "packageInformation": {
+    "simple_finer.ext": {
+      "rootPackageName": "simple_finer",
+      "fileNameHash": "-2921057682646241376",
+      "timeStamp": 1733368563,
+      "buildFlag": true,
+      "exeName": "",
+      "hasSubPkgs": false
+    },
+    "simple_finer": {
+      "rootPackageName": "simple_finer",
+      "fileNameHash": "4565497750276805277",
+      "timeStamp": 1733368832,
+      "buildFlag": true,
+      "exeName": "main",
+      "hasSubPkgs": true
+    }
+  },
+  "jsonHash": "4171070236743634814",
+  "rootPackageName": "simple_finer"
+}

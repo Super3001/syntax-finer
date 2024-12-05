@@ -1,4 +1,4 @@
-package simple_finer
+package simple_finer.ext
 
 public enum List<A> {
     | Nil
@@ -30,6 +30,14 @@ extend<A> List<A> {
         cons(x, this)
     }
 
+    public func append(x: A): List<A> {
+        this.concat(Cons(x, Nil))
+    }
+
+    public func concat(other: List<A>): List<A> {
+        this.reverse().reduce<List<A>>({acc, x => cons(x, acc)}, other)
+    }
+
     public func reduce<B>(f: (B, A) -> B, base: B): B {
         var acc = base
         var x = this
@@ -48,15 +56,19 @@ extend<A> List<A> {
         this.reduce(f, base)
     }
 
+    public func foldRight<B>(f: (B, A) -> B, base: B): B {
+        this.reverse().reduce(f, base)
+    }
+
     /*
     递归调用，小心爆栈
-    */
-    public func foldRight<B>(f: (B, A) -> B, base: B): B {
+    public func foldRight<B>(f: (A, B) -> B, base: B): B {
         match (this) {
             case Nil => base
-            case Cons(hd, tl) => f(hd, tl.foldRight(base))
+            case Cons(hd, tl) => f(hd, tl.foldRight(f, base))
         }
     }
+    */
 
     public func reverse(): List<A> {
         this.reduce({acc, x => List<A>.cons(x, acc)}, Nil)
@@ -73,6 +85,34 @@ extend<A> List<A> {
         this.reduce({acc, _ => acc + 1}, 0)
     }
 
+    public func skip(num: Int): List<A> {
+        var x = this
+        for (_ in 0..num) {
+            match(x) {
+                case Nil => break
+                case Cons(hd, tl) =>
+                    x = tl
+            }
+        }
+        x
+    }
+
+    public func splitOnce(condition: (A) -> Bool): Option<(List<A>, List<A>)> {
+        var x: List<A> = Nil
+        var y = this
+        while (true) {
+            match (y) {
+                case Nil => 
+                    return None
+                case Cons(hd, tl) where condition(hd) =>
+                    break
+                case Cons(hd, tl) => 
+                    x = Cons(hd, x)
+                    y = tl
+            }
+        }
+        Some((x, y))
+    }
 }
 
 extend<A> List<A> <: ToString where A <: ToString {
@@ -85,5 +125,20 @@ extend<A> List<A> <: ToString where A <: ToString {
 
     public func toString() {
         "List: [${this.join(",")}]"
+    }
+}
+
+extend<A> List<A> where A <: Equatable<A> {
+    public func startsWith(other: List<A>): Bool {
+        other.reduce({acc: Option<List<A>>, x: A => match(acc) {
+            case Some(Cons(hd, tl)) where hd == x => Some(tl)
+            case _ => Option<List<A>>.None
+        }}, this).isSome()
+    }
+}
+
+extend<B> List<List<B>> {
+    public func flatten(): List<B> {
+        this.reduce ({acc, x => acc.concat(x)}, List<B>.Nil)
     }
 }

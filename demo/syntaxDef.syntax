@@ -1,4 +1,4 @@
-.rootdir &builtin
+
 
 DefSymbol ::= ' ::= '
 
