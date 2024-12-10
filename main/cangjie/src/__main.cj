@@ -29,6 +29,6 @@ main() {
     // while (true) {
     //     Console.stdIn.readln().okOr("Invalid Input!").andThen(readFile).andThen(evalExpression).mapErr(println)
     // }
-    Result<String, String>.Ok("E:/BaiduSyncdisk/modeling/syntax/demo/base.syntax").andThen(readFile).andThen(evalNfa).mapErr(println)
+    Result<String, String>.Ok("E:/BaiduSyncdisk/modeling/syntax/demo/syntaxDef.syntax").andThen(readFile).andThen(evalNfa).mapErr(println)
     ()
 }

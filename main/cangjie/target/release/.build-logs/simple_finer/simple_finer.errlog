@@ -1,8 +1,8 @@
-[33mwarning[0m: unused variable:'s'
-   [36m==>[0m E:\BaiduSyncdisk\modeling\syntax\main\cangjie\src\generator.cj:225:20:
+[33mwarning[0m: unused variable:'one'
+   [36m==>[0m E:\BaiduSyncdisk\modeling\syntax\main\cangjie\src\generator.cj:289:21:
     [36m| [0m
-[36m225[0m [36m| [0m    func regex_nfa(s: String, nxt: NfaNode): NfaNode {[0m
-    [36m| [0m                   [33m^ unused variable[0m
+[36m289[0m [36m| [0m                let one = gen_nfa(p, Transition(novel_id(), nxt, first))[0m
+    [36m| [0m                    [33m^^^ unused variable[0m
     [36m| [0m
     [36m#[0m [0mnote[0m: this warning can be suppressed by setting the compiler option `-Woff unused`
 

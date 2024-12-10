@@ -143,26 +143,28 @@ enum NfaNode {
     | Single(Int, Rune, NfaNode)
     | Sequence(Int, List<Rune>, NfaNode)
     | Set(Int, List<Rune>, NfaNode)
+    | Regex(Int, String, NfaNode)
     | Transition(Int, NfaNode, NfaNode)
-//     | LastTransition(Int, NfaNode, NfaNode)
-//     | Merge(Int, NfaNode)
+    | LastTransition(Int, NfaNode, NfaNode)
+    | Merge(Int, NfaNode)
     | Forward(Int, NfaNode, ForwardConnector)
-    | Start(NfaNode)
-    | Bridge(Int, NfaNode)
+    | Start(Int, NfaNode)
     | EmptyNode
     | End
 
-    public func getId(): Option<Int> {
+    public func getId(): Int {
         match (this) {
-            case Single(id, _, _) => Some(id)
-            case Sequence(id, _, _) => Some(id)
-            case Set(id, _, _) => Some(id)
-            case Transition(id, _, _) => Some(id)
-            case Forward(id, _, _) => Some(id)
-            case Start(_) => None
-            case Bridge(id, _) => Some(id)
-            case EmptyNode => None
-            case End => Some(0)
+            case Single(id, _, _) => id
+            case Sequence(id, _, _) => id
+            case Set(id, _, _) => id
+            case Regex(id, _, _) => id
+            case Transition(id, _, _) => id
+            case LastTransition(id, _, _) => id
+            case Merge(id, _) => id
+            case Forward(id, _, _) => id
+            case Start(id, _) => id
+            case EmptyNode => -1
+            case End => 0
         }
     }
 }
@@ -178,25 +180,34 @@ extend NfaNode {
 
 extend NfaNode <: ToString {
     public func toString(): String {
-        if (let Some(id) <- this.getId()) {
+        /*
+        if (this.getId() >= 0) {
+            let id = this.getId()
             if (!Context.testAndSetFunc(id)) {
-                return "<${id}>; "
+                println("warn: shouldn't have any re-print here, this should not be called")
+                return "<!!!${id}!!!>; "
             }
         }
+        */
 
         match (this) {
-            case Start(nxt) => "Nfa: \n" + nxt.toString()
-            case Single(id, ch, nxt) => "<${id}> '${ch}' -> \n" + nxt.toString()
-            case Sequence(id, l, nxt) => "<${id}> \"${l.join('')}\" -> \n" + nxt.toString()
-            case Set(id, l, nxt) => "<${id}> [${l.join('')}] -> \n" + nxt.toString()
-            case Transition(id, fst, snd) => match (snd.getId()) {
-                case Some(id2) => "<${id}> => <${id2}> -> \n" + fst.toString() + snd.toString()
-                case None => println("Forward Node to EmptyNode, Start!!!"); "<${id}> => <???> -> \n" + snd.toString()
+            case Start(id, nxt) => "Nfa: \n<${id}> Start" + nxt.toString()
+            case Single(id, ch, nxt) => "\n<${id}> '${ch}' -> " + nxt.toString()
+            case Sequence(id, l, nxt) => "\n<${id}> '${l.join('')}' -> " + nxt.toString()
+            case Set(id, l, nxt) => "\n<${id}> [${l.join('')}] -> " + nxt.toString()
+            case Regex(id, s, nxt) => "\n<${id}> /${s}/ -> " + nxt.toString()
+            case Transition(id, fst, snd) => match (snd) {
+                case n where n.getId() >= 0 => "\n<${id}> => <${snd.getId()}> -> " + fst.toString() + snd.toString()
+                case _ => println("<${id}> Transition connect to Start or EmptyNode!!!"); "\n<${id}> => <???> -> " + fst.toString()
             }
-            case Forward(id, nxt, conn) => "<${id}> => <${conn.dest.getId().map{x => x.toString()}}> -> \n" + nxt.toString()
-            case Bridge(id, nxt) => "<${id}> (maybe regex here ...) -> \n" + nxt.toString()
-            case EmptyNode => "().\n"
-            case End => "<0> End.\n"
+            case LastTransition(id, fst, snd) => match (snd) {
+                case Merge(id2, nxt) => "\n<${id}> -> " + fst.toString() + nxt.toString()
+                case _ => println("LastTransition must connect to Merge node!!!"); "\n<${id}> -> " + fst.toString()
+            }
+            case Merge(id, _) => "<${id}>"
+            case Forward(id, nxt, conn) => "\n<${id}> => <${conn.dest.getId()}> -> " + nxt.toString()
+            case EmptyNode => "\n()."
+            case End => "\n<0> End."
         }
     }
 }
@@ -216,41 +227,39 @@ func generateNfaFunc(pat: SymbolicPattern): Option<NfaNode> {
         id
     }
 
-    /*
-    func or_nfa(l: List<SymbolicPattern>, nxt: NfaNode): NfaNode {
-        
-    }
-    */
-
-    func regex_nfa(s: String, nxt: NfaNode): NfaNode {
-        Bridge(novel_id(), nxt)
-    }
-
     func gen_nfa(pat: SymbolicPattern, nxt: NfaNode): NfaNode {
 
         match (pat) {
 
             case SimplePattern(s) => Sequence(novel_id(), List.fromArray(s.toRuneArray()), nxt)
 
-            case RegexPattern(s) => regex_nfa(s, nxt)
+            case RegexPattern(s) => Regex(novel_id(), s, nxt)
 
             case ConcatPattern(l) => l.reverse().reduce ({
                 acc, x => gen_nfa(x, acc)
             }, nxt)
 
             case OrPattern(l) =>
+                let merge = Merge(nxt.getId(), nxt)
                 var x = l.reverse()
-                var acc = Bridge(novel_id(), nxt)
+                var acc = EmptyNode
+                match (x) {
+                    case Nil => throw Exception("OrPattern with no sub-patterns")
+                    case Cons(hd, tl) =>
+                        let inner = gen_nfa(hd, merge)
+                        acc = LastTransition(novel_id(), inner, merge)
+                        x = tl
+                }
                 while (true) {
                     match (x) {
                         case Nil => break
                         case Cons(hd, tl) => 
-                            acc = Transition(novel_id(), gen_nfa(hd, nxt), acc)
+                            let inner = gen_nfa(hd, merge)
+                            acc = Transition(novel_id(), inner, acc)
                             x = tl
                     }
                 }
-                acc       
-            
+                acc            
             /*
             l.reverse().reduce<NfaNode> ({
                 acc, x => match (acc) {
@@ -261,25 +270,34 @@ func generateNfaFunc(pat: SymbolicPattern): Option<NfaNode> {
             */
 
             case StarPattern(p) => 
+                let merge = Merge(nxt.getId(), nxt)
                 var conn = ForwardConnector()
-                let one = gen_nfa(p, Forward(novel_id(), nxt, conn))
+                let one = gen_nfa(p, Forward(novel_id(), merge, conn))
                 let first = Transition(novel_id(), one, nxt)
                 conn.dest = first
                 first
             case OptPattern(p) =>
-                let one = gen_nfa(p, nxt)
+                let merge = Merge(nxt.getId(), nxt)
+                let one = gen_nfa(p, merge)
                 Transition(novel_id(), one, nxt)
             case PlusPattern(p) =>
                 var first = EmptyNode
                 let one = gen_nfa(p, Transition(novel_id(), nxt, first))
-                first = Bridge(novel_id(), one)
                 first
 
             case UnQualifiedPattern => EmptyNode
         }
     }
 
-    Some(Start(gen_nfa(pat, End)))
+    let nfa = gen_nfa(pat, End)
+
+    // 将 regex 转为普通的 NfaNode
+    func deal_regex() {}
+
+    // 处理 literal 中的转义字符
+    func deal_literal() {}
+
+    Some(Start(novel_id(), nfa))
 }
 
 func evalNfa(str: String): Result<Unit, String>  {

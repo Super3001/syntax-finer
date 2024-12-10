@@ -6,6 +6,10 @@ Identifier ::= /\w+/
 
 NL ::= '\n' | '\r\n'
 
+WORD ::= /\w+/
+
+LINE ::= /\S.*/
+
 Blank ::= '\n' | ' ' | '\t' | '\r'
 
 OneLine ::= /.*/
@@ -40,6 +44,8 @@ DotHeader ::= '.' WORD ' ' OneLine
 
 Header ::= LineHeader | DotHeader
 
+ImportLine ::= 'import ' OneLine
+
 SyntaxLine ::= Identifier DefSymbol Pattern Blank*
 
-SyntaxFile[file] ::= Header* Blank* Comment* SyntaxLine*
+SyntaxFile[file] ::= Header* Blank* Comment* ImportLine* SyntaxLine*
