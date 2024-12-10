@@ -52,6 +52,39 @@ extend<A> List<A> {
         acc
     }
 
+    public func filter(f: (A) -> Bool): List<A> {
+        this.reduce ({
+            acc, x => match(f(x)) {
+                case true => Cons(x, acc)
+                case false => acc
+            }
+        }, List<A>.empty()).reverse()
+    }
+
+    public func map<B>(f: (A) -> B): List<B> {
+        var acc = List<B>.empty()
+        var x = this
+        while (true) {
+            match(x) {
+                case Nil => break
+                case Cons(hd, tl) =>
+                    acc = Cons(f(hd), acc)
+                    x = tl
+            }
+        }
+        acc.reverse()
+        // this.reduce ({
+        //     acc, x => Cons(f(x), acc)
+        // }, List<B>.empty()).reverse()
+    }
+
+    public func map2<B>(f: (A) -> B): List<B> {
+        match (this) {
+            case Nil => List<B>.empty()
+            case Cons(hd, tl) => Cons(f(hd), tl.map2(f))
+        }
+    }
+
     public func foldLeft<B>(f: (B, A) -> B, base: B): B {
         this.reduce(f, base)
     }

@@ -17,3 +17,24 @@ extend<T> Option<T> <: OptionExt {
         }
     }
 }
+
+extend Option<Int64> {
+    public func getStr(): String {
+        match (this) {
+            case Some(v) => v.toString()
+            case None => "(None!)"
+        }
+    }
+}
+
+/*
+extend<T> Option<T> where T <: ToString {
+    public func getStr(): String {
+        match (this) {
+            case Some(v) => v.toString()
+            case None => "(None!)"
+        }
+    }
+}
+*/
+

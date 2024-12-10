@@ -190,10 +190,10 @@ let syntaxDef = name.and(modifier.opt()).and(defSymbol).and(
 ).and(newline.many(1)).map {
     input => match(input) {
         case ((((name, None), defSymbol), values), _) => 
-            println("parsed SyntaxDef: ${name} without modifier")
+            // println("parsed SyntaxDef: ${name} without modifier")
             Cons(name, Cons(defSymbol, Nil)).concat(values)
         case ((((name, Some(modifier)), defSymbol), values), _) => 
-            println("parsed SyntaxDef: ${name} with modifier: ${modifier}")
+            // println("parsed SyntaxDef: ${name} with modifier: ${modifier}")
             Cons(name, Cons(modifier, Cons(defSymbol, Nil))).concat(values)
         // case _ => throw Exception()
     }
@@ -234,7 +234,6 @@ let tokens = syntaxImport.many(0).and(newline.many(0)).and(syntaxDef.many(1)).ma
 }
 
 func tokensFunc(input: List<Rune>): Option<(List<Token>, List<Rune>)> {
-    println("input: ${input}")
     tokens.parseFunc(input)
 }
 
@@ -282,6 +281,15 @@ extend SyntaxExpr {
             case Some(e) => Ok(e)
             case None => Err("Invalid Expression!")
         }
+    }
+
+    static func resolveLinks(expr: List<SyntaxExpr>): Result<List<SyntaxExpr>, String> {
+        Ok(expr.filter {
+            x => match(x) {
+                case SyntaxDefExpr(_, _, _) => true
+                case _ => false
+            }
+        })
     }
 }
 

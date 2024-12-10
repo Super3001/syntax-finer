@@ -4,3 +4,9 @@
 
 # useless Cangjie configuration file
 cjlintignore.fcg
+
+# bin
+main/cangjie/target
+
+.cache
+.vscode
