@@ -126,8 +126,18 @@ func evalSymbolic(str: String): Result<Unit, String>  {
     }
 }
 
-class ForwardConnector {
+class Connector {
+    private var _id: Int = -1
     private var _dest: NfaNode = EmptyNode
+
+    public mut prop id: Int {
+        get() {
+            _id
+        }
+        set(value) {
+            _id = value
+        }
+    }
 
     public mut prop dest: NfaNode {
         get() {
@@ -137,16 +147,25 @@ class ForwardConnector {
             _dest = value
         }
     }
+
+    public func init() {}
+    public func init(id: Int, dest: NfaNode) {
+        this.id = id
+        this.dest = dest
+    }
 }
+
+class MergeConnector <: Connector
+class ForwardConnector <: Connector
 
 enum NfaNode {
     | Single(Int, Rune, NfaNode)
     | Sequence(Int, List<Rune>, NfaNode)
     | Set(Int, List<Rune>, NfaNode)
     | Regex(Int, String, NfaNode)
-    | Transition(Int, NfaNode, NfaNode)
-    | LastTransition(Int, NfaNode, NfaNode)
-    | Merge(Int, NfaNode)
+    | Branch(Int, NfaNode, NfaNode)
+    | LastBranch(Int, NfaNode, NfaNode)
+    | Merge(MergeConnector)
     | Forward(Int, NfaNode, ForwardConnector)
     | Start(Int, NfaNode)
     | EmptyNode
@@ -158,9 +177,9 @@ enum NfaNode {
             case Sequence(id, _, _) => id
             case Set(id, _, _) => id
             case Regex(id, _, _) => id
-            case Transition(id, _, _) => id
-            case LastTransition(id, _, _) => id
-            case Merge(id, _) => id
+            case Branch(id, _, _) => id
+            case LastBranch(id, _, _) => id
+            case Merge(conn) => conn.id
             case Forward(id, _, _) => id
             case Start(id, _) => id
             case EmptyNode => -1
@@ -180,32 +199,23 @@ extend NfaNode {
 
 extend NfaNode <: ToString {
     public func toString(): String {
-        /*
-        if (this.getId() >= 0) {
-            let id = this.getId()
-            if (!Context.testAndSetFunc(id)) {
-                println("warn: shouldn't have any re-print here, this should not be called")
-                return "<!!!${id}!!!>; "
-            }
-        }
-        */
-
+        
         match (this) {
             case Start(id, nxt) => "Nfa: \n<${id}> Start" + nxt.toString()
-            case Single(id, ch, nxt) => "\n<${id}> '${ch}' -> " + nxt.toString()
-            case Sequence(id, l, nxt) => "\n<${id}> '${l.join('')}' -> " + nxt.toString()
+            case Single(id, ch, nxt) => "\n<${id}> c'${Context.printable(ch)}' -> " + nxt.toString()
+            case Sequence(id, l, nxt) => "\n<${id}> s'${l.join('')}' -> " + nxt.toString()
             case Set(id, l, nxt) => "\n<${id}> [${l.join('')}] -> " + nxt.toString()
             case Regex(id, s, nxt) => "\n<${id}> /${s}/ -> " + nxt.toString()
-            case Transition(id, fst, snd) => match (snd) {
+            case Branch(id, fst, snd) => match (snd) {
                 case n where n.getId() >= 0 => "\n<${id}> => <${snd.getId()}> -> " + fst.toString() + snd.toString()
-                case _ => println("<${id}> Transition connect to Start or EmptyNode!!!"); "\n<${id}> => <???> -> " + fst.toString()
+                case _ => println("<${id}> Branch connect to Start or EmptyNode!!!"); "\n<${id}> => <???> -> " + fst.toString()
             }
-            case LastTransition(id, fst, snd) => match (snd) {
+            case LastBranch(id, fst, snd) => match (snd) {
                 case Merge(id2, nxt) => "\n<${id}> -> " + fst.toString() + nxt.toString()
-                case _ => println("LastTransition must connect to Merge node!!!"); "\n<${id}> -> " + fst.toString()
+                case _ => println("LastBranch must connect to Merge node!!!"); "\n<${id}> -> " + fst.toString()
             }
-            case Merge(id, _) => "<${id}>"
-            case Forward(id, nxt, conn) => "\n<${id}> => <${conn.dest.getId()}> -> " + nxt.toString()
+            case Merge(conn) => "<${conn.id}>"
+            case Forward(id, nxt, conn) => "\n<${id}> => <${conn.id}> -> " + nxt.toString()
             case EmptyNode => "\n()."
             case End => "\n<0> End."
         }
@@ -227,6 +237,10 @@ func generateNfaFunc(pat: SymbolicPattern): Option<NfaNode> {
         id
     }
 
+    func clear_count(): Unit {
+        id = 0
+    }
+
     func gen_nfa(pat: SymbolicPattern, nxt: NfaNode): NfaNode {
 
         match (pat) {
@@ -240,14 +254,14 @@ func generateNfaFunc(pat: SymbolicPattern): Option<NfaNode> {
             }, nxt)
 
             case OrPattern(l) =>
-                let merge = Merge(nxt.getId(), nxt)
+                let merge = Merge(MergeConnector(nxt.getId(), nxt))
                 var x = l.reverse()
                 var acc = EmptyNode
                 match (x) {
                     case Nil => throw Exception("OrPattern with no sub-patterns")
                     case Cons(hd, tl) =>
                         let inner = gen_nfa(hd, merge)
-                        acc = LastTransition(novel_id(), inner, merge)
+                        acc = LastBranch(novel_id(), inner, merge)
                         x = tl
                 }
                 while (true) {
@@ -255,7 +269,7 @@ func generateNfaFunc(pat: SymbolicPattern): Option<NfaNode> {
                         case Nil => break
                         case Cons(hd, tl) => 
                             let inner = gen_nfa(hd, merge)
-                            acc = Transition(novel_id(), inner, acc)
+                            acc = Branch(novel_id(), inner, acc)
                             x = tl
                     }
                 }
@@ -264,25 +278,26 @@ func generateNfaFunc(pat: SymbolicPattern): Option<NfaNode> {
             l.reverse().reduce<NfaNode> ({
                 acc, x => match (acc) {
                     case EmptyNode => gen_nfa(x, nxt)
-                    case _ => Transition(novel_id(), gen_nfa(x, nxt), acc)
+                    case _ => Branch(novel_id(), gen_nfa(x, nxt), acc)
                 }  
             }, EmptyNode)
             */
 
             case StarPattern(p) => 
-                let merge = Merge(nxt.getId(), nxt)
+                let merge = Merge(MergeConnector(nxt.getId(), nxt))
                 var conn = ForwardConnector()
                 let one = gen_nfa(p, Forward(novel_id(), merge, conn))
-                let first = Transition(novel_id(), one, nxt)
+                let first = Branch(novel_id(), one, nxt)
+                conn.id = first.getId()
                 conn.dest = first
                 first
             case OptPattern(p) =>
-                let merge = Merge(nxt.getId(), nxt)
+                let merge = Merge(MergeConnector(nxt.getId(), nxt))
                 let one = gen_nfa(p, merge)
-                Transition(novel_id(), one, nxt)
+                Branch(novel_id(), one, nxt)
             case PlusPattern(p) =>
                 var first = EmptyNode
-                let one = gen_nfa(p, Transition(novel_id(), nxt, first))
+                let one = gen_nfa(p, Branch(novel_id(), nxt, first))
                 first
 
             case UnQualifiedPattern => EmptyNode
@@ -295,7 +310,70 @@ func generateNfaFunc(pat: SymbolicPattern): Option<NfaNode> {
     func deal_regex() {}
 
     // 处理 literal 中的转义字符
-    func deal_literal() {}
+    func deal_literal(node: NfaNode) {
+        let idMap = HashMap<Int, NfaNode>()
+        let forwardQueue = List<(Int, ForwardConnector)>.empty()
+
+        func add_map(id: Int, node: NfaNode) {
+            if (let Some(old) <- idMap.put(id, node)) {
+                throw Exception("<${id}> id collision!")
+            }
+        }
+
+        func add_queue(id: Int, conn: ForwardConnector) {
+            forwardQueue.add((id, conn))
+        }
+
+        escaped = Combinator<Rune, Rune> {
+            input => match(input) {
+                case l where l.startsWith(List.fromArray("\\n".toRuneArray())) =>
+                    Some((r'\n', l.skip(2)))
+                case l where l.startsWith(List.fromArray("\\t".toRuneArray())) =>
+                    Some((r'\t', l.skip(2)))
+                case l where l.startsWith(List.fromArray("\\r".toRuneArray())) =>
+                    Some((r'\r', l.skip(2)))
+                case _ => Option<(Rune, List<Rune>)>.None
+            }
+        }
+
+        plain = Combinator<Rune, Rune>.make {
+            ch => true
+        }
+
+        literal = escaped.or(plain).many(1)
+
+        func literalFunc(id: Int, sequence: List<Rune>. nxt: NfaNode): NfaNode{
+            match (literal.parseFunc(sequence)) {
+                case Some((l, _)) => l.reverse().reduce ({
+                    acc, x => Single(novel_id(), x, acc)
+                }, nxt)
+                case None => throw Exception("<${id}> Literal not accepted: ${sequence.join('')}")
+            }
+        }
+
+        func gen_dl(node: NfaNode) {
+            match (node) {
+                case Start(id, nxt) =>              let one = gen_dl(nxt); add_map(id, Start(novel_id(), one))
+                case Single(id, ch, nxt) =>         let one = gen_dl(nxt); add_map(id, Single(novel_id(), ch, one))
+                case Sequence(id, l, nxt) =>        let one = gen_dl(nxt); add_map(id, literalFunc(novel_id(), l, one))
+                case Set(id, l, nxt) =>             let one = gen_dl(nxt); add_map(id, Set(novel_id(), l, one))
+                case Regex(id, s, nxt) =>           let one = gen_dl(nxt); add_map(id, Regex(novel_id(), s, one))
+                case Branch(id, fst, snd) =>        let two = gen_dl(snd); let one = gen_dl(fst); add_map(id, Branch(novel_id(), one, two))
+                case LastBranch(id, fst, snd) =>    let two = gen_dl(snd); let one = gen_dl(fst); add_map(id, LastBranch(novel_id(), one, two))
+                case Merge(conn) => 
+                    // 后面id的结点，应该先生成
+                    if (let Some(dest) <- idMap.get(conn.id)) { return Merge(MergeConnector(dest.getId(), dest)) } 
+                    else { throw Exception("Merge connot connect to destination") }
+                case Forward(id, nxt, conn) =>      let one = gen_dl(nxt); let two_conn = ForwardConnector(); add_queue(conn.id, two_conn); add_map(id, Forward(novel_id(), one, two_conn))
+                case EmptyNode =>                   EmptyNode
+                case End =>                         End
+            }
+        }
+
+
+        
+
+    }
 
     Some(Start(novel_id(), nfa))
 }
@@ -339,6 +417,15 @@ class Context {
             return false
         }
         return true
+    }
+
+    static func printable(c: Rune): String {
+        match (c) {
+            case r'\n' => "\\n"
+            case r'\t' => "\\t"
+            case r'\r' => "\\r"
+            case _ => c.toString()
+        }
     }
 }
 
