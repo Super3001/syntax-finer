@@ -1,33 +1,20 @@
-[33mwarning[0m: unused variable:'one'
-   [36m==>[0m E:\BaiduSyncdisk\modeling\syntax\main\cangjie\src\generator.cj:285:21:
+[33mwarning[0m: unused function:'clear_count'
+   [36m==>[0m E:\BaiduSyncdisk\modeling\syntax\main\cangjie\src\generator.cj:242:5:
     [36m| [0m
-[36m285[0m [36m| [0m                let one = gen_nfa(p, Transition(novel_id(), nxt, first))[0m
+[36m242[0m [36m| [0m      func clear_count(): Unit {[0m
+    [36m| [0m [33m_[0m[33m____^[0m
+[36m243[0m [36m| [0m[33m|[0m         id = 0[0m
+[36m244[0m [36m| [0m[33m|[0m     }[0m
+    [36m| [0m[33m|[0m[33m_[0m[33m____^ unused function[0m
+    [36m| [0m
+    [36m#[0m [0mnote[0m: this warning can be suppressed by setting the compiler option `-Woff unused`
+
+[33mwarning[0m: unused variable:'one'
+   [36m==>[0m E:\BaiduSyncdisk\modeling\syntax\main\cangjie\src\generator.cj:302:21:
+    [36m| [0m
+[36m302[0m [36m| [0m                let one = gen_nfa(p, Branch(novel_id(), nxt, first))[0m
     [36m| [0m                    [33m^^^ unused variable[0m
     [36m| [0m
     [36m#[0m [0mnote[0m: this warning can be suppressed by setting the compiler option `-Woff unused`
 
-[33mwarning[0m: unused function:'deal_regex'
-   [36m==>[0m E:\BaiduSyncdisk\modeling\syntax\main\cangjie\src\generator.cj:295:5:
-    [36m| [0m
-[36m295[0m [36m| [0m    func deal_regex() {}[0m
-    [36m| [0m    [33m^^^^^^^^^^^^^^^^^^^^ unused function[0m
-    [36m| [0m
-    [36m#[0m [0mnote[0m: this warning can be suppressed by setting the compiler option `-Woff unused`
-
-[33mwarning[0m: unused function:'deal_literal'
-   [36m==>[0m E:\BaiduSyncdisk\modeling\syntax\main\cangjie\src\generator.cj:298:5:
-    [36m| [0m
-[36m298[0m [36m| [0m    func deal_literal() {}[0m
-    [36m| [0m    [33m^^^^^^^^^^^^^^^^^^^^^^ unused function[0m
-    [36m| [0m
-    [36m#[0m [0mnote[0m: this warning can be suppressed by setting the compiler option `-Woff unused`
-
-[33mwarning[0m: unused variable:'c'
-   [36m==>[0m E:\BaiduSyncdisk\modeling\syntax\main\cangjie\src\generator.cj:344:27:
-    [36m| [0m
-[36m344[0m [36m| [0m    static func printable(c: Rune): String {[0m
-    [36m| [0m                          [33m^ unused variable[0m
-    [36m| [0m
-    [36m#[0m [0mnote[0m: this warning can be suppressed by setting the compiler option `-Woff unused`
-
-4 warnings generated, 4 warnings printed.
+2 warnings generated, 2 warnings printed.

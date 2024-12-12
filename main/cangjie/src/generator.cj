@@ -126,7 +126,7 @@ func evalSymbolic(str: String): Result<Unit, String>  {
     }
 }
 
-class Connector {
+open class Connector {
     private var _id: Int = -1
     private var _dest: NfaNode = EmptyNode
 
@@ -148,15 +148,17 @@ class Connector {
         }
     }
 
-    public func init() {}
-    public func init(id: Int, dest: NfaNode) {
-        this.id = id
-        this.dest = dest
+    public init() {}
+    public init(id: Int, dest: NfaNode) {
+        this._id = id
+        this._dest = dest
     }
 }
 
-class MergeConnector <: Connector
-class ForwardConnector <: Connector
+/*
+class MergeConnector <: Connector {}
+class ForwardConnector <: Connector {}
+*/
 
 enum NfaNode {
     | Single(Int, Rune, NfaNode)
@@ -165,8 +167,8 @@ enum NfaNode {
     | Regex(Int, String, NfaNode)
     | Branch(Int, NfaNode, NfaNode)
     | LastBranch(Int, NfaNode, NfaNode)
-    | Merge(MergeConnector)
-    | Forward(Int, NfaNode, ForwardConnector)
+    | Merge(Connector)
+    | Forward(Int, NfaNode, Connector)
     | Start(Int, NfaNode)
     | EmptyNode
     | End
@@ -211,7 +213,7 @@ extend NfaNode <: ToString {
                 case _ => println("<${id}> Branch connect to Start or EmptyNode!!!"); "\n<${id}> => <???> -> " + fst.toString()
             }
             case LastBranch(id, fst, snd) => match (snd) {
-                case Merge(id2, nxt) => "\n<${id}> -> " + fst.toString() + nxt.toString()
+                case Merge(conn) => "\n<${id}> -> " + fst.toString() + conn.dest.toString()
                 case _ => println("LastBranch must connect to Merge node!!!"); "\n<${id}> -> " + fst.toString()
             }
             case Merge(conn) => "<${conn.id}>"
@@ -254,7 +256,7 @@ func generateNfaFunc(pat: SymbolicPattern): Option<NfaNode> {
             }, nxt)
 
             case OrPattern(l) =>
-                let merge = Merge(MergeConnector(nxt.getId(), nxt))
+                let merge = Merge(Connector(nxt.getId(), nxt))
                 var x = l.reverse()
                 var acc = EmptyNode
                 match (x) {
@@ -284,15 +286,15 @@ func generateNfaFunc(pat: SymbolicPattern): Option<NfaNode> {
             */
 
             case StarPattern(p) => 
-                let merge = Merge(MergeConnector(nxt.getId(), nxt))
-                var conn = ForwardConnector()
+                let merge = Merge(Connector(nxt.getId(), nxt))
+                var conn = Connector()
                 let one = gen_nfa(p, Forward(novel_id(), merge, conn))
                 let first = Branch(novel_id(), one, nxt)
                 conn.id = first.getId()
                 conn.dest = first
                 first
             case OptPattern(p) =>
-                let merge = Merge(MergeConnector(nxt.getId(), nxt))
+                let merge = Merge(Connector(nxt.getId(), nxt))
                 let one = gen_nfa(p, merge)
                 Branch(novel_id(), one, nxt)
             case PlusPattern(p) =>
@@ -303,8 +305,7 @@ func generateNfaFunc(pat: SymbolicPattern): Option<NfaNode> {
             case UnQualifiedPattern => EmptyNode
         }
     }
-
-    let nfa = gen_nfa(pat, End)
+    /*
 
     // 将 regex 转为普通的 NfaNode
     func deal_regex() {}
@@ -312,7 +313,7 @@ func generateNfaFunc(pat: SymbolicPattern): Option<NfaNode> {
     // 处理 literal 中的转义字符
     func deal_literal(node: NfaNode) {
         let idMap = HashMap<Int, NfaNode>()
-        let forwardQueue = List<(Int, ForwardConnector)>.empty()
+        let forwardQueue = List<(Int, Connector)>.empty()
 
         func add_map(id: Int, node: NfaNode) {
             if (let Some(old) <- idMap.put(id, node)) {
@@ -320,7 +321,7 @@ func generateNfaFunc(pat: SymbolicPattern): Option<NfaNode> {
             }
         }
 
-        func add_queue(id: Int, conn: ForwardConnector) {
+        func add_queue(id: Int, conn: Connector) {
             forwardQueue.add((id, conn))
         }
 
@@ -362,19 +363,18 @@ func generateNfaFunc(pat: SymbolicPattern): Option<NfaNode> {
                 case LastBranch(id, fst, snd) =>    let two = gen_dl(snd); let one = gen_dl(fst); add_map(id, LastBranch(novel_id(), one, two))
                 case Merge(conn) => 
                     // 后面id的结点，应该先生成
-                    if (let Some(dest) <- idMap.get(conn.id)) { return Merge(MergeConnector(dest.getId(), dest)) } 
+                    if (let Some(dest) <- idMap.get(conn.id)) { return Merge(Connector(dest.getId(), dest)) } 
                     else { throw Exception("Merge connot connect to destination") }
-                case Forward(id, nxt, conn) =>      let one = gen_dl(nxt); let two_conn = ForwardConnector(); add_queue(conn.id, two_conn); add_map(id, Forward(novel_id(), one, two_conn))
+                case Forward(id, nxt, conn) =>      let one = gen_dl(nxt); let two_conn = Connector(); add_queue(conn.id, two_conn); add_map(id, Forward(novel_id(), one, two_conn))
                 case EmptyNode =>                   EmptyNode
                 case End =>                         End
             }
         }
 
-
-        
-
     }
+    */
 
+    let nfa = gen_nfa(pat, End)
     Some(Start(novel_id(), nfa))
 }
 
