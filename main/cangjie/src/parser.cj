@@ -35,6 +35,11 @@ extend Token {
             case None => Err("Invalid Input!")
         }
     }
+
+    static func fromString(str: String): Result<List<Token>, String> {
+        let runes = List<Rune>.fromArray(str.toRuneArray())
+        Token.fromRunes(runes)
+    }
 }
 
 extend Token <: ToString {
@@ -238,9 +243,11 @@ func tokensFunc(input: List<Rune>): Option<(List<Token>, List<Rune>)> {
 }
 
 public func evalToken(str: String): Result<Unit, String> {
-    let runes = List<Rune>.fromArray(str.toRuneArray())
-    Token.fromRunes(runes).map {l => l.reduce({_, tk => println(tk)}, ())}
-    // Ok(())
+    Token.fromString(str).map {l => l.reduce({_, tk => println(tk)}, ())}
+}
+
+func printOut(res: Result<List<Token>, String>) {
+    res.map { l => println(l.join('\n')) }
 }
 
 
@@ -422,6 +429,9 @@ func expressionFunc(input: List<Token>): Option<(List<SyntaxExpr>, List<Token>)>
 }
 
 public func evalExpression(str: String): Result<Unit, String> {
-    let runes = List<Rune>.fromArray(str.toRuneArray())
-    Token.fromRunes(runes).andThen(SyntaxExpr.fromTokens).map {l => println(l.join('\n'))}
+    Token.fromString(str).andThen(SyntaxExpr.fromTokens).map {l => println(l.join('\n'))}
+}
+
+func printOut(res: Result<List<SyntaxExpr>, String>) {
+    res.map { l => println(l.join('\n')) }
 }

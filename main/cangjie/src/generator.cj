@@ -208,7 +208,7 @@ extend NfaNode <: ToString {
             case Regex(nxt, s, id) => "<${id}> Regex{/${s}/} -> <${nxt.getId()}>"
             case Branch(fst, snd, id) => "<${id}> Branch{<${fst.getId()}>} -> <${snd.getId()}>"
             case Merge(nxt) => "<-2> Merge -> <${nxt.getId()}>"
-            case Forward(fst, snd, id) => "<${id}> Forward{<${fst.getId()}>} -> <${snd.getId()}>"
+            case Forward(near, far, id) => "<${id}> Forward{<${far.getId()}>} -> <${near.getId()}>"
             case Backward(nxt, conn, id) => "<${id}> Backward{<${conn.id}>} -> <${nxt.getId()}>"
             case Start(nxt, id) => "<${id}> Start -> <${nxt.getId()}>"
             case EmptyNode => "<-1> EmptyNode."
@@ -233,7 +233,7 @@ extend NfaNode {
                     case _ => println("<${id}> Branch connect to Start or EmptyNode!!!"); "\n<${id}> => <???> -> " + nfa2string(snd)
                 }
                 case Merge(nxt) => "<${nxt.getId()}>"
-                case Forward(fst, snd, id) => "\n<${id}> => <${fst.getId()}> -> " + nfa2string(snd)
+                case Forward(near, far, id) => "\n<${id}> => <${far.getId()}> -> " + nfa2string(near)
                 case Backward(nxt, conn, id) => "\n<${id}> => <${conn.id}> -> " + nfa2string(nxt)
                 case EmptyNode => "\n()."
                 case End => "\n<0> End."
@@ -291,10 +291,10 @@ func generateNfaFunc(pat: SymbolicPattern): Option<NfaNode> {
 
             case StarPattern(p) => 
                 let one = gen_nfa(PlusPattern(p), nxt)
-                Forward(nxt, one, novel_id())
+                Forward(one, nxt, novel_id())
             case OptPattern(p) =>
                 let one = gen_nfa(p, nxt)
-                Forward(nxt, one, novel_id())
+                Forward(one, nxt, novel_id())
             case PlusPattern(p) =>
                 var conn = Connector()
                 let one = gen_nfa(p, Backward(nxt, conn, novel_id()))
@@ -304,13 +304,12 @@ func generateNfaFunc(pat: SymbolicPattern): Option<NfaNode> {
             case UnQualifiedPattern => EmptyNode
         }
     }
-    /*
 
     // 将 regex 转为普通的 NfaNode
     func deal_regex() {}
 
     // 处理 literal 中的转义字符
-    func deal_literal(node: NfaNode) {
+    func deal_literal(head: NfaNode) {
         let idMap = HashMap<Int, NfaNode>()
         let forwardQueue = List<(Int, Connector)>.empty()
 
@@ -318,13 +317,14 @@ func generateNfaFunc(pat: SymbolicPattern): Option<NfaNode> {
             if (let Some(old) <- idMap.put(id, node)) {
                 throw Exception("<${id}> id collision!")
             }
+            node
         }
 
         func add_queue(id: Int, conn: Connector) {
             forwardQueue.add((id, conn))
         }
 
-        escaped = Combinator<Rune, Rune> {
+        let escaped = Combinator<Rune, Rune> {
             input => match(input) {
                 case l where l.startsWith(List.fromArray("\\n".toRuneArray())) =>
                     Some((r'\n', l.skip(2)))
@@ -336,45 +336,72 @@ func generateNfaFunc(pat: SymbolicPattern): Option<NfaNode> {
             }
         }
 
-        plain = Combinator<Rune, Rune>.make {
-            ch => true
+        let plain = Combinator<Rune, Rune>.make {
+            _ => true
         }
 
-        literal = escaped.or(plain).many(1)
+        let literal = escaped.or(plain).many(1)
 
-        func literalFunc(id: Int, sequence: List<Rune>. nxt: NfaNode): NfaNode{
+        func literalFunc(nxt: NfaNode, sequence: List<Rune>, id: Int): NfaNode{
             match (literal.parseFunc(sequence)) {
-                case Some((l, _)) => l.reverse().reduce ({
-                    acc, x => Single(novel_id(), x, acc)
-                }, nxt)
+                case Some((l, _)) => 
+                    var acc = nxt
+                    var x = l.reverse()
+                    while (true) {
+                        match (x) {
+                            case Nil => break
+                            case Cons(hd, tl) =>
+                                acc = Single(acc, hd, novel_id())
+                                x = tl
+                        }
+                    }
+                    acc
                 case None => throw Exception("<${id}> Literal not accepted: ${sequence.join('')}")
             }
         }
 
-        func gen_dl(node: NfaNode) {
+        func gen_dl(node: NfaNode): NfaNode {
             match (node) {
-                case Start(id, nxt) =>              let one = gen_dl(nxt); add_map(id, Start(novel_id(), one))
-                case Single(id, ch, nxt) =>         let one = gen_dl(nxt); add_map(id, Single(novel_id(), ch, one))
-                case Sequence(id, l, nxt) =>        let one = gen_dl(nxt); add_map(id, literalFunc(novel_id(), l, one))
-                case Set(id, l, nxt) =>             let one = gen_dl(nxt); add_map(id, Set(novel_id(), l, one))
-                case Regex(id, s, nxt) =>           let one = gen_dl(nxt); add_map(id, Regex(novel_id(), s, one))
-                case Branch(id, fst, snd) =>        let two = gen_dl(snd); let one = gen_dl(fst); add_map(id, Branch(novel_id(), one, two))
-                case LastBranch(id, fst, snd) =>    let two = gen_dl(snd); let one = gen_dl(fst); add_map(id, LastBranch(novel_id(), one, two))
-                case Merge(conn) => 
-                    // 后面id的结点，应该先生成
-                    if (let Some(dest) <- idMap.get(conn.id)) { return Merge(Connector(dest.getId(), dest)) } 
+                case Start(nxt, id) =>              add_map(id, Start(gen_dl(nxt), novel_id()))
+                case Single(nxt, ch, id) =>         add_map(id, Single(gen_dl(nxt), ch, novel_id()))
+                case Sequence(nxt, l, id) =>        add_map(id, literalFunc(gen_dl(nxt), l, id))
+                case Set(nxt, l, id) =>             add_map(id, Set(gen_dl(nxt), l, novel_id()))
+                case Regex(nxt, s, id) =>           add_map(id, Regex(gen_dl(nxt), s, novel_id()))
+                case Branch(down, inner, id) =>     add_map(id, Branch(gen_dl(down), gen_dl(inner), novel_id()))
+                case Merge(nxt) => 
+                    if (let Some(dest) <- idMap.get(nxt.getId())) { return Merge(dest) } 
                     else { throw Exception("Merge connot connect to destination") }
-                case Backward(id, nxt, conn) =>      let one = gen_dl(nxt); let two_conn = Connector(); add_queue(conn.id, two_conn); add_map(id, Backward(novel_id(), one, two_conn))
+                case Forward(near, far, id) => 
+                    let nxt = gen_dl(near)    
+                    if (let Some(one) <- idMap.get(far.getId())) { return add_map(id, Forward(nxt, one, novel_id())) } 
+                    else { throw Exception("${node}:\nForward connot connect to the front") }
+                case Backward(nxt, conn, id) =>     let newConn = Connector(); add_queue(conn.id, newConn); add_map(id, Backward(gen_dl(nxt), newConn, novel_id()))
                 case EmptyNode =>                   EmptyNode
-                case End =>                         End
+                case End =>                         add_map(0, End)
             }
         }
 
+        clear_count()
+        let res = gen_dl(head)
+        forwardQueue.map {
+            group: (Int, Connector) => 
+                match (group) {
+                    case (id, conn) =>
+                        if (let Some(node) <- idMap.get(id)) {
+                            conn.dest = node
+                            conn.id = node.getId()
+                            return ()
+                        }
+                        throw Exception("<${id}> node not found!")
+                }
+            
+        }
+        res
     }
-    */
 
     let nfa = Start(gen_nfa(pat, End), novel_id())
-    Some(nfa)
+    // println(nfa.stringifyNfa())
+    Some(deal_literal(nfa))
 }
 
 func evalNfa(str: String): Result<Unit, String>  {
@@ -426,6 +453,7 @@ class Context {
             case _ => c.toString()
         }
     }
+
 }
 
 // throw Exception("Circle in Linked Data Structure")

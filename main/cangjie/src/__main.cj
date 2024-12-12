@@ -19,13 +19,17 @@ main() {
 ###################################################
 ##  this is a simple finer                       ##
 ##  press Ctrl-C to exit                         ##
-###################################################
-"""
+###################################################"""
     )
 
     while (true) {
         println("please input .syntax file:")
-        Console.stdIn.readln().okOr("Invalid Input!").andThen(readFile).andThen(evalNfa).mapErr(println)
+        let str = Console.stdIn.readln().okOr("Invalid Input!").andThen(readFile)
+        str.andThen(evalNfa).mapErr(println)
+        // let symbolic = Token.fromString(str).andThen(SyntaxExpr.fromTokens).andThen(SyntaxExpr.resolveLinks).andThen(nominalToSymbolicPattern)
+        // printOut(symbolic)
+        // SymbolicPattern.filterFileEntry(symbolic).andThen(NfaEntry.fromSyntaxEntry).andThen(NfaEntry.getNfa).andThen(printOut)
+
     }
     // Result<String, String>.Ok("E:/BaiduSyncdisk/modeling/syntax/demo/base.syntax").andThen(readFile).andThen(evalNfa).mapErr(println)
     ()
