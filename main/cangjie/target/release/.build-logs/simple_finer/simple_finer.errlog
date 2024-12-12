@@ -1,9 +1,5 @@
-[33mwarning[0m: unused function:'deal_regex'
-   [36m==>[0m E:\BaiduSyncdisk\modeling\syntax\main\cangjie\src\generator.cj:309:5:
-    [36m| [0m
-[36m309[0m [36m| [0m    func deal_regex() {}[0m
-    [36m| [0m    [33m^^^^^^^^^^^^^^^^^^^^ unused function[0m
-    [36m| [0m
-    [36m#[0m [0mnote[0m: this warning can be suppressed by setting the compiler option `-Woff unused`
-
-1 warning generated, 1 warning printed.
+Cangjie Compiler: 0.54.3 (cjnative)
+Target: x86_64-w64-mingw32
+[31mInternal Compiler Error: [0mgeneric instantiation failed
+Please report this to Cangjie team and include the project. Error Code: 7
+Error: compile package simple_finer failed, return code is 2

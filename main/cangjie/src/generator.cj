@@ -103,6 +103,10 @@ extend SyntaxEntry <: ToString {
     }
 }
 
+func printOut(l: List<SyntaxEntry>) {
+    println(l.join('\n'))
+}
+
 
 extend SymbolicPattern <: ToString {
     public func toString(): String {
@@ -190,6 +194,12 @@ enum NfaNode {
     }
 }
 
+enum NfaEntry {
+    | FileEntry(String, NfaNode)
+    | SimpleEntry(String, NfaNode)
+    | UndefinedEntry(String, String, NfaNode)
+}
+
 extend NfaNode {
     static func fromPattern(pat: SymbolicPattern): Result<NfaNode, String> {
         match (generateNfaFunc(pat)) {
@@ -215,6 +225,41 @@ extend NfaNode <: ToString {
             case End => "<0> End."
         }
     }
+}
+
+extend NfaEntry {
+    static func generateFirstFile(l: List<SyntaxEntry>): Result<NfaEntry, String> {
+        l.map {
+            x => match (x) {
+                case FileEntry(s, pat) => 
+                    match (NfaNode.fromPattern(pat)) {
+                        case Ok(nfa) => return Some(FileEntry(s, nfa))
+                        case Err(e) => throw Exception("${x}:\nnfa generate failed")
+                    }
+                case _ =>
+                    ()
+            }
+        }
+        throw Exception("using `NfaEntry.generateFirstFile()`, but no SyntaxEntry::FileEntry found.\nProbably: No SyntaxDef has `file` modifier!")
+    }
+
+    static func generateSeparatedFiles() {}
+
+    static func generateLinkedAll() {}
+}
+
+extend NfaEntry <: ToString {
+    public func toString(): String {
+        match (this) {
+            case SimpleEntry(name, nfa) => '<${name}> -> ${nfa}'
+            case FileEntry(name, nfa) => '[qualified:file] <${name}> -> ${nfa}'
+            case UndefinedEntry(modifier, name, nfa) => '[undefined:${modifier}] <${name}> -> ${nfa}'
+        } 
+    }
+}
+
+func printOut(entry: NfaEntry) {
+    println(entry)
 }
 
 extend NfaNode {
@@ -370,7 +415,7 @@ func generateNfaFunc(pat: SymbolicPattern): Option<NfaNode> {
                 case Branch(down, inner, id) =>     add_map(id, Branch(gen_dl(down), gen_dl(inner), novel_id()))
                 case Merge(nxt) => 
                     if (let Some(dest) <- idMap.get(nxt.getId())) { return Merge(dest) } 
-                    else { throw Exception("Merge connot connect to destination") }
+                    else { throw Exception("${node}:\nMerge connot connect to destination") }
                 case Forward(near, far, id) => 
                     let nxt = gen_dl(near)    
                     if (let Some(one) <- idMap.get(far.getId())) { return add_map(id, Forward(nxt, one, novel_id())) } 
