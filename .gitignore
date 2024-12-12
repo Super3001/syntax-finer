@@ -5,8 +5,9 @@
 # useless Cangjie configuration file
 cjlintignore.fcg
 
-# bin
-main/cangjie/target
-
 .cache
 .vscode
+# bin
+main/cangjie/target/release/bin/main.exe
+main/cangjie/target/release/bin/simple_finer.bchir2
+main/cangjie/target/release/bin/simple_finer.cjo
