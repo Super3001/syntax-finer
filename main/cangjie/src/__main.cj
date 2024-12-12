@@ -10,7 +10,6 @@ func readFile(path: String): Result<String, String> {
         case str where str.endsWith('\n') => str.replace("\r\n", "\n")
         case str => str.replace("\r\n", "\n") + '\n'
     }
-    // println("str: ${str}")
     Ok(str)
 }
 
@@ -19,16 +18,18 @@ main() {
         """
 ###################################################
 ##  this is a simple finer                       ##
-##                                               ##
-##  please input .syntax file path               ##
 ##  press Ctrl-C to exit                         ##
 ###################################################
 """
     )
 
-    // while (true) {
-    //     Console.stdIn.readln().okOr("Invalid Input!").andThen(readFile).andThen(evalExpression).mapErr(println)
-    // }
-    Result<String, String>.Ok("E:/BaiduSyncdisk/modeling/syntax/demo/syntaxDef.syntax").andThen(readFile).andThen(evalNfa).mapErr(println)
+    while (true) {
+        println("please input .syntax file:")
+        Console.stdIn.readln().okOr("Invalid Input!").andThen(readFile).andThen(evalNfa).mapErr(println)
+    }
+    // Result<String, String>.Ok("E:/BaiduSyncdisk/modeling/syntax/demo/base.syntax").andThen(readFile).andThen(evalNfa).mapErr(println)
     ()
 }
+
+// E:/BaiduSyncdisk/modeling/syntax/demo/base.syntax
+// E:/BaiduSyncdisk/modeling/syntax/demo/syntaxDef.syntax
