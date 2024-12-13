@@ -20,6 +20,25 @@
     {
       "rootPackageName": "simple_finer",
       "modulePath": ".",
+      "packagePath": "E:\\BaiduSyncdisk\\modeling\\syntax\\main\\cangjie\\src\\regex",
+      "fullName": "simple_finer.regex",
+      "isMacroPackage": false,
+      "output-type": "static",
+      "compile-option": "",
+      "native-compile-option": "",
+      "customized-option": {},
+      "link-option": "",
+      "native-link-option": "",
+      "requires": [
+        "simple_finer.ext"
+      ],
+      "c_libs": {},
+      "isTestPkg": false,
+      "accessLevel": "public"
+    },
+    {
+      "rootPackageName": "simple_finer",
+      "modulePath": ".",
       "packagePath": "E:\\BaiduSyncdisk\\modeling\\syntax\\main\\cangjie\\src",
       "fullName": "simple_finer",
       "isMacroPackage": false,
@@ -30,7 +49,8 @@
       "link-option": "",
       "native-link-option": "",
       "requires": [
-        "simple_finer.ext"
+        "simple_finer.ext",
+        "simple_finer.regex"
       ],
       "c_libs": {},
       "isTestPkg": false,

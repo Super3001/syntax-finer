@@ -175,6 +175,14 @@ let escapedSlash = Combinator<Rune, Rune> {
     }
 }
 
+let realBackSlash = Combinator<Rune, Rune> {
+    input => match(input) {
+        case l where l.startsWith(List.fromArray("\\\\".toRuneArray())) =>
+            Some((r'\\', l.skip(2)))
+        case _ => Option<(Rune, List<Rune>)>.None
+    }
+}
+
 let charInRegex = Combinator<Rune, Rune>.make {
     ch => match(ch) {
         case ch where runeIsNewline(ch) => false
@@ -182,16 +190,16 @@ let charInRegex = Combinator<Rune, Rune>.make {
         case _ => true
     }
 }
-let literal = singleQuote.and(escapedQuote.or(charInLiteral).many(1)).and(singleQuote).map {
+let literal = singleQuote.and(realBackSlash.or(escapedQuote).or(charInLiteral).many(1)).and(singleQuote).map {
     x => Literal(x[0][1].join(''))
 }
 
-let regex = slash.and(escapedSlash.or(charInRegex).many(1)).and(slash).map {
+let regexLiteral = slash.and(realBackSlash.or(escapedSlash).or(charInRegex).many(1)).and(slash).map {
     x => Regex(x[0][1].join(''))
 }
 
 let syntaxDef = name.and(modifier.opt()).and(defSymbol).and(
-    literal.or(regex).or(pipe).or(singleSymbol).or(name).many(1)
+    literal.or(regexLiteral).or(pipe).or(singleSymbol).or(name).many(1)
 ).and(newline.many(1)).map {
     input => match(input) {
         case ((((name, None), defSymbol), values), _) => 

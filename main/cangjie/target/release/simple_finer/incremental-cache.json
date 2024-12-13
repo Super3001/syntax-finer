@@ -8,10 +8,18 @@
       "exeName": "",
       "hasSubPkgs": false
     },
+    "simple_finer.regex": {
+      "rootPackageName": "simple_finer",
+      "fileNameHash": "5381015709391496354",
+      "timeStamp": 1734074806,
+      "buildFlag": true,
+      "exeName": "",
+      "hasSubPkgs": false
+    },
     "simple_finer": {
       "rootPackageName": "simple_finer",
       "fileNameHash": "4681296875831760018",
-      "timeStamp": 1734006460,
+      "timeStamp": 1734074990,
       "buildFlag": true,
       "exeName": "main",
       "hasSubPkgs": true
