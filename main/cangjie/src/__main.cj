@@ -2,7 +2,7 @@ package simple_finer
 
 import std.console.*
 import simple_finer.ext.*
-import simple_finer.regex.evalToken as evalTokenRegex
+import simple_finer.regex.{evalToken as evalTokenRegex, evalExpression as evalExprRegex}
 import std.fs.File
 
 func readFile(path: String): Result<String, String> {
@@ -25,7 +25,9 @@ main() {
 
     while (true) {
         println("please input .syntax file:")
-        Console.stdIn.readln().okOr("End.").andThen(evalTokenRegex)
+        Console.stdIn.readln().okOr("End.").andThen(evalExprRegex)
+        // tokens.map { l: List<Token> => l.map {tk => println(tk) } }
+        // tokens.andThen(RegexPattern.fromTokens).map { e => println(e) }.mapErr { e => println(e) }
         // let str = Console.stdIn.readln().okOr("Invalid Input!").andThen(readFile)
         // let symbolic = str.andThen(Token.fromString).andThen(SyntaxExpr.fromTokens).andThen(SyntaxExpr.resolveLinks).andThen(nominalToSymbolicPattern)
         // symbolic.map(printOut)

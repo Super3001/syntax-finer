@@ -1,4 +1,5 @@
-package simple_finer
+
+package simple_finer.ext
 
 extend String {
     func isAlnum(): Bool {

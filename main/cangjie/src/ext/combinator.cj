@@ -70,7 +70,7 @@ extend<I, O> Combinator<I, O> {
     }
 }
 
-extend<I, O> Combinator<I, O> where O <: ToString {
+extend<I, O> Combinator<I, O> {
     public func opt(): Combinator<I, Option<O>> {
         Combinator {
             input => match (this.parseFunc(input)) {
@@ -82,3 +82,29 @@ extend<I, O> Combinator<I, O> where O <: ToString {
         }
     }
 }
+
+/*
+public class LazyCombinator<I, O> {
+    public Combinator() {}
+    
+    var parseFunc: (List<I>) -> Option<(O, List<I>)> = {
+        _ => None
+    }
+
+    let hookFunc: (List<I>) -> Option<(O, List<I>)> = {
+        input => parseFunc(input)
+    }
+
+    prop hook: Combinator<I, O> {
+        get() {
+            Combinator<I, O> {
+                input => parseFunc(input)
+            }
+        }
+    }
+
+    public setParseFunc(pf) {
+        parseFunc = pf
+    }
+}
+*/

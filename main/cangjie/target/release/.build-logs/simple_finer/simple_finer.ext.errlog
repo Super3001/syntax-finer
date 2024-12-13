@@ -1,0 +1,13 @@
+[33mwarning[0m: unused function:'isAlnum'
+  [36m==>[0m E:\BaiduSyncdisk\modeling\syntax\main\cangjie\src\ext\extensions.cj:5:5:
+   [36m| [0m
+[36m5[0m  [36m| [0m      func isAlnum(): Bool {[0m
+   [36m| [0m [33m_[0m[33m____^[0m
+[36m6[0m  [36m| [0m[33m|[0m         for (c in this.runes()) {[0m
+   [36m| [0m[33m|[0m ...[0m
+[36m14[0m [36m| [0m[33m|[0m     }[0m
+   [36m| [0m[33m|[0m[33m_[0m[33m____^ unused function[0m
+   [36m| [0m
+   [36m#[0m [0mnote[0m: this warning can be suppressed by setting the compiler option `-Woff unused`
+
+1 warning generated, 1 warning printed.
