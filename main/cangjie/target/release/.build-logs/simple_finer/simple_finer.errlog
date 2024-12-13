@@ -1,5 +1,0 @@
-Cangjie Compiler: 0.54.3 (cjnative)
-Target: x86_64-w64-mingw32
-[31mInternal Compiler Error: [0mgeneric instantiation failed
-Please report this to Cangjie team and include the project. Error Code: 7
-Error: compile package simple_finer failed, return code is 2

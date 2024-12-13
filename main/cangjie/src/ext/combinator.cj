@@ -75,10 +75,8 @@ extend<I, O> Combinator<I, O> where O <: ToString {
         Combinator {
             input => match (this.parseFunc(input)) {
                 case None => 
-                    // println("opt() not captured"); 
                     Some((Option<O>.None, input))
                 case Some((value, rest)) => 
-                    // println("opt() captured: ${value}"); 
                     Some((Some(value), rest))
             }
         }

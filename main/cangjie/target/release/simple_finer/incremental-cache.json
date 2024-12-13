@@ -3,7 +3,7 @@
     "simple_finer.ext": {
       "rootPackageName": "simple_finer",
       "fileNameHash": "-2921057682646241376",
-      "timeStamp": 1733810042,
+      "timeStamp": 1734005787,
       "buildFlag": true,
       "exeName": "",
       "hasSubPkgs": false
@@ -11,8 +11,8 @@
     "simple_finer": {
       "rootPackageName": "simple_finer",
       "fileNameHash": "4681296875831760018",
-      "timeStamp": 1733991351,
-      "buildFlag": false,
+      "timeStamp": 1734006460,
+      "buildFlag": true,
       "exeName": "main",
       "hasSubPkgs": true
     }

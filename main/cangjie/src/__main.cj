@@ -25,10 +25,10 @@ main() {
     while (true) {
         println("please input .syntax file:")
         let str = Console.stdIn.readln().okOr("Invalid Input!").andThen(readFile)
-        str.andThen(evalNfa).mapErr(println)
-        // let symbolic = str.andThen(Token.fromString).andThen(SyntaxExpr.fromTokens).andThen(SyntaxExpr.resolveLinks).andThen(nominalToSymbolicPattern)
-        // symbolic.map(printOut)
-        // symbolic.andThen(NfaEntry.generateFirstFile).map(printOut)
+        // str.andThen(evalNfa).mapErr(println)
+        let symbolic = str.andThen(Token.fromString).andThen(SyntaxExpr.fromTokens).andThen(SyntaxExpr.resolveLinks).andThen(nominalToSymbolicPattern)
+        symbolic.map(printOut)
+        symbolic.andThen(NfaEntry.generateFirstFile).map(printOut)
     }
     // Result<String, String>.Ok("E:/BaiduSyncdisk/modeling/syntax/demo/base.syntax").andThen(readFile).andThen(evalNfa).mapErr(println)
     ()

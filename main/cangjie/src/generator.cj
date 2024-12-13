@@ -18,6 +18,13 @@ enum SyntaxEntry {
     | FileEntry(String, SymbolicPattern)
     | SimpleEntry(String, SymbolicPattern)
     | UndefinedEntry(String, String, SymbolicPattern)
+
+    func isFileEntry(): Bool {
+        match(this) {
+            case FileEntry(_, _) => true
+            case _ => false
+        }
+    } 
 }
 
 func nominalToSymbolicPattern(expr: List<SyntaxExpr>): Result<List<SyntaxEntry>, String> {
@@ -198,6 +205,29 @@ enum NfaEntry {
     | FileEntry(String, NfaNode)
     | SimpleEntry(String, NfaNode)
     | UndefinedEntry(String, String, NfaNode)
+
+    func isFileEntry(): Bool {
+        match(this) {
+            case FileEntry(_, _) => true
+            case _ => false
+        }
+    } 
+
+    func getNfa(): NfaNode {
+        match (this) {
+            case FileEntry(_, nfa) => nfa
+            case SimpleEntry(_, nfa) => nfa
+            case UndefinedEntry(_, _, nfa) => nfa
+        }
+    }
+
+    func getSymbol(): String {
+        match (this) {
+            case SimpleEntry(name, nfa) => '<${name}>'
+            case FileEntry(name, nfa) => '[qualified:file] <${name}>'
+            case UndefinedEntry(modifier, name, nfa) => '[undefined:${modifier}] <${name}>'
+        } 
+    }
 }
 
 extend NfaNode {
@@ -229,16 +259,11 @@ extend NfaNode <: ToString {
 
 extend NfaEntry {
     static func generateFirstFile(l: List<SyntaxEntry>): Result<NfaEntry, String> {
-        l.map {
-            x => match (x) {
-                case FileEntry(s, pat) => 
-                    match (NfaNode.fromPattern(pat)) {
-                        case Ok(nfa) => return Some(FileEntry(s, nfa))
-                        case Err(e) => throw Exception("${x}:\nnfa generate failed")
-                    }
-                case _ =>
-                    ()
+        if (let Some((hd, Cons(FileEntry(s, pat), tl))) <- l.splitOnce { x => x.isFileEntry() } ) {
+            if (let Ok(nfa) <- NfaNode.fromPattern(pat)) {
+                return Ok(FileEntry(s, nfa))
             }
+            throw Exception("symbol ${s}:\nError when generate Nfa!")
         }
         throw Exception("using `NfaEntry.generateFirstFile()`, but no SyntaxEntry::FileEntry found.\nProbably: No SyntaxDef has `file` modifier!")
     }
@@ -250,16 +275,18 @@ extend NfaEntry {
 
 extend NfaEntry <: ToString {
     public func toString(): String {
-        match (this) {
-            case SimpleEntry(name, nfa) => '<${name}> -> ${nfa}'
-            case FileEntry(name, nfa) => '[qualified:file] <${name}> -> ${nfa}'
-            case UndefinedEntry(modifier, name, nfa) => '[undefined:${modifier}] <${name}> -> ${nfa}'
-        } 
+        this.getSymbol() + " -> Nfa{${this.getNfa().getId()} nodes}"
+    }
+}
+
+extend NfaEntry {
+    public func stringifyNfa(): String {
+        return this.getSymbol() + " -> " + this.getNfa().stringifyNfa()
     }
 }
 
 func printOut(entry: NfaEntry) {
-    println(entry)
+    println(entry.stringifyNfa())
 }
 
 extend NfaNode {
@@ -351,7 +378,9 @@ func generateNfaFunc(pat: SymbolicPattern): Option<NfaNode> {
     }
 
     // 将 regex 转为普通的 NfaNode
+    /*
     func deal_regex() {}
+    */
 
     // 处理 literal 中的转义字符
     func deal_literal(head: NfaNode) {
