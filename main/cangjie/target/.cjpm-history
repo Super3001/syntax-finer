@@ -3,6 +3,23 @@
     {
       "rootPackageName": "simple_finer",
       "modulePath": ".",
+      "packagePath": "E:\\BaiduSyncdisk\\modeling\\syntax\\main\\cangjie\\src\\context",
+      "fullName": "simple_finer.context",
+      "isMacroPackage": false,
+      "output-type": "static",
+      "compile-option": "",
+      "native-compile-option": "",
+      "customized-option": {},
+      "link-option": "",
+      "native-link-option": "",
+      "requires": [],
+      "c_libs": {},
+      "isTestPkg": false,
+      "accessLevel": "public"
+    },
+    {
+      "rootPackageName": "simple_finer",
+      "modulePath": ".",
       "packagePath": "E:\\BaiduSyncdisk\\modeling\\syntax\\main\\cangjie\\src\\ext",
       "fullName": "simple_finer.ext",
       "isMacroPackage": false,
@@ -20,6 +37,26 @@
     {
       "rootPackageName": "simple_finer",
       "modulePath": ".",
+      "packagePath": "E:\\BaiduSyncdisk\\modeling\\syntax\\main\\cangjie\\src\\nfa",
+      "fullName": "simple_finer.nfa",
+      "isMacroPackage": false,
+      "output-type": "static",
+      "compile-option": "",
+      "native-compile-option": "",
+      "customized-option": {},
+      "link-option": "",
+      "native-link-option": "",
+      "requires": [
+        "simple_finer.context",
+        "simple_finer.ext"
+      ],
+      "c_libs": {},
+      "isTestPkg": false,
+      "accessLevel": "public"
+    },
+    {
+      "rootPackageName": "simple_finer",
+      "modulePath": ".",
       "packagePath": "E:\\BaiduSyncdisk\\modeling\\syntax\\main\\cangjie\\src\\regex",
       "fullName": "simple_finer.regex",
       "isMacroPackage": false,
@@ -30,7 +67,9 @@
       "link-option": "",
       "native-link-option": "",
       "requires": [
-        "simple_finer.ext"
+        "simple_finer.context",
+        "simple_finer.ext",
+        "simple_finer.nfa"
       ],
       "c_libs": {},
       "isTestPkg": false,
@@ -50,6 +89,7 @@
       "native-link-option": "",
       "requires": [
         "simple_finer.ext",
+        "simple_finer.nfa",
         "simple_finer.regex"
       ],
       "c_libs": {},

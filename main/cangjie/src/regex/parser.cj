@@ -1,9 +1,9 @@
 
 package simple_finer.regex
 
-import std.convert.*
-
 import simple_finer.ext.*
+
+import simple_finer.context.Context
 
 enum Token {
     | Plain(Rune)
@@ -45,7 +45,7 @@ extend Token {
     static func fromRunes(runes: List<Rune>): Result<List<Token>, String> {
         match (regexTokensFunc(runes).map {t => t[0]}) {
             case Some(l) => Ok(l)
-            case None => Err("Regex parse failed!")
+            case None => Err("Regex lex failed!")
         }
     }
 
@@ -108,7 +108,7 @@ let singleSymbol = Combinator<Rune, Rune>.make {
 let trailingEscaped = Combinator<Rune, Rune>.make {
     ch => match (ch) {
         case r'n' | r't' | r'r' | r'w' | r's' | r'd' | r'W' | r'S' | r'D' | r'a' => true
-        case _ => false
+        case _ => true
     }
 }.map {
     ch: Rune => match (ch) {
@@ -131,9 +131,7 @@ let backSlash = Combinator<Rune, Rune>.make {
 }
 
 let escaped = backSlash.and(trailingEscaped).map {
-    group => match (group) {
-        case (_, tk) => tk
-    }
+    t => t[1]
 }
 
 let lbracket = Combinator<Rune, Rune>.make {
@@ -193,93 +191,6 @@ public func evalToken(str: String): Result<Unit, String> {
     Token.fromString(str).map {l => l.reduce({_, tk => println(tk)}, ())}
 }
 
-/*
-
-extend Rune {
-    func isAlnum(): Bool {
-        this.isAsciiNumberOrLetter() || this == r'_'
-    }
-
-    func toInt(): Int {
-        match {
-            case this.isAscii() =>
-                let arr = Array<Byte>(1, item: 0)
-                Rune.intoUtf8Array(this, arr, 0)
-                Int.parse("${arr[0]}")
-            case _ => -1
-        }
-        
-    }
-}
-
-extend Byte {
-    func isAlnum(): Bool {
-        this.isAsciiNumberOrLetter() || this == b'_'
-    }
-}
-
-type Rec = BoolArrayRecord
-
-class BoolArrayRecord {
-    static let w = Rec.madeFrom { ch => ch.isAlnum() }
-    static let d = Rec.madeFrom { ch => ch.isAsciiNumber() }
-    static let s = Rec.madeFrom { ch => ch.isAsciiWhiteSpace() }
-    static let W = Rec.madeFrom { ch => !ch.isAlnum() }
-    static let S = Rec.madeFrom { ch => !ch.isAsciiWhiteSpace() }
-    static let D = Rec.madeFrom { ch => !ch.isAsciiNumber() }
-
-    let _dest: Array<Bool> = Array(128, item: false)
-
-    public prop dest: Array<Bool> {
-        get() {
-            _dest
-        }
-    }
-
-    public func runeContains(ch: Rune): Bool {
-        match {
-            case ch.isAscii() => this.dest[ch.toInt()]
-            case _ => false
-        }
-    }
-
-    static func madeFrom(cond: (Byte) -> Bool): Rec {
-        let p = Rec()
-        var b: Byte = 0
-        for( i in 0..128 ) {
-            if ( cond(b) ) {
-                p._dest[i] = true
-            }
-            b += 1
-        }
-        p
-    }
-
-    func toRuneList() {
-        var ls = List<Rune>.Nil
-        ls
-    }
-
-    func repr(): String {
-        match (this) {
-            case Rec.w => "\\w"
-            case Rec.s => "\\s"
-            case Rec.d => "\\d"
-            case Rec.W => "\\W"
-            case Rec.S => "\\S"
-            case Rec.D => "\\D"
-            case _ => "TODO"
-        }
-    }
-}
-
-extend Rec <: ToString {
-    public func toString(): String {
-        "Rec{${this.toRuneList().join('')}}"
-    }
-}
-
-*/
 
 enum RegexPattern {
     | SimplePattern(Rune)
@@ -298,7 +209,7 @@ extend RegexPattern {
     static func fromTokens(tokens: List<Token>): Result<RegexPattern, String> {
         match (expressionFunc(tokens).map {t => t[0]}) {
             case Some(e) => Ok(e)
-            case None => Err("Invalid Expression!")
+            case None => Err("Regex parse failed!")
         }
     }
 }
@@ -306,7 +217,7 @@ extend RegexPattern {
 extend RegexPattern <: ToString {
     public func toString(): String {
         match (this) {
-            case SimplePattern(ch) => "SimplePattern{${ch}}"
+            case SimplePattern(ch) => "SimplePattern{${Context.printable(ch)}}"
             case SetPattern(l) => "SetPattern{${l.join(', ')}}"
             case DotPattern => "Any"
             case PositionPattern(flag) => "PositionPattern{${flag}}"
@@ -432,5 +343,5 @@ func expressionFunc(input: List<Token>): Option<(RegexPattern, List<Token>)> {
 }
 
 public func evalExpression(str: String): Result<Unit, String> {
-    Token.fromString(str).map{l => println(l); l}.andThen(RegexPattern.fromTokens).map { e => println(e) }.mapErr { e => println(e); e }
+    Token.fromString(str).andThen(RegexPattern.fromTokens).map { e => println(e) }.mapErr { e => println(e); e }
 }

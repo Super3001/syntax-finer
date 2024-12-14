@@ -1,0 +1,9 @@
+[33mwarning[0m: unused variable:'base_id'
+   [36m==>[0m E:\BaiduSyncdisk\modeling\syntax\main\cangjie\src\generator.cj:228:45:
+    [36m| [0m
+[36m228[0m [36m| [0m    func regexFunc(nxt: NfaNode, s: String, base_id: Int): (NfaNode, Int) {[0m
+    [36m| [0m                                            [33m^^^^^^^ unused variable[0m
+    [36m| [0m
+    [36m#[0m [0mnote[0m: this warning can be suppressed by setting the compiler option `-Woff unused`
+
+1 warning generated, 1 warning printed.

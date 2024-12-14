@@ -2,6 +2,7 @@ package simple_finer
 
 import std.collection.{HashMap, HashSet}
 import simple_finer.ext.*
+import simple_finer.nfa.*
 
 enum SymbolicPattern {
     | SimplePattern(String)
@@ -137,69 +138,6 @@ func evalSymbolic(str: String): Result<Unit, String>  {
     }
 }
 
-open class Connector {
-    private var _id: Int = -1
-    private var _dest: NfaNode = EmptyNode
-
-    public mut prop id: Int {
-        get() {
-            _id
-        }
-        set(value) {
-            _id = value
-        }
-    }
-
-    public mut prop dest: NfaNode {
-        get() {
-            _dest
-        }
-        set(value) {
-            _dest = value
-        }
-    }
-
-    public init() {}
-    public init(id: Int, dest: NfaNode) {
-        this._id = id
-        this._dest = dest
-    }
-}
-
-/*
-class MergeConnector <: Connector {}
-class BackwardConnector <: Connector {}
-*/
-
-enum NfaNode {
-    | Single(NfaNode, Rune, Int)
-    | Sequence(NfaNode, List<Rune>, Int)
-    | Set(NfaNode, List<Rune>, Int)
-    | Regex(NfaNode, String, Int)
-    | Branch(NfaNode, NfaNode, Int)
-    | Merge(NfaNode)
-    | Forward(NfaNode, NfaNode, Int)
-    | Backward(NfaNode, Connector, Int)
-    | Start(NfaNode, Int)
-    | EmptyNode
-    | End
-
-    public func getId(): Int {
-        match (this) {
-            case Single(_, _, id) => id
-            case Sequence(_, _, id) => id
-            case Set(_, _, id) => id
-            case Regex(_, _, id) => id
-            case Branch(_, _, id) => id
-            case Merge(nxt) => nxt.getId()
-            case Forward(_, _, id) => id
-            case Backward(_, _, id) => id
-            case Start(_, id) => id
-            case EmptyNode => -1
-            case End => 0
-        }
-    }
-}
 
 enum NfaEntry {
     | FileEntry(String, NfaNode)
@@ -239,23 +177,6 @@ extend NfaNode {
     }
 }
 
-extend NfaNode <: ToString {
-    public func toString(): String {
-        match (this) {
-            case Single(nxt, ch, id) => "<${id}> Single{c'${ch}'} -> <${nxt.getId()}>"
-            case Sequence(nxt, l, id) => "<${id}> Sequence{s'${l.join('')}'} -> <${nxt.getId()}>"
-            case Set(nxt, l, id) => "<${id}> Set{[${l.join('')}]} -> <${nxt.getId()}>"
-            case Regex(nxt, s, id) => "<${id}> Regex{/${s}/} -> <${nxt.getId()}>"
-            case Branch(fst, snd, id) => "<${id}> Branch{<${fst.getId()}>} -> <${snd.getId()}>"
-            case Merge(nxt) => "<-2> Merge -> <${nxt.getId()}>"
-            case Forward(near, far, id) => "<${id}> Forward{<${far.getId()}>} -> <${near.getId()}>"
-            case Backward(nxt, conn, id) => "<${id}> Backward{<${conn.id}>} -> <${nxt.getId()}>"
-            case Start(nxt, id) => "<${id}> Start -> <${nxt.getId()}>"
-            case EmptyNode => "<-1> EmptyNode."
-            case End => "<0> End."
-        }
-    }
-}
 
 extend NfaEntry {
     static func generateFirstFile(l: List<SyntaxEntry>): Result<NfaEntry, String> {
@@ -289,32 +210,6 @@ func printOut(entry: NfaEntry) {
     println(entry.stringifyNfa())
 }
 
-extend NfaNode {
-    public func stringifyNfa(): String {
-
-        func nfa2string(node: NfaNode): String {
-
-            match (node) {
-                case Start(nxt, id) => "Nfa: \n<${id}> Start ->" + nfa2string(nxt)
-                case Single(nxt, ch, id) => "\n<${id}> c'${Context.printable(ch)}' -> " + nfa2string(nxt)
-                case Sequence(nxt, l, id) => "\n<${id}> s'${l.join('')}' -> " + nfa2string(nxt)
-                case Set(nxt, l, id) => "\n<${id}> [${l.join('')}] -> " + nfa2string(nxt)
-                case Regex(nxt, s, id) => "\n<${id}> /${s}/ -> " + nfa2string(nxt)
-                case Branch(fst, snd, id) => match (fst) {
-                    case n where n.getId() >= 0 => "\n<${id}> => <${fst.getId()}> -> " + nfa2string(snd) + nfa2string(fst)
-                    case _ => println("<${id}> Branch connect to Start or EmptyNode!!!"); "\n<${id}> => <???> -> " + nfa2string(snd)
-                }
-                case Merge(nxt) => "<${nxt.getId()}>"
-                case Forward(near, far, id) => "\n<${id}> => <${far.getId()}> -> " + nfa2string(near)
-                case Backward(nxt, conn, id) => "\n<${id}> => <${conn.id}> -> " + nfa2string(nxt)
-                case EmptyNode => "\n()."
-                case End => "\n<0> End."
-            }
-        }
-
-        nfa2string(this)   
-    }
-}
 
 func generateNfaFunc(pat: SymbolicPattern): Option<NfaNode> {
     var id = 0
@@ -327,76 +222,19 @@ func generateNfaFunc(pat: SymbolicPattern): Option<NfaNode> {
     func clear_count(): Unit {
         id = 0
     }
-
-    func gen_nfa(pat: SymbolicPattern, nxt: NfaNode): NfaNode {
-
-        match (pat) {
-
-            case SimplePattern(s) => Sequence(nxt, List.fromArray(s.toRuneArray()), novel_id())
-
-            case RegexPattern(s) => Regex(nxt, s, novel_id())
-
-            case ConcatPattern(l) => l.reverse().reduce ({
-                acc, x => gen_nfa(x, acc)
-            }, nxt)
-
-            case OrPattern(l) =>
-                let merge = Merge(nxt)
-                var x = l.reverse()
-                var acc = EmptyNode
-                match (x) {
-                    case Nil => throw Exception("OrPattern with no content!")
-                    case Cons(hd, tl) =>
-                        acc = gen_nfa(hd, nxt)
-                        x = tl
-                }
-                while (true) {
-                    match (x) {
-                        case Nil => break
-                        case Cons(hd, tl) => 
-                            let inner = gen_nfa(hd, merge)
-                            acc = Branch(acc, inner, novel_id())
-                            x = tl
-                    }
-                }
-                acc
-
-            case StarPattern(p) => 
-                let one = gen_nfa(PlusPattern(p), nxt)
-                Forward(one, nxt, novel_id())
-            case OptPattern(p) =>
-                let one = gen_nfa(p, nxt)
-                Forward(one, nxt, novel_id())
-            case PlusPattern(p) =>
-                var conn = Connector()
-                let one = gen_nfa(p, Backward(nxt, conn, novel_id()))
-                conn.id = one.getId()
-                conn.dest = one
-                one
-            case UnQualifiedPattern => EmptyNode
-        }
+    
+    // 将 regex 转为普通的 NfaNode
+    func regexFunc(nxt: NfaNode, s: String, base_id: Int): (NfaNode, Int) {
+        let id = novel_id(); (Regex(nxt, s, id), id)
     }
 
-    // 将 regex 转为普通的 NfaNode
-    /*
-    func deal_regex() {}
-    */
+    // func deal_regex() {
+    // }
 
     // 处理 literal 中的转义字符
-    func deal_literal(head: NfaNode) {
-        let idMap = HashMap<Int, NfaNode>()
-        let forwardQueue = List<(Int, Connector)>.empty()
+    func literalFunc(nxt: NfaNode, s: String, id: Int): NfaNode{
 
-        func add_map(id: Int, node: NfaNode) {
-            if (let Some(old) <- idMap.put(id, node)) {
-                throw Exception("<${id}> id collision!")
-            }
-            node
-        }
-
-        func add_queue(id: Int, conn: Connector) {
-            forwardQueue.add((id, conn))
-        }
+        let sequence = List.fromArray(s.toRuneArray())
 
         let escaped = Combinator<Rune, Rune> {
             input => match(input) {
@@ -416,23 +254,38 @@ func generateNfaFunc(pat: SymbolicPattern): Option<NfaNode> {
 
         let literal = escaped.or(plain).many(1)
 
-        func literalFunc(nxt: NfaNode, sequence: List<Rune>, id: Int): NfaNode{
-            match (literal.parseFunc(sequence)) {
-                case Some((l, _)) => 
-                    var acc = nxt
-                    var x = l.reverse()
-                    while (true) {
-                        match (x) {
-                            case Nil => break
-                            case Cons(hd, tl) =>
-                                acc = Single(acc, hd, novel_id())
-                                x = tl
-                        }
+        match (literal.parseFunc(sequence)) {
+            case Some((l, _)) => 
+                var acc = nxt
+                var x = l.reverse()
+                while (true) {
+                    match (x) {
+                        case Nil => break
+                        case Cons(hd, tl) =>
+                            acc = Single(acc, hd, novel_id())
+                            x = tl
                     }
-                    acc
-                case None => throw Exception("<${id}> Literal not accepted: ${sequence.join('')}")
-            }
+                }
+                acc
+            case None => throw Exception("<${id}> Literal not accepted: ${sequence.join('')}")
         }
+    }
+
+    func deal_literal(head: NfaNode) {
+        let idMap = HashMap<Int, NfaNode>()
+        let forwardQueue = List<(Int, Connector)>.empty()
+
+        func add_map(id: Int, node: NfaNode) {
+            if (let Some(old) <- idMap.put(id, node)) {
+                throw Exception("<${id}> id collision!")
+            }
+            node
+        }
+
+        func add_queue(id: Int, conn: Connector) {
+            forwardQueue.add((id, conn))
+        }
+
 
         func gen_dl(node: NfaNode): NfaNode {
             match (node) {
@@ -473,10 +326,71 @@ func generateNfaFunc(pat: SymbolicPattern): Option<NfaNode> {
         res
     }
 
+    func gen_nfa(pat: SymbolicPattern, nxt: NfaNode): NfaNode {
+
+        match (pat) {
+
+            // case SimplePattern(s) => Sequence(nxt, List.fromArray(s.toRuneArray()), novel_id())
+            case SimplePattern(s) => literalFunc(nxt, s, -1)
+
+            // case RegexPattern(s) => Regex(nxt, s, novel_id())
+            case RegexPattern(s) => let t = regexFunc(nxt, s, id); id = t[1]; t[0]
+
+            case ConcatPattern(l) => 
+                // l.reverse().reduce({ acc, x => gen_nfa(x, acc) }, nxt)
+                var x = l.reverse()
+                var acc = nxt
+                while (true) {
+                    match (x) {
+                        case Nil => return acc
+                        case Cons(hd, tl) =>
+                            acc = gen_nfa(hd, acc)
+                            x = tl
+                    }
+                }
+                EmptyNode
+            case OrPattern(l) =>
+                let merge = Merge(nxt)
+                var x = l.reverse()
+                var acc = EmptyNode
+                match (x) {
+                    case Nil => throw Exception("OrPattern with no content!")
+                    case Cons(hd, tl) =>
+                        acc = gen_nfa(hd, nxt)
+                        x = tl
+                }
+                while (true) {
+                    match (x) {
+                        case Nil => break
+                        case Cons(hd, tl) => 
+                            let inner = gen_nfa(hd, merge)
+                            acc = Branch(acc, inner, novel_id())
+                            x = tl
+                    }
+                }
+                acc
+
+            case StarPattern(p) => 
+                let one = gen_nfa(PlusPattern(p), nxt)
+                Forward(one, nxt, novel_id())
+            case OptPattern(p) =>
+                let one = gen_nfa(p, nxt)
+                Forward(one, nxt, novel_id())
+            case PlusPattern(p) =>
+                var conn = Connector()
+                let one = gen_nfa(p, Backward(nxt, conn, novel_id()))
+                conn.id = one.getId()
+                conn.dest = one
+                one
+            case UnQualifiedPattern => EmptyNode
+        }
+    }
+
     let nfa = Start(gen_nfa(pat, End), novel_id())
     // println(nfa.stringifyNfa())
     Some(deal_literal(nfa))
 }
+
 
 func evalNfa(str: String): Result<Unit, String>  {
     let runes = List<Rune>.fromArray(str.toRuneArray())
@@ -495,39 +409,6 @@ func evalNfa(str: String): Result<Unit, String>  {
         }
     }
     Ok(())
-}
-
-class Context {
-
-    static let _testSet = HashSet<Int>()
-
-    static func clearSet(): Unit {
-        _testSet.clear()
-    }
-
-    static func testAndSetFunc(id: Int): Bool {
-        if (!_testSet.put(id)) {
-            return false
-        }
-        return true
-    }
-
-    static func unsetFunc(id: Int): Bool {
-        if (!_testSet.remove(id)) {
-            return false
-        }
-        return true
-    }
-
-    static func printable(c: Rune): String {
-        match (c) {
-            case r'\n' => "\\n"
-            case r'\t' => "\\t"
-            case r'\r' => "\\r"
-            case _ => c.toString()
-        }
-    }
-
 }
 
 // throw Exception("Circle in Linked Data Structure")
