@@ -133,3 +133,26 @@ func generateRegexNfaFunc(pat: RegexPattern): Option<NfaNode> {
     generateRegexNfaWithBase(pat, End, 0).map { t => Start(t[0], t[1] + 1) }
 
 }
+
+extend NfaNode {
+
+    public func fromRegexStringWithBase(s: String, nxt: NfaNode, base_id: Int): Result<(NfaNode, Int), String> {
+        match (Some(s).okOr("").andThen(Token.fromString).andThen(RegexPattern.fromTokens)) {
+            case Ok(pat) => match(generateRegexNfaWithBase(pat, nxt, base_id)) {
+                case Some(nfa) => Ok(nfa)
+                case None => Err("regex parse success, generate Nfa failed")
+            }
+            case Err(e) => Err(e)
+        }
+    }
+
+    public func fromRegexString(s: String): Result<NfaNode, String> {
+        match (Some(s).okOr("").andThen(Token.fromString).andThen(RegexPattern.fromTokens)) {
+            case Ok(pat) => match(generateRegexNfaFunc(pat)) {
+                case Some(nfa) => Ok(nfa)
+                case None => Err("regex parse success, generate Nfa failed")
+            }
+            case Err(e) => Err(e)
+        }
+    }
+}

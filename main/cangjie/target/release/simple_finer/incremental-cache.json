@@ -8,29 +8,13 @@
       "exeName": "",
       "hasSubPkgs": false
     },
-    "simple_finer.nfa": {
-      "rootPackageName": "simple_finer",
-      "fileNameHash": "8420655802487864121",
-      "timeStamp": 1734406098,
-      "buildFlag": true,
-      "exeName": "",
-      "hasSubPkgs": false
-    },
     "simple_finer.regex": {
       "rootPackageName": "simple_finer",
       "fileNameHash": "4392509862513431096",
-      "timeStamp": 1734406295,
+      "timeStamp": 1734406538,
       "buildFlag": true,
       "exeName": "",
       "hasSubPkgs": false
-    },
-    "simple_finer": {
-      "rootPackageName": "simple_finer",
-      "fileNameHash": "4439981212287534597",
-      "timeStamp": 1734405616,
-      "buildFlag": true,
-      "exeName": "main",
-      "hasSubPkgs": true
     },
     "simple_finer.context": {
       "rootPackageName": "simple_finer",
@@ -39,6 +23,22 @@
       "buildFlag": true,
       "exeName": "",
       "hasSubPkgs": false
+    },
+    "simple_finer.nfa": {
+      "rootPackageName": "simple_finer",
+      "fileNameHash": "8420655802487864121",
+      "timeStamp": 1734406348,
+      "buildFlag": true,
+      "exeName": "",
+      "hasSubPkgs": false
+    },
+    "simple_finer": {
+      "rootPackageName": "simple_finer",
+      "fileNameHash": "4439981212287534597",
+      "timeStamp": 1734406506,
+      "buildFlag": false,
+      "exeName": "main",
+      "hasSubPkgs": true
     }
   },
   "jsonHash": "4171070236743634814",
