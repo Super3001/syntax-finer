@@ -134,18 +134,9 @@ func generateRegexNfaFunc(pat: RegexPattern): Option<NfaNode> {
 
 }
 
+// ld.exe Error
+
 extend NfaNode {
-
-    public func fromRegexStringWithBase(s: String, nxt: NfaNode, base_id: Int): Result<(NfaNode, Int), String> {
-        match (Some(s).okOr("").andThen(Token.fromString).andThen(RegexPattern.fromTokens)) {
-            case Ok(pat) => match(generateRegexNfaWithBase(pat, nxt, base_id)) {
-                case Some(nfa) => Ok(nfa)
-                case None => Err("regex parse success, generate Nfa failed")
-            }
-            case Err(e) => Err(e)
-        }
-    }
-
     public func fromRegexString(s: String): Result<NfaNode, String> {
         match (Some(s).okOr("").andThen(Token.fromString).andThen(RegexPattern.fromTokens)) {
             case Ok(pat) => match(generateRegexNfaFunc(pat)) {
@@ -156,3 +147,19 @@ extend NfaNode {
         }
     }
 }
+
+/*
+extend NfaNode {
+    public static func fromRegexPattern(pat: RegexPattern): Result<NfaNode, String> {
+        match (generateRegexNfaFunc(pat)) {
+            case Some(nfa) => Ok(nfa)
+            case None => Err("regex parse success, generate Nfa failed")
+        }
+    }
+}
+
+public func evalNfa(input: String): Result<Unit, String> {
+    Token.fromString(input).andThen(RegexPattern.fromTokens).andThen(NfaNode.fromRegexPattern).map { x => println(x.stringifyNfa()) }
+    Ok(())
+}
+*/
