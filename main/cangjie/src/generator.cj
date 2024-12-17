@@ -3,6 +3,7 @@ package simple_finer
 import std.collection.{HashMap, HashSet}
 import simple_finer.ext.*
 import simple_finer.nfa.*
+import simple_finer.regex.*
 
 enum SymbolicPattern {
     | SimplePattern(String)
@@ -219,7 +220,7 @@ func generateNfaFunc(pat: SymbolicPattern): Option<NfaNode> {
         id
     }
 
-    func clear_count(): Unit {
+    func reset_id(): Unit {
         id = 0
     }
     
@@ -290,9 +291,11 @@ func generateNfaFunc(pat: SymbolicPattern): Option<NfaNode> {
         func gen_dl(node: NfaNode): NfaNode {
             match (node) {
                 case Start(nxt, id) =>              add_map(id, Start(gen_dl(nxt), novel_id()))
+                case All(nxt, id) =>                add_map(id, All(gen_dl(nxt), novel_id()))
                 case Single(nxt, ch, id) =>         add_map(id, Single(gen_dl(nxt), ch, novel_id()))
                 case Sequence(nxt, l, id) =>        add_map(id, literalFunc(gen_dl(nxt), l, id))
-                case Set(nxt, l, id) =>             add_map(id, Set(gen_dl(nxt), l, novel_id()))
+                case Set(nxt, rec, id) =>           add_map(id, Set(gen_dl(nxt), rec, novel_id()))
+                case InvSet(nxt, rec, id) =>        add_map(id, InvSet(gen_dl(nxt), rec, novel_id()))
                 case Regex(nxt, s, id) =>           add_map(id, Regex(gen_dl(nxt), s, novel_id()))
                 case Branch(down, inner, id) =>     add_map(id, Branch(gen_dl(down), gen_dl(inner), novel_id()))
                 case Merge(nxt) => 
@@ -303,12 +306,17 @@ func generateNfaFunc(pat: SymbolicPattern): Option<NfaNode> {
                     if (let Some(one) <- idMap.get(far.getId())) { return add_map(id, Forward(nxt, one, novel_id())) } 
                     else { throw Exception("${node}:\nForward connot connect to the front") }
                 case Backward(nxt, conn, id) =>     let newConn = Connector(); add_queue(conn.id, newConn); add_map(id, Backward(gen_dl(nxt), newConn, novel_id()))
+                case AssertAhead(nxt, anxt, id) =>  add_map(id, AssertAhead(gen_dl(nxt), gen_dl(anxt), novel_id()))
+                case AssertBack(nxt, anxt, id) =>   add_map(id, AssertBack(gen_dl(nxt), gen_dl(anxt), novel_id()))
+                case AssertEnd(id) =>               
+                    if (let Some(one) <- idMap.get(id)) { return AssertEnd(one.getId()) }
+                    else { throw Exception("${node}:\nAssertEnd connot connect to the front") }
                 case EmptyNode =>                   EmptyNode
                 case End =>                         add_map(0, End)
             }
         }
 
-        clear_count()
+        reset_id()
         let res = gen_dl(head)
         forwardQueue.map {
             group: (Int, Connector) => 
@@ -342,13 +350,13 @@ func generateNfaFunc(pat: SymbolicPattern): Option<NfaNode> {
                 var acc = nxt
                 while (true) {
                     match (x) {
-                        case Nil => return acc
+                        case Nil => break
                         case Cons(hd, tl) =>
                             acc = gen_nfa(hd, acc)
                             x = tl
                     }
                 }
-                EmptyNode
+                acc
             case OrPattern(l) =>
                 let merge = Merge(nxt)
                 var x = l.reverse()
