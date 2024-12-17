@@ -1,12 +1,9 @@
-[33mwarning[0m: unused variable:'base_id'
-   [36m==>[0m E:\BaiduSyncdisk\modeling\syntax\main\cangjie\src\generator.cj:228:45:
+[31merror[0m: 'fromRegexStringWithBase' is not a member of enum 'NfaNode'
+   [36m==>[0m E:\BaiduSyncdisk\modeling\syntax\main\cangjie\src\generator.cj:230:17:
     [36m| [0m
-[36m228[0m [36m| [0m    func regexFunc(nxt: NfaNode, s: String, base_id: Int): (NfaNode, Int) {[0m
-    [36m| [0m                                            [33m^^^^^^^ unused variable[0m
+[36m230[0m [36m| [0m        NfaNode.fromRegexStringWithBase(s, nxt, base_id).getOrThrow()[0m
+    [36m| [0m                [31m^^^^^^^^^^^^^^^^^^^^^^^ [0m
     [36m| [0m
-    [36m#[0m [0mnote[0m: this warning can be suppressed by setting the compiler option `-Woff unused`
 
-1 warning generated, 1 warning printed.
-D:\\Cangjie\\third_party\\mingw\\bin\\ld.exe: E:\\BaiduSyncdisk\\modeling\\syntax\\main\\cangjie\\target\\release\\simple_finer/libsimple_finer.regex.a(simple_finer.regex.o):0-simple_finer.reg:(.data+0x540): multiple definition of `_ZN015$Captured_Int64E.objKlass'; C:\\Users\\LENOVO\\AppData\\Local\\Temp\\cangjie-tmp-D6DKG1Q1GWPG-cecc5525\\simple_finer.o:0-simple_finer:(.data+0xaf0): first defined here
-[31merror[0m: ""D:\\Cangjie\\third_party\\mingw\\bin\\ld.exe" "-o" "E:\\BaiduSyncdisk\\modeling\\syntax\\main\\cangjie\\target\\release\\bin\\main.exe" "--nxcompat" "--dynamicbase" "--high-entropy-va" "-m" "i386pep" "-Bdynamic" "D:\\Cangjie\\third_party\\mingw\\lib\\crt2.o" "D:\\Cangjie\\third_party\\mingw\\lib\\crtbegin.o" "-LD:\\Cangjie\\third_party\\mingw\\lib\\" "-LE:\\BaiduSyncdisk\\modeling\\syntax\\main\\cangjie\\target\\release\\simple_finer" "-LD:\\Cangjie\\lib\\windows_x86_64_llvm" "-LD:\\Cangjie\\runtime\\lib\\windows_x86_64_llvm" "-L/lib" "-L/x86_64-w64-mingw32/lib" "-LD:\\Cangjie\\third_party\\mingw\\lib\\" "-T" "D:\\Cangjie\\lib\\windows_x86_64_llvm\\cjld.lds" "D:\\Cangjie\\lib\\windows_x86_64_llvm\\cjstart.o" "C:\\Users\\LENOVO\\AppData\\Local\\Temp\\cangjie-tmp-D6DKG1Q1GWPG-cecc5525\\simple_finer.o" "-lsimple_finer.regex" "-lsimple_finer.nfa" "-lsimple_finer.ext" "-lsimple_finer.context" "--start-group" "-l:libcangjie-std-collection.a" "-l:libcangjie-std-console.a" "-l:libcangjie-std-convert.a" "-l:libcangjie-std-core.a" "-l:libcangjie-std-format.a" "-l:libcangjie-std-fs.a" "-l:libcangjie-std-io.a" "-l:libcangjie-std-math.a" "-l:libcangjie-std-sort.a" "-l:libcangjie-std-sync.a" "-l:libcangjie-std-time.a" "--end-group" "-lcangjie-runtime" "-lsecurec" "-lm" "-lssp_nonshared" "-lssp" "-lmsvcrt" "-lmingw32" "-lgcc" "-lgcc_eh" "-lmoldname" "-lmingwex" "-lmingw32" "-lmsvcrt" "-lpthread" "-ladvapi32" "-lshell32" "-luser32" "-lkernel32" "-lmingw32" "-lgcc" "-lgcc_eh" "-lmoldname" "-lmingwex" "-lmsvcrt" "-lclang_rt-builtins" "D:\\Cangjie\\third_party\\mingw\\lib\\crtend.o" ": command failed (use -V to see invocation)
+1 error generated, 1 error printed.
 Error: compile package simple_finer failed, return code is 1

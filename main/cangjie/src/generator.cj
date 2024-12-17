@@ -3,7 +3,7 @@ package simple_finer
 import std.collection.{HashMap, HashSet}
 import simple_finer.ext.*
 import simple_finer.nfa.*
-import simple_finer.regex.*
+import simple_finer.regex.fun as regexFun
 
 enum SymbolicPattern {
     | SimplePattern(String)
@@ -226,13 +226,8 @@ func generateNfaFunc(pat: SymbolicPattern): Option<NfaNode> {
     
     // 将 regex 转为普通的 NfaNode
     func regexFunc(nxt: NfaNode, s: String, base_id: Int): (NfaNode, Int) {
-        /*
-        if (let Some(ret) <- bridgeRegex2Nfa(s, nxt, base_id)) {
-            return ret
-        }
-        println("warn: regex generate nfa failed: ${s}")
-        */
-        let id = novel_id(); (Regex(nxt, s, id), id)
+        regexFun(s, nxt, base_id).getOrThrow()
+        // let id = novel_id(); (Regex(nxt, s, id), id)
     }
 
     // func deal_regex() {

@@ -144,34 +144,29 @@ func generateRegexNfaFunc(pat: RegexPattern): Option<NfaNode> {
 
 }
 
-/*
-protected func bridgeRegex2Nfa(s: String, nxt: NfaNode, base_id: Int): Option<(NfaNode, Int)> {
-    match (Some(s).okOr("").andThen(Token.fromString).andThen(RegexPattern.fromTokens)) {
-        case Ok(pat) => generateRegexNfaWithBase(pat, nxt, base_id)
-        case Err(e) => None
-    }
-}
-*/
-
 extend NfaNode {
 
-    public func fromRegexStringWithBase(s: String, nxt: NfaNode, base_id: Int): Result<(NfaNode, Int), String> {
-        match (Some(s).okOr("").andThen(Token.fromString).andThen(RegexPattern.fromTokens)) {
-            case Ok(pat) => match(generateRegexNfaWithBase(pat, nxt, base_id)) {
+    public static func fromPatternWithBase(pat: RegexPattern, nxt: NfaNode, base_id: Int): Result<(NfaNode, Int), String> {
+        match(generateRegexNfaWithBase(pat, nxt, base_id)) {
                 case Some(nfa) => Ok(nfa)
                 case None => Err("regex parse success, generate Nfa failed")
             }
-            case Err(e) => Err(e)
-        }
     }
 
-    public func fromRegexString(s: String): Result<NfaNode, String> {
-        match (Some(s).okOr("").andThen(Token.fromString).andThen(RegexPattern.fromTokens)) {
-            case Ok(pat) => match(generateRegexNfaFunc(pat)) {
+    public static func fromPattern(pat: RegexPattern): Result<NfaNode, String> {
+        match(generateRegexNfaFunc(pat)) {
                 case Some(nfa) => Ok(nfa)
                 case None => Err("regex parse success, generate Nfa failed")
             }
-            case Err(e) => Err(e)
-        }
+    }
+
+    public static func fromRegexStringWithBase(s: String, nxt: NfaNode, base_id: Int): Result<(NfaNode, Int), String> {
+        Token.fromString(s).andThen(RegexPattern.fromTokens).andThen { x => fromPatternWithBase(x, nxt, base_id) }
+    }
+
+    public static func fromRegexString(s: String): Result<NfaNode, String> {
+        Token.fromString(s).andThen(RegexPattern.fromTokens).andThen(NfaNode.fromPattern)
     }
 }
+
+protected let fun = NfaNode.fromRegexStringWithBase
