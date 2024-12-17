@@ -19,15 +19,15 @@
     "simple_finer.regex": {
       "rootPackageName": "simple_finer",
       "fileNameHash": "4392509862513431096",
-      "timeStamp": 1734149403,
+      "timeStamp": 1734397033,
       "buildFlag": true,
       "exeName": "",
       "hasSubPkgs": false
     },
     "simple_finer.nfa": {
       "rootPackageName": "simple_finer",
-      "fileNameHash": "2759366070768672334",
-      "timeStamp": 1734149363,
+      "fileNameHash": "8420655802487864121",
+      "timeStamp": 1734336509,
       "buildFlag": true,
       "exeName": "",
       "hasSubPkgs": false
@@ -35,8 +35,8 @@
     "simple_finer": {
       "rootPackageName": "simple_finer",
       "fileNameHash": "4439981212287534597",
-      "timeStamp": 1734150972,
-      "buildFlag": true,
+      "timeStamp": 1734397049,
+      "buildFlag": false,
       "exeName": "main",
       "hasSubPkgs": true
     }

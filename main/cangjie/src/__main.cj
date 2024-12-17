@@ -30,7 +30,7 @@ main() {
         // tokens.andThen(RegexPattern.fromTokens).map { e => println(e) }.mapErr { e => println(e) }
         let str = Console.stdIn.readln().okOr("Invalid Input!").andThen(readFile)
         let symbolic = str.andThen(Token.fromString).andThen(SyntaxExpr.fromTokens).andThen(SyntaxExpr.resolveLinks).andThen(nominalToSymbolicPattern)
-        symbolic.map(printOut)
+        // symbolic.map(printOut)
         symbolic.andThen(NfaEntry.generateFirstFile).map(printOut)
     }
     // Result<String, String>.Ok("E:/BaiduSyncdisk/modeling/syntax/demo/base.syntax").andThen(readFile).andThen(evalNfa).mapErr(println)

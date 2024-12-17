@@ -146,15 +146,22 @@ let caret = Combinator<Rune, Rune>.make {
     ch => ch == r'$'
 }
 
+let dash = Combinator<Rune, Rune>.make {
+    ch => ch == r'-'
+}.map {
+    _ => Dash
+}
+
 let charInChoiceSet = Combinator<Rune, Rune>.make {
     ch => match (ch) {
         case r']' => false
         case r'\\' => false
+        case r'-' => false
         case _ => true
     }
 }.map {
     ch => Plain(ch)
-}.or(escaped)
+}.or(escaped).or(dash)
 
 let choiceSet = lbracket.and(caret.opt()).and(charInChoiceSet.many(0)).and(rbracket).map {
     input => match (input) {
@@ -279,9 +286,9 @@ let dotPattern = Combinator<Token, Token>.make {
 let positionPattern = Combinator<Token, RegexPattern> {
     input => match(input) {
         case Cons(Caret, tail) => 
-            Some((PositionPattern(true), tail))
-        case Cons(Dollar, tail) => 
             Some((PositionPattern(false), tail))
+        case Cons(Dollar, tail) => 
+            Some((PositionPattern(true), tail))
         case _ => Option<(RegexPattern, List<Token>)>.None
     }
 }

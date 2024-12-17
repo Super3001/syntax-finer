@@ -1,89 +1,177 @@
 
 package simple_finer.regex
 
-import std.convert.*
 import simple_finer.ext.*
-import simple_finer.nfa.{NfaNode, Connector}
+import simple_finer.nfa.*
 
-extend Rune {
-    func toInt(): Int {
-        match {
-            case this.isAscii() =>
-                let arr = Array<Byte>(1, item: 0)
-                Rune.intoUtf8Array(this, arr, 0)
-                Int.parse("${arr[0]}")
-            case _ => -1
-        }
-    }
-}
-
-extend Byte {
-    func isAlnum(): Bool {
-        this.isAsciiNumberOrLetter() || this == b'_'
-    }
-}
-
-type Rec = BoolArrayRecord
-
-class BoolArrayRecord {
+extend Rec {
     
-    BoolArrayRecord(let _rawString: String) {}
+    static func fromTokens(l: List<Token>): Rec {
 
-    static let w = Rec.madeFrom("\\w") { ch => ch.isAlnum() }
-    static let d = Rec.madeFrom("\\d") { ch => ch.isAsciiNumber() }
-    static let s = Rec.madeFrom("\\s") { ch => ch.isAsciiWhiteSpace() }
-    static let W = Rec.madeFrom("\\W") { ch => !ch.isAlnum() }
-    static let S = Rec.madeFrom("\\S") { ch => !ch.isAsciiWhiteSpace() }
-    static let D = Rec.madeFrom("\\D") { ch => !ch.isAsciiNumber() }
-
-    let _dest: Array<Bool> = Array(128, item: false)
-
-    public prop dest: Array<Bool> {
-        get() {
-            _dest
-        }
-    }
-
-    public prop rawString: String {
-        get() {
-            _rawString
-        }
-    }
-
-    public func runeContains(ch: Rune): Bool {
-        match {
-            case ch.isAscii() => this.dest[ch.toInt()]
-            case _ => false
-        }
-    }
-
-    static func madeFrom(raw: String, cond: (Byte) -> Bool): Rec {
-        let p = Rec(raw)
-        var b: Byte = 0
-        for( i in 0..128 ) {
-            if ( cond(b) ) {
-                p._dest[i] = true
+        /*
+        let dashGroup = Combinator<Token, Rec> {
+            input => match(input) {
+                case Cons(Plain(c1), Cons(Dash, Cons(Plain(c2), tail))) =>
+                case Cons(_, Cons(Dash, Cons(_, _))) => 
+                case _ => None
             }
-            b += 1
         }
-        p
+        */
+
+        func shortListToken(l: List<Token>): String {
+            l.toString()
+        }
+
+        match(l) {
+            case Nil => throw Exception("empty regex [] syntax is not accepted")
+            case _ =>
+                var x = l
+                var acc = Rec(shortListToken(l))
+                while (true) {
+                    match (x) {
+                        case Nil => break
+                        case Cons(Plain(c1), Cons(Dash, Cons(Plain(c2), tail))) => 
+                            acc.or(Rec.fromRange(c1, c2))
+                            x = tail
+                        case Cons(_, Cons(Dash, Cons(_, _))) => 
+                            throw Exception("regex generate: You cannot create a range with shorthand escape sequences")
+                        case Cons(Escaped(ch), tail) =>
+                            acc.or(Rec.fromEscaped(ch))
+                            x = tail
+                        case Cons(Plain(ch), tail) =>
+                            acc.or(ch)
+                            x = tail
+                        case Cons(Dash, tail) =>
+                            acc.or(r'-')
+                            x = tail
+                        case _ => throw Exception("")
+                    }
+                }
+                acc
+        }
     }
 
 }
 
-extend Rec <: ToString {
-    public func toString(): String {
-        "Rec{${this.rawString}}"
+func generateRegexNfaWithBase(pat: RegexPattern, nxt: NfaNode, base: Int): Option<(NfaNode, Int)> {
+
+    var id = base
+
+    func novel_id(): Int {
+        id += 1
+        id
     }
-}
 
-
-func generateRegexNfaFunc(pat: RegexPattern): NfaNode {
-
-    func gen_nfa(): NfaNode {
+    func gen_nfa(pat: RegexPattern, nxt: NfaNode): NfaNode {
         
-        EmptyNode
+        match (pat) {
+
+            case SimplePattern(ch) => Single(nxt, ch, novel_id())
+            case SetPattern(l) => match(l) {
+                case Cons(Caret, tail) => InvSet(nxt, Rec.fromTokens(tail), novel_id())
+                case l => Set(nxt, Rec.fromTokens(l), novel_id())
+            }
+            case DotPattern => InvSet(nxt, Rec.newline(), novel_id())
+            // case DotPattern => Set(nxt, Rec.dot, novel_id())
+            case PositionPattern(flag) => 
+                id = novel_id()
+                if (flag) {
+                    AssertAhead(nxt, Set(AssertEnd(id), Rec.newline(), novel_id()), id)
+                }
+                else {
+                    AssertBack(nxt, Set(AssertEnd(id), Rec.newline(), novel_id()), id)
+                }
+            case ConcatPattern(l) => 
+                var x = l.reverse()
+                var acc = nxt
+                while (true) {
+                    match (x) {
+                        case Nil => break
+                        case Cons(hd, tl) =>
+                            acc = gen_nfa(hd, acc)
+                            x = tl
+                    }
+                }
+                acc
+            // case OrPattern
+
+            case OrPattern(l) =>
+                let merge = Merge(nxt)
+                var x = l.reverse()
+                var acc = EmptyNode
+                match (x) {
+                    case Nil => throw Exception("OrPattern with no content!")
+                    case Cons(hd, tl) =>
+                        acc = gen_nfa(hd, nxt)
+                        x = tl
+                }
+                while (true) {
+                    match (x) {
+                        case Nil => break
+                        case Cons(hd, tl) => 
+                            let inner = gen_nfa(hd, merge)
+                            acc = Branch(acc, inner, novel_id())
+                            x = tl
+                    }
+                }
+                acc
+
+            case StarPattern(p) => 
+                let one = gen_nfa(PlusPattern(p), nxt)
+                Forward(one, nxt, novel_id())
+            case OptPattern(p) =>
+                let one = gen_nfa(p, nxt)
+                Forward(one, nxt, novel_id())
+            case PlusPattern(p) =>
+                var conn = Connector()
+                let one = gen_nfa(p, Backward(nxt, conn, novel_id()))
+                conn.id = one.getId()
+                conn.dest = one
+                one
+
+            case EmptyPattern => EmptyNode
+
+        }
+        
     }
 
-    EmptyNode
+    Some((gen_nfa(pat, nxt), id))
+}
+
+func generateRegexNfaFunc(pat: RegexPattern): Option<NfaNode> {
+
+    generateRegexNfaWithBase(pat, End, 0).map { t => Start(t[0], t[1] + 1) }
+
+}
+
+/*
+protected func bridgeRegex2Nfa(s: String, nxt: NfaNode, base_id: Int): Option<(NfaNode, Int)> {
+    match (Some(s).okOr("").andThen(Token.fromString).andThen(RegexPattern.fromTokens)) {
+        case Ok(pat) => generateRegexNfaWithBase(pat, nxt, base_id)
+        case Err(e) => None
+    }
+}
+*/
+
+extend NfaNode {
+
+    public func fromRegexStringWithBase(s: String, nxt: NfaNode, base_id: Int): Result<(NfaNode, Int), String> {
+        match (Some(s).okOr("").andThen(Token.fromString).andThen(RegexPattern.fromTokens)) {
+            case Ok(pat) => match(generateRegexNfaWithBase(pat, nxt, base_id)) {
+                case Some(nfa) => Ok(nfa)
+                case None => Err("regex parse success, generate Nfa failed")
+            }
+            case Err(e) => Err(e)
+        }
+    }
+
+    public func fromRegexString(s: String): Result<NfaNode, String> {
+        match (Some(s).okOr("").andThen(Token.fromString).andThen(RegexPattern.fromTokens)) {
+            case Ok(pat) => match(generateRegexNfaFunc(pat)) {
+                case Some(nfa) => Ok(nfa)
+                case None => Err("regex parse success, generate Nfa failed")
+            }
+            case Err(e) => Err(e)
+        }
+    }
 }
