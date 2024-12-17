@@ -4,10 +4,6 @@ package simple_finer.nfa
 import simple_finer.context.Context
 import simple_finer.ext.*
 
-public class Rec {
-    public Rec(let name: String) {}
-}
-
 protected enum NfaNode {
     | Single(NfaNode, Rune, Int)
     | All(NfaNode, Int)
