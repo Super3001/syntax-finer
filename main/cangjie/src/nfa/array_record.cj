@@ -29,8 +29,6 @@ protected type Rec = BoolArrayRecord
 
 protected class BoolArrayRecord {
     
-    // BoolArrayRecord(let _name: String) {}
-
     var _name = "unknown"
 
     protected init(name: String) {
