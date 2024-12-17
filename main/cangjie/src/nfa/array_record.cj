@@ -3,6 +3,7 @@ package simple_finer.nfa
 
 import std.convert.*
 import simple_finer.ext.*
+import simple_finer.context.*
 
 extend Rune {
     func toInt(): Int {
@@ -74,6 +75,28 @@ protected class BoolArrayRecord {
         }
     }
 
+    public func getName(): String {
+        let l = List<(Int, Int)>.Nil
+        var start = 0
+        var flag = false
+        for (i in 0..128) {
+            if (!flag && dest[i]) {
+                start = i
+                flag = true
+            }
+            else if (flag && !dest[i]) {
+                l.add((start, i-1))
+                flag = false
+            }
+        }
+        if (flag) {
+            l.add((start, 127))
+        }
+        l.reduce<String> ({
+            acc, x => acc + "${Context.intToPrintable(x[0])}-${Context.intToPrintable(x[1])}"
+        })
+    }
+
     protected func or(other: Rec) {
         let o = other.dest
         for (i in 0..128) {
@@ -105,8 +128,8 @@ protected class BoolArrayRecord {
         // let p = Rec("${Context.printable(c1)}-${Context.printable(c2)}")
         let p = Rec("")
         match {
-            case !c1.isAscii() || !c2.isAscii() => throw Exception("")
-            case c1.toInt() > c2.toInt() => throw Exception("")
+            case !c1.isAscii() || !c2.isAscii() => throw Exception("non-ascii range is currently not supported")
+            case c1.toInt() > c2.toInt() => throw Exception("- Character range is out of order")
             case _ =>
                 let low = c1.toInt()
                 let high = c2.toInt()

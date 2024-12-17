@@ -34,4 +34,11 @@ protected class Context {
         }
     }
 
+    protected static func intToPrintable(n: Int): String {
+        if (n < 128) {
+            return printable[n]
+        } else {
+            return "(${n})"
+        }
+    }
 }

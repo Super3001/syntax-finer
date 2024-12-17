@@ -33,6 +33,18 @@ extend Rec {
                         case Cons(Plain(c1), Cons(Dash, Cons(Plain(c2), tail))) => 
                             acc.or(Rec.fromRange(c1, c2))
                             x = tail
+                        case Cons(Plain(c1), Cons(Dash, Cons(Dash, tail))) => 
+                            acc.or(Rec.fromRange(c1, c'-'))
+                            x = tail
+                        case Cons(Dash, Cons(Dash, Cons(Plain(c2), tail))) => 
+                            acc.or(Rec.fromRange(c'-', c2))
+                            x = tail
+                        case Cons(Dash, Cons(Dash, Cons(Dash, tail))) => 
+                            acc.or(r'-')
+                            x = tail
+                        case Cons(Plain(c1), Cons(Dash, Cons(Plain(c2), tail))) => 
+                            acc.or(Rec.fromRange(c1, c2))
+                            x = tail
                         case Cons(_, Cons(Dash, Cons(_, _))) => 
                             throw Exception("regex generate: You cannot create a range with shorthand escape sequences")
                         case Cons(Escaped(ch), tail) =>
