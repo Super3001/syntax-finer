@@ -1,7 +1,13 @@
 
 # Introduction
 
-Text-Finer works to transform plain text to structural text (in JSON format) according to a dynamic BNF grammar template.
+Text-Finer works to transform plain text to structural text (in JSON format) according to a dynamic grammar template.
+
+**currently BNF grammar not supported, and name within itself or circular reference not supported, let alone left recursion detection**
+
+**only a top-down structure is allowed**
+
+regular expression, kleen closure operation **is** supported
 
 # Inputs and Outputs
 
