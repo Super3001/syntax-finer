@@ -1,4 +1,6 @@
 
+**note: lastest update is in `topology` branch -> [goto](https://github.com/Super3001/Text-Finer/tree/topology)**
+
 # Introduction
 
 Text-Finer works to transform plain text to structural text (in JSON format) according to a dynamic grammar template.
