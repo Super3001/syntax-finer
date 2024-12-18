@@ -4,6 +4,33 @@ package simple_finer.nfa
 import simple_finer.context.Context
 import simple_finer.ext.*
 
+public enum TMod {
+    | File
+    | F
+    | Object
+    | List
+    | Str
+    | Intt
+    | Booll
+    | Default
+}
+
+extend TMod <: ToString {
+
+    public func toString(): String {
+        match (this) {
+            case File => "File"
+            case F => "F"
+            case Object => "Object"
+            case List => "List"
+            case Str => "Str"
+            case Intt => "Int"
+            case Booll => "Bool"
+            case Default => "Default"
+        }
+    }
+}
+
 protected enum NfaNode {
     | Single(NfaNode, Rune, Int)
     | All(NfaNode, Int)
@@ -21,6 +48,8 @@ protected enum NfaNode {
     | Start(NfaNode, Int)
     | EmptyNode
     | End
+    | Tracker(NfaNode, Int, TMod, Int) // name number constant
+    | TrackerEnd(NfaNode, Int) // end of the tracker name
 
     public func getId(): Int {
         match (this) {
@@ -40,6 +69,8 @@ protected enum NfaNode {
             case Start(_, id) => id
             case EmptyNode => -1
             case End => 0
+            case Tracker(_, _, _, id) => id
+            case TrackerEnd(_, _) => -4
         }
     }
 }
@@ -92,6 +123,8 @@ extend NfaNode <: ToString {
             case Start(nxt, id) => "<${id}> Start -> <${nxt.getId()}>"
             case EmptyNode => "<-1> EmptyNode."
             case End => "<0> End."
+            case Tracker(nxt, name, mod, id) => "<${id}> Tracker{${Context.getName(name)}, ${mod}} -> <${nxt.getId()}>"
+            case TrackerEnd(nxt, name) => "<-4> TrackerEnd{~(${Context.getName(name)})}"
         }
     }
 }
@@ -121,6 +154,8 @@ extend NfaNode {
                 case AssertEnd(id) => "(~<${id}>)."
                 case EmptyNode => "\n()."
                 case End => "\n<0> End."
+                case Tracker(nxt, name, mod, id) => "\n<${id}> Tracker{${Context.getName(name)}, ${mod}} -> " + nfa2string(nxt)
+                case TrackerEnd(nxt, name) => "\nTrackerEnd{${Context.getName(name)}}"
             }
         }
 

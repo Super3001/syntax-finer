@@ -13,6 +13,7 @@ enum SymbolicPattern {
     | StarPattern(SymbolicPattern)
     | OptPattern(SymbolicPattern)
     | PlusPattern(SymbolicPattern)
+    | NamePattern(SymbolicPattern, Int, TMod)
     | UnQualifiedPattern
 }
 
@@ -30,14 +31,14 @@ enum SyntaxEntry {
 }
 
 func nominalToSymbolicPattern(expr: List<SyntaxExpr>): Result<List<SyntaxEntry>, String> {
-    let _mapNominal = HashMap<String, SyntaxPattern>()
+    let _mapNominal = HashMap<String, SyntaxExpr>()
     let _mapSymbolic = HashMap<String, SymbolicPattern>()
     let _testSet = HashSet<String>()
 
     expr.map { 
         x: SyntaxExpr => match(x) {
-            case SyntaxDefExpr(name, modifier, pat) => 
-                if (let Some(old) <- _mapNominal.put(name, pat)) {
+            case SyntaxDefExpr(name, _, _) => 
+                if (let Some(old) <- _mapNominal.put(name, x)) {
                     throw Exception("SyntaxDef name collision: ${old}")
                 }
             case ImportExpr(_) => throw Exception("SyntaxImport should have been already removed here")
@@ -65,13 +66,13 @@ func nominalToSymbolicPattern(expr: List<SyntaxExpr>): Result<List<SyntaxEntry>,
                 if (let Some(qualified) <- _mapSymbolic.get(s)) {
                     ret = qualified
                 }
-                else if (let Some(sub) <- _mapNominal.get(s)) {
+                else if (let Some(expr) <- _mapNominal.get(s)) {
                     // circular reference detection
                     testAndSetFunc(s)
-                    let qualified = qualifyAndLink(sub)
+                    let entry = entryFromExpr(expr)
                     unsetFunc(s)
-                    _mapSymbolic.put(s, qualified)
-                    ret = qualified
+                    _mapSymbolic.put(s, entry.pattern())
+                    ret = entry.pattern()
                 }
                 else {
                     throw Exception("SyntaxDef name not found: ${s}")
@@ -85,6 +86,21 @@ func nominalToSymbolicPattern(expr: List<SyntaxExpr>): Result<List<SyntaxEntry>,
         }
     }
 
+    func entryFromExpr(expr: SyntaxExpr): SyntaxEntry {
+        match (expr) {
+            case SyntaxDefExpr(name, modifier, pat) => 
+                symbolic = qualifyAndLink(pat)
+                match (modifier) {
+                    case Some("file") => FileEntry(name, NamePattern(symbolic, File))
+                    case Some("f") => FileEntry(name, NamePattern(symbolic, F))
+                    case Some(other) => UndefinedEntry(name, other, NamePattern(symbolic, getDefaultModifier(symbolic)))
+                    case None => SimpleEntry(name, NamePattern(symbolic, getDefaultModifier(symbolic)))
+                }
+            case _ => throw Exception("`entryFromExpr`: unreachable here");
+        }
+    }
+
+    /*
     Ok(expr.reduce<List<SyntaxEntry>> ({
         acc, x => 
             let entry = match(x) {
@@ -99,7 +115,9 @@ func nominalToSymbolicPattern(expr: List<SyntaxExpr>): Result<List<SyntaxEntry>,
             }
             Cons(entry, acc)
     }, List<SyntaxEntry>.empty()).reverse())
+    */
 
+    expr.map(entryFromExpr)
 }
 
 extend SyntaxEntry <: ToString {
@@ -107,7 +125,7 @@ extend SyntaxEntry <: ToString {
         match (this) {
             case SimpleEntry(name, pat) => '<${name}> -> ${pat}'
             case FileEntry(name, pat) => '[qualified:file] <${name}> -> ${pat}'
-            case UndefinedEntry(modifier, name, pat) => '[undefined:${modifier}] <${name}> -> ${pat}'
+            // case UndefinedEntry(modifier, name, pat) => '[undefined:${modifier}] <${name}> -> ${pat}'
         }
     }
 }
@@ -228,9 +246,6 @@ func generateNfaFunc(pat: SymbolicPattern): Option<NfaNode> {
     func regexFunc(nxt: NfaNode, s: String, base_id: Int): (NfaNode, Int) {
         let id = novel_id(); (Regex(nxt, s, id), id)
     }
-
-    // func deal_regex() {
-    // }
 
     // 处理 literal 中的转义字符
     func literalFunc(nxt: NfaNode, s: String, id: Int): NfaNode{
@@ -395,7 +410,6 @@ func generateNfaFunc(pat: SymbolicPattern): Option<NfaNode> {
     }
 
     let nfa = Start(gen_nfa(pat, End), novel_id())
-    // println(nfa.stringifyNfa())
     Some(deal_literal(nfa))
 }
 

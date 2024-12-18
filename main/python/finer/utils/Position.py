@@ -26,9 +26,6 @@ class NoPosition(Position):
 
 
 class Positioned:
-    pass
-
-class Positioned:
     def __init__(self) -> None:
         self.pos_: Position = NoPosition()
 

@@ -1,11 +1,12 @@
 
 package simple_finer.context
 
-import std.collection.{HashMap, HashSet}
+import std.collection.{HashSet, ArrayList}
 
 
 protected class Context {
     static let _testSet = HashSet<Int>()
+    static let _nameMap = ArrayList<String>()
 
     protected static func clearSet(): Unit {
         _testSet.clear()
@@ -32,6 +33,10 @@ protected class Context {
             case r'\r' => "\\r"
             case _ => c.toString()
         }
+    }
+
+    protected static func getName(id: Int): String {
+        _nameMap[id]
     }
 
 }

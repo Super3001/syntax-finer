@@ -134,8 +134,9 @@ func generateRegexNfaFunc(pat: RegexPattern): Option<NfaNode> {
 
 }
 
-// ld.exe Error
+/*
 
+// ld.exe Error
 extend NfaNode {
     public func fromRegexString(s: String): Result<NfaNode, String> {
         match (Some(s).okOr("").andThen(Token.fromString).andThen(RegexPattern.fromTokens)) {
@@ -148,7 +149,6 @@ extend NfaNode {
     }
 }
 
-/*
 extend NfaNode {
     public static func fromRegexPattern(pat: RegexPattern): Result<NfaNode, String> {
         match (generateRegexNfaFunc(pat)) {

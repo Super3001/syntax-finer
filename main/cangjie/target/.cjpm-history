@@ -3,6 +3,23 @@
     {
       "rootPackageName": "simple_finer",
       "modulePath": ".",
+      "packagePath": "E:\\BaiduSyncdisk\\modeling\\syntax\\main\\cangjie\\src\\ac",
+      "fullName": "simple_finer.ac",
+      "isMacroPackage": false,
+      "output-type": "static",
+      "compile-option": "",
+      "native-compile-option": "",
+      "customized-option": {},
+      "link-option": "",
+      "native-link-option": "",
+      "requires": [],
+      "c_libs": {},
+      "isTestPkg": false,
+      "accessLevel": "public"
+    },
+    {
+      "rootPackageName": "simple_finer",
+      "modulePath": ".",
       "packagePath": "E:\\BaiduSyncdisk\\modeling\\syntax\\main\\cangjie\\src\\context",
       "fullName": "simple_finer.context",
       "isMacroPackage": false,

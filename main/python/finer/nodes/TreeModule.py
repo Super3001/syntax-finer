@@ -131,16 +131,7 @@ class SimplePattern(AtomicPattern):
 
     def resolve(self):
         return re.compile(self.content)
-    
-'''
-class DoubleQuotePattern(AtomicPattern):
-    def __init__(self, string: str) -> None:
-        super().__init__(string)
-        self.require('"', '"')
 
-    def resolve(self) -> re.Pattern:
-        return super().resolve()
-'''
 
 class RegexpPattern(AtomicPattern):
     def __init__(self, string: str) -> None:
