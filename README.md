@@ -15,7 +15,38 @@ and output one file (default at project root dir): `<filename>`.tree.json
 
 `python run.py *filename*.syntax *filename*.txt --interpret`
 
-*Currently, the interpreter version (in Python) is available; the compile version (in Go, or Cangjie in the future) is still under development*
+*Currently, the interpreter version (in Python) is available; the compile version in Cangjie is still under development*
+
+# workflow
+
+## Compile version in Cangjie
+
+```
+lex
+->
+parse
+->
+qualify (e.g. LL1 check) and link (e.g. link all the name patterns)
+->
+generate NFA -> lex, parse, and transform regex literals to NFA
+->
+match text and generate JSON dynamically
+
+```
+
+## Interpreter version in Python
+
+```
+read and parse each line
+->
+deal the imports
+->
+link all the symbols
+->
+match text and generate JSON dynamically
+```
+
+note: can traverse the NFA nodes with topology order, no need to record the visit of each node.
 
 # Advanced features
 
@@ -30,6 +61,19 @@ and output one file (default at project root dir): `<filename>`.tree.json
 3. Transform Regex to DFA
 
 *(under development)*
+
+4. Check the grammar, if is BNF, LL1, etc.
+
+*(under development)*
+
+# Version comparison
+
+| | Compile version in Cangjie | Interpreter version in Python |
+|:--:|:--:|:--:|
+|import from other .syntax files|false|true|
+|NFA|true|false|
+|DFA|false|false|
+|JSON output|false(under development)|true|
 
 # Examples
 
