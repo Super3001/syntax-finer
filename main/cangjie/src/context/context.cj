@@ -34,9 +34,4 @@ protected class Context {
             case _ => c.toString()
         }
     }
-
-    protected static func getName(id: Int): String {
-        _nameMap[id]
-    }
-
 }

@@ -30,6 +30,15 @@ enum SyntaxEntry {
     } 
 }
 
+extend TMod {
+    static func default(pat: SymbolicPattern): TMod {
+        match (pat) {
+            case SimplePattern(_) => Str
+            case 
+        }
+    }
+}
+
 func nominalToSymbolicPattern(expr: List<SyntaxExpr>): Result<List<SyntaxEntry>, String> {
     let _mapNominal = HashMap<String, SyntaxExpr>()
     let _mapSymbolic = HashMap<String, SymbolicPattern>()
@@ -93,8 +102,8 @@ func nominalToSymbolicPattern(expr: List<SyntaxExpr>): Result<List<SyntaxEntry>,
                 match (modifier) {
                     case Some("file") => FileEntry(name, NamePattern(symbolic, File))
                     case Some("f") => FileEntry(name, NamePattern(symbolic, F))
-                    case Some(other) => UndefinedEntry(name, other, NamePattern(symbolic, getDefaultModifier(symbolic)))
-                    case None => SimpleEntry(name, NamePattern(symbolic, getDefaultModifier(symbolic)))
+                    case Some(other) => UndefinedEntry(name, other, NamePattern(symbolic, Undefined(other)))
+                    case None => SimpleEntry(name, NamePattern(symbolic, TMod.default(symbolic)))
                 }
             case _ => throw Exception("`entryFromExpr`: unreachable here");
         }
@@ -352,15 +361,11 @@ func generateNfaFunc(pat: SymbolicPattern): Option<NfaNode> {
     func gen_nfa(pat: SymbolicPattern, nxt: NfaNode): NfaNode {
 
         match (pat) {
+            case SimplePattern(s) => literalFunc(nxt, s, -1) // case SimplePattern(s) => Sequence(nxt, List.fromArray(s.toRuneArray()), novel_id())
 
-            // case SimplePattern(s) => Sequence(nxt, List.fromArray(s.toRuneArray()), novel_id())
-            case SimplePattern(s) => literalFunc(nxt, s, -1)
+            case RegexPattern(s) => let t = regexFunc(nxt, s, id); id = t[1]; t[0] // case RegexPattern(s) => Regex(nxt, s, novel_id())
 
-            // case RegexPattern(s) => Regex(nxt, s, novel_id())
-            case RegexPattern(s) => let t = regexFunc(nxt, s, id); id = t[1]; t[0]
-
-            case ConcatPattern(l) => 
-                // l.reverse().reduce({ acc, x => gen_nfa(x, acc) }, nxt)
+            case ConcatPattern(l) => // l.reverse().reduce({ acc, x => gen_nfa(x, acc) }, nxt)
                 var x = l.reverse()
                 var acc = nxt
                 while (true) {
@@ -405,6 +410,8 @@ func generateNfaFunc(pat: SymbolicPattern): Option<NfaNode> {
                 conn.id = one.getId()
                 conn.dest = one
                 one
+            case NamePattern(p, id, tmod) => 
+                Tracker(gen_nfa(p, TrackerEnd(nxt, id)), id, tmod, novel_id())
             case UnQualifiedPattern => EmptyNode
         }
     }

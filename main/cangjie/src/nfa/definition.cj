@@ -12,7 +12,7 @@ public enum TMod {
     | Str
     | Intt
     | Booll
-    | Default
+    | Undefined(String)
 }
 
 extend TMod <: ToString {
@@ -26,10 +26,12 @@ extend TMod <: ToString {
             case Str => "Str"
             case Intt => "Int"
             case Booll => "Bool"
-            case Default => "Default"
+            case Undefined(s) => "Tmod{${s}}(Undefined!)"
         }
     }
 }
+
+type Idklass = Int
 
 protected enum NfaNode {
     | Single(NfaNode, Rune, Int)
@@ -48,8 +50,8 @@ protected enum NfaNode {
     | Start(NfaNode, Int)
     | EmptyNode
     | End
-    | Tracker(NfaNode, Int, TMod, Int) // name number constant
-    | TrackerEnd(NfaNode, Int) // end of the tracker name
+    | Tracker(NfaNode, Idklass, TMod, Int) // name number constant
+    | TrackerEnd(NfaNode, Idklass) // end of the tracker name
 
     public func getId(): Int {
         match (this) {
@@ -123,8 +125,8 @@ extend NfaNode <: ToString {
             case Start(nxt, id) => "<${id}> Start -> <${nxt.getId()}>"
             case EmptyNode => "<-1> EmptyNode."
             case End => "<0> End."
-            case Tracker(nxt, name, mod, id) => "<${id}> Tracker{${Context.getName(name)}, ${mod}} -> <${nxt.getId()}>"
-            case TrackerEnd(nxt, name) => "<-4> TrackerEnd{~(${Context.getName(name)})}"
+            case Tracker(nxt, name, mod, id) => "<${id}> Tracker{${name}, ${mod}} -> <${nxt.getId()}>"
+            case TrackerEnd(nxt, name) => "<-4> TrackerEnd{~(${name})}"
         }
     }
 }
@@ -154,8 +156,8 @@ extend NfaNode {
                 case AssertEnd(id) => "(~<${id}>)."
                 case EmptyNode => "\n()."
                 case End => "\n<0> End."
-                case Tracker(nxt, name, mod, id) => "\n<${id}> Tracker{${Context.getName(name)}, ${mod}} -> " + nfa2string(nxt)
-                case TrackerEnd(nxt, name) => "\nTrackerEnd{${Context.getName(name)}}"
+                case Tracker(nxt, name, mod, id) => "\n<${id}> Tracker{${name}}, ${mod}} -> " + nfa2string(nxt)
+                case TrackerEnd(nxt, name) => "\nTrackerEnd{${name}}"
             }
         }
 
