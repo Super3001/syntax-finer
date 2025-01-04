@@ -1,66 +1,51 @@
-[31merror[0m: undeclared identifier 'entryFromExpr'
-  [36m==>[0m E:\BaiduSyncdisk\modeling\syntax\main\cangjie\src\generator.cj:72:33:
+[33mwarning[0m: unused variable:'nameId'
+  [36m==>[0m E:\BaiduSyncdisk\modeling\syntax\main\cangjie\src\generator.cj:68:9:
    [36m| [0m
-[36m72[0m [36m| [0m                    let entry = entryFromExpr(expr)[0m
-   [36m| [0m                                [31m^ [0m
+[36m68[0m [36m| [0m    var nameId = init_nameId()[0m
+   [36m| [0m        [33m^^^^^^ unused variable[0m
    [36m| [0m
+   [36m#[0m [0mnote[0m: this warning can be suppressed by setting the compiler option `-Woff unused`
 
-[31merror[0m: undeclared identifier 'qualified'
-  [36m==>[0m E:\BaiduSyncdisk\modeling\syntax\main\cangjie\src\generator.cj:75:27:
+[33mwarning[0m: unused function:'novel_name_id'
+  [36m==>[0m E:\BaiduSyncdisk\modeling\syntax\main\cangjie\src\generator.cj:70:9:
    [36m| [0m
-[36m75[0m [36m| [0m                    ret = qualified[0m
-   [36m| [0m                          [31m^ [0m
+[36m70[0m [36m| [0m          func novel_name_id(): Idklass {[0m
+   [36m| [0m [33m_[0m[33m________^[0m
+[36m71[0m [36m| [0m[33m|[0m             /*[0m
+   [36m| [0m[33m|[0m ...[0m
+[36m76[0m [36m| [0m[33m|[0m         }[0m
+   [36m| [0m[33m|[0m[33m_[0m[33m________^ unused function[0m
    [36m| [0m
+   [36m#[0m [0mnote[0m: this warning can be suppressed by setting the compiler option `-Woff unused`
 
-[31merror[0m: undeclared identifier 'symbolic'
-  [36m==>[0m E:\BaiduSyncdisk\modeling\syntax\main\cangjie\src\generator.cj:92:17:
+[33mwarning[0m: unused function:'id2name'
+  [36m==>[0m E:\BaiduSyncdisk\modeling\syntax\main\cangjie\src\generator.cj:92:5:
    [36m| [0m
-[36m92[0m [36m| [0m                symbolic = qualifyAndLink(pat)[0m
-   [36m| [0m                [31m^ [0m
+[36m92[0m [36m| [0m      func id2name(id: Idklass): String {[0m
+   [36m| [0m [33m_[0m[33m____^[0m
+[36m93[0m [36m| [0m[33m|[0m         id[0m
+[36m94[0m [36m| [0m[33m|[0m     } [0m
+   [36m| [0m[33m|[0m[33m_[0m[33m____^ unused function[0m
    [36m| [0m
+   [36m#[0m [0mnote[0m: this warning can be suppressed by setting the compiler option `-Woff unused`
 
-[31merror[0m: undeclared identifier 'NamePattern'
-  [36m==>[0m E:\BaiduSyncdisk\modeling\syntax\main\cangjie\src\generator.cj:94:58:
-   [36m| [0m
-[36m94[0m [36m| [0m                    case Some("file") => FileEntry(name, NamePattern(symbolic, File))[0m
-   [36m| [0m                                                         [31m^ [0m
-   [36m| [0m
-
-[31merror[0m: undeclared identifier 'NamePattern'
-  [36m==>[0m E:\BaiduSyncdisk\modeling\syntax\main\cangjie\src\generator.cj:95:55:
-   [36m| [0m
-[36m95[0m [36m| [0m                    case Some("f") => FileEntry(name, NamePattern(symbolic, F))[0m
-   [36m| [0m                                                      [31m^ [0m
-   [36m| [0m
-
-[31merror[0m: undeclared identifier 'NamePattern'
-  [36m==>[0m E:\BaiduSyncdisk\modeling\syntax\main\cangjie\src\generator.cj:96:69:
-   [36m| [0m
-[36m96[0m [36m| [0m                    case Some(other) => UndefinedEntry(name, other, NamePattern(symbolic, getDefaultModifier(symbolic)))[0m
-   [36m| [0m                                                                    [31m^ [0m
-   [36m| [0m
-
-[31merror[0m: undeclared identifier 'NamePattern'
-  [36m==>[0m E:\BaiduSyncdisk\modeling\syntax\main\cangjie\src\generator.cj:97:52:
-   [36m| [0m
-[36m97[0m [36m| [0m                    case None => SimpleEntry(name, NamePattern(symbolic, getDefaultModifier(symbolic)))[0m
-   [36m| [0m                                                   [31m^ [0m
-   [36m| [0m
-
-[31merror[0m: unable to infer generic argument of this function
-   [36m==>[0m E:\BaiduSyncdisk\modeling\syntax\main\cangjie\src\generator.cj:120:5:
+[33mwarning[0m: unused function:'reset_id'
+   [36m==>[0m E:\BaiduSyncdisk\modeling\syntax\main\cangjie\src\generator.cj:323:5:
     [36m| [0m
-[36m120[0m [36m| [0m    expr.map(entryFromExpr)[0m
-    [36m| [0m    [31m^^^^^^^^ [0m
+[36m323[0m [36m| [0m      func reset_id(): Unit {[0m
+    [36m| [0m [33m_[0m[33m____^[0m
+[36m324[0m [36m| [0m[33m|[0m         id = 0[0m
+[36m325[0m [36m| [0m[33m|[0m     }[0m
+    [36m| [0m[33m|[0m[33m_[0m[33m____^ unused function[0m
     [36m| [0m
-[34mnote[0m: for function type '((Generics-A) -> Generics-B) -> Enum-List<Generics-B>' in context type 'Enum-List<Enum-SyntaxExpr>'
-  [36m==>[0m (package simple_finer.ext)list.cj:64:17:
-[34mnote[0m: mismatched types
-   [36m==>[0m E:\BaiduSyncdisk\modeling\syntax\main\cangjie\src\generator.cj:120:5:
-    [36m| [0m
-[36m120[0m [36m| [0m    expr.map(entryFromExpr)[0m
-    [36m| [0m    [34m^^^^^^^^^^^^^^^^^^^^^^^ of return type 'Enum-List<Generics-B>', impossible to match expected type 'Enum-Result<Enum-List<Enum-SyntaxEntry>, Struct-String>'[0m
-    [36m| [0m
+    [36m#[0m [0mnote[0m: this warning can be suppressed by setting the compiler option `-Woff unused`
 
-12 errors generated, 8 errors printed.
-Error: compile package simple_finer failed, return code is 1
+[33mwarning[0m: unused variable:'base_id'
+   [36m==>[0m E:\BaiduSyncdisk\modeling\syntax\main\cangjie\src\generator.cj:328:45:
+    [36m| [0m
+[36m328[0m [36m| [0m    func regexFunc(nxt: NfaNode, s: String, base_id: Int): (NfaNode, Int) {[0m
+    [36m| [0m                                            [33m^^^^^^^ unused variable[0m
+    [36m| [0m
+    [36m#[0m [0mnote[0m: this warning can be suppressed by setting the compiler option `-Woff unused`
+
+5 warnings generated, 5 warnings printed.

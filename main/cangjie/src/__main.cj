@@ -14,6 +14,15 @@ func readFile(path: String): Result<String, String> {
     Ok(str)
 }
 
+extend<T> Option<T> {
+    public func okOr<E>(e: E): Result<T, E> {
+        match (this) {
+            case Some(v) => Ok(v)
+            case None => Err(e)
+        }
+    }
+}
+
 main() {
     println(
         """
@@ -25,7 +34,7 @@ main() {
 
     while (true) {
         println("please input .syntax file:")
-        Console.stdIn.readln().okOr("End.").andThen(evalNfa)
+        Console.stdIn.readln().okOr("Invalid Input!").andThen(readFile).andThen(evalNfa)
         // tokens.map { l: List<Token> => l.map {tk => println(tk) } }
         // tokens.andThen(RegexPattern.fromTokens).map { e => println(e) }.mapErr { e => println(e) }
         // let str = Console.stdIn.readln().okOr("Invalid Input!").andThen(readFile)

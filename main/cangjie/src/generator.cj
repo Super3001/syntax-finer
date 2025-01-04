@@ -13,7 +13,7 @@ enum SymbolicPattern {
     | StarPattern(SymbolicPattern)
     | OptPattern(SymbolicPattern)
     | PlusPattern(SymbolicPattern)
-    | NamePattern(SymbolicPattern, Int, TMod)
+    | NamePattern(SymbolicPattern, Idklass, TMod)
     | UnQualifiedPattern
 }
 
@@ -28,13 +28,28 @@ enum SyntaxEntry {
             case _ => false
         }
     } 
+
+    func pattern(): SymbolicPattern {
+        match (this) {
+            case FileEntry(_, p) => p
+            case SimpleEntry(_, p) => p
+            case UndefinedEntry(_, _, p) => p
+        }
+    }
 }
 
 extend TMod {
     static func default(pat: SymbolicPattern): TMod {
         match (pat) {
             case SimplePattern(_) => Str
-            case 
+            case RegexPattern(_) => Str
+            case ConcatPattern(_) => Dict
+            case OrPattern(_) => Dict
+            case StarPattern(_) => List
+            case OptPattern(p) => default(p)
+            case PlusPattern(_) => List
+            case NamePattern(p, _, _) => default(p)
+            case UnQualified => throw Exception("UnQualified SymbolicPattern should not occur at link stage")
         }
     }
 }
@@ -42,15 +57,70 @@ extend TMod {
 func nominalToSymbolicPattern(expr: List<SyntaxExpr>): Result<List<SyntaxEntry>, String> {
     let _mapNominal = HashMap<String, SyntaxExpr>()
     let _mapSymbolic = HashMap<String, SymbolicPattern>()
+    let _mapNameId = HashMap<String, Idklass>()
+    let _mapIdName = HashMap<Idklass, String>()
+    func init_nameId(): Idklass {
+        /*
+        0
+        */
+        ""
+    }
+    var nameId = init_nameId()
+    func add_name(name: String) {
+        func novel_name_id(): Idklass {
+            /*
+            nameId += 1
+            nameId
+            */
+            name
+        }
+        /*
+        id = novel_name_id()
+        _mapNameId.put(name, id)
+        _mapIdName.put(id, name)
+        */
+    }
+    func name2id(name: String): Idklass {
+        /*
+        if (let Some(id) <- _mapNameId.get(name)) {
+            return id
+        }
+        throw Exception("name not found: ${name}")
+        */
+        name
+    }
+    func id2name(id: Idklass): String {
+        id
+    } 
     let _testSet = HashSet<String>()
 
+    /*
     expr.map { 
         x: SyntaxExpr => match(x) {
             case SyntaxDefExpr(name, _, _) => 
                 if (let Some(old) <- _mapNominal.put(name, x)) {
                     throw Exception("SyntaxDef name collision: ${old}")
                 }
+                add_name(name)
             case ImportExpr(_) => throw Exception("SyntaxImport should have been already removed here")
+        }
+    }
+    */
+
+    var x = expr
+    while (true) {
+        match (x) {
+            case Nil => break
+            case Cons(hd, tl) =>
+                match(hd) {
+                    case SyntaxDefExpr(name, _, _) => 
+                        if (let Some(old) <- _mapNominal.put(name, hd)) {
+                            throw Exception("SyntaxDef name collision: ${old}")
+                        }
+                    add_name(name)
+                    case ImportExpr(_) => throw Exception("SyntaxImport should have been already removed here")
+                }
+                x = tl
         }
     }
 
@@ -66,44 +136,45 @@ func nominalToSymbolicPattern(expr: List<SyntaxExpr>): Result<List<SyntaxEntry>,
         }
     }
 
-    func qualifyAndLink(pat: SyntaxPattern): SymbolicPattern {
-        match (pat) {
-            case SimplePattern(s) => SimplePattern(s)
-            case RegexPattern(s) => RegexPattern(s)
-            case NamePattern(s) =>
-                var ret: SymbolicPattern = UnQualifiedPattern
-                if (let Some(qualified) <- _mapSymbolic.get(s)) {
-                    ret = qualified
-                }
-                else if (let Some(expr) <- _mapNominal.get(s)) {
-                    // circular reference detection
-                    testAndSetFunc(s)
-                    let entry = entryFromExpr(expr)
-                    unsetFunc(s)
-                    _mapSymbolic.put(s, entry.pattern())
-                    ret = entry.pattern()
-                }
-                else {
-                    throw Exception("SyntaxDef name not found: ${s}")
-                }
-                ret
-            case ConcatPattern(l) => ConcatPattern(l.map(qualifyAndLink))
-            case OrPattern(l) => OrPattern(l.map(qualifyAndLink))
-            case StarPattern(p) => StarPattern(qualifyAndLink(p))
-            case OptPattern(p) => OptPattern(qualifyAndLink(p))
-            case PlusPattern(p) => PlusPattern(qualifyAndLink(p))
-        }
-    }
-
     func entryFromExpr(expr: SyntaxExpr): SyntaxEntry {
+
+        func qualifyAndLink(pat: SyntaxPattern): SymbolicPattern {
+            match (pat) {
+                case SimplePattern(s) => SimplePattern(s)
+                case RegexPattern(s) => RegexPattern(s)
+                case NamePattern(s) =>
+                    var ret: SymbolicPattern = UnQualifiedPattern
+                    if (let Some(qualified) <- _mapSymbolic.get(s)) {
+                        ret = qualified
+                    }
+                    else if (let Some(expr) <- _mapNominal.get(s)) {
+                        // circular reference detection
+                        testAndSetFunc(s)
+                        let entry = entryFromExpr(expr)
+                        unsetFunc(s)
+                        _mapSymbolic.put(s, entry.pattern())
+                        ret = entry.pattern()
+                    }
+                    else {
+                        throw Exception("SyntaxDef name not found: ${s}")
+                    }
+                    ret
+                case ConcatPattern(l) => ConcatPattern(l.map(qualifyAndLink))
+                case OrPattern(l) => OrPattern(l.map(qualifyAndLink))
+                case StarPattern(p) => StarPattern(qualifyAndLink(p))
+                case OptPattern(p) => OptPattern(qualifyAndLink(p))
+                case PlusPattern(p) => PlusPattern(qualifyAndLink(p))
+            }
+        }
+
         match (expr) {
             case SyntaxDefExpr(name, modifier, pat) => 
-                symbolic = qualifyAndLink(pat)
+                let symbolic = qualifyAndLink(pat)
                 match (modifier) {
-                    case Some("file") => FileEntry(name, NamePattern(symbolic, File))
-                    case Some("f") => FileEntry(name, NamePattern(symbolic, F))
-                    case Some(other) => UndefinedEntry(name, other, NamePattern(symbolic, Undefined(other)))
-                    case None => SimpleEntry(name, NamePattern(symbolic, TMod.default(symbolic)))
+                    case Some("file") => FileEntry(name, NamePattern(symbolic, name2id(name), File))
+                    case Some("f") => FileEntry(name, NamePattern(symbolic, name2id(name), F))
+                    case Some(other) => UndefinedEntry(name, other, NamePattern(symbolic, name2id(name), Undefined(other)))
+                    case None => SimpleEntry(name, NamePattern(symbolic, name2id(name), TMod.default(symbolic)))
                 }
             case _ => throw Exception("`entryFromExpr`: unreachable here");
         }
@@ -126,7 +197,7 @@ func nominalToSymbolicPattern(expr: List<SyntaxExpr>): Result<List<SyntaxEntry>,
     }, List<SyntaxEntry>.empty()).reverse())
     */
 
-    expr.map(entryFromExpr)
+    Ok(expr.map(entryFromExpr))
 }
 
 extend SyntaxEntry <: ToString {
@@ -134,7 +205,7 @@ extend SyntaxEntry <: ToString {
         match (this) {
             case SimpleEntry(name, pat) => '<${name}> -> ${pat}'
             case FileEntry(name, pat) => '[qualified:file] <${name}> -> ${pat}'
-            // case UndefinedEntry(modifier, name, pat) => '[undefined:${modifier}] <${name}> -> ${pat}'
+            case UndefinedEntry(modifier, name, pat) => '[undefined:${modifier}] <${name}> -> ${pat}'
         }
     }
 }
@@ -155,6 +226,8 @@ extend SymbolicPattern <: ToString {
             case StarPattern(p) => "StarPattern{${p}}"
             case OptPattern(p) => "OptPattern{${p}}"
             case PlusPattern(p) => "PlusPattern{${p}}"
+            // case NamePattern(p, id, tmod) => "NamePattern[${id}, ${tmod}]{${p}}"
+            case NamePattern(p, id, tmod) => "${p}"
         }
     }
 }
@@ -296,68 +369,6 @@ func generateNfaFunc(pat: SymbolicPattern): Option<NfaNode> {
         }
     }
 
-    func deal_literal(head: NfaNode) {
-        let idMap = HashMap<Int, NfaNode>()
-        let forwardQueue = List<(Int, Connector)>.empty()
-
-        func add_map(id: Int, node: NfaNode) {
-            if (let Some(old) <- idMap.put(id, node)) {
-                throw Exception("<${id}> id collision!")
-            }
-            node
-        }
-
-        func add_queue(id: Int, conn: Connector) {
-            forwardQueue.add((id, conn))
-        }
-
-
-        func gen_dl(node: NfaNode): NfaNode {
-            match (node) {
-                case Start(nxt, id) =>              add_map(id, Start(gen_dl(nxt), novel_id()))
-                case All(nxt, id) =>                add_map(id, All(gen_dl(nxt), novel_id()))
-                case Single(nxt, ch, id) =>         add_map(id, Single(gen_dl(nxt), ch, novel_id()))
-                case Sequence(nxt, l, id) =>        add_map(id, literalFunc(gen_dl(nxt), l, id))
-                case Set(nxt, rec, id) =>           add_map(id, Set(gen_dl(nxt), rec, novel_id()))
-                case InvSet(nxt, rec, id) =>        add_map(id, InvSet(gen_dl(nxt), rec, novel_id()))
-                case Regex(nxt, s, id) =>           add_map(id, Regex(gen_dl(nxt), s, novel_id()))
-                case Branch(down, inner, id) =>     add_map(id, Branch(gen_dl(down), gen_dl(inner), novel_id()))
-                case Merge(nxt) => 
-                    if (let Some(dest) <- idMap.get(nxt.getId())) { return Merge(dest) } 
-                    else { throw Exception("${node}:\nMerge connot connect to destination") }
-                case Forward(near, far, id) => 
-                    let nxt = gen_dl(near)    
-                    if (let Some(one) <- idMap.get(far.getId())) { return add_map(id, Forward(nxt, one, novel_id())) } 
-                    else { throw Exception("${node}:\nForward connot connect to the front") }
-                case Backward(nxt, conn, id) =>     let newConn = Connector(); add_queue(conn.id, newConn); add_map(id, Backward(gen_dl(nxt), newConn, novel_id()))
-                case AssertAhead(nxt, anxt, id) =>  add_map(id, AssertAhead(gen_dl(nxt), gen_dl(anxt), novel_id()))
-                case AssertBack(nxt, anxt, id) =>   add_map(id, AssertBack(gen_dl(nxt), gen_dl(anxt), novel_id()))
-                case AssertEnd(id) =>               
-                    if (let Some(one) <- idMap.get(id)) { return AssertEnd(one.getId()) }
-                    else { throw Exception("${node}:\nAssertEnd connot connect to the front") }
-                case EmptyNode =>                   EmptyNode
-                case End =>                         add_map(0, End)
-            }
-        }
-
-        reset_id()
-        let res = gen_dl(head)
-        forwardQueue.map {
-            group: (Int, Connector) => 
-                match (group) {
-                    case (id, conn) =>
-                        if (let Some(node) <- idMap.get(id)) {
-                            conn.dest = node
-                            conn.id = node.getId()
-                            return ()
-                        }
-                        throw Exception("<${id}> node not found!")
-                }
-            
-        }
-        res
-    }
-
     func gen_nfa(pat: SymbolicPattern, nxt: NfaNode): NfaNode {
 
         match (pat) {
@@ -411,18 +422,19 @@ func generateNfaFunc(pat: SymbolicPattern): Option<NfaNode> {
                 conn.dest = one
                 one
             case NamePattern(p, id, tmod) => 
-                Tracker(gen_nfa(p, TrackerEnd(nxt, id)), id, tmod, novel_id())
+                Tracker(gen_nfa(p, TrackerEnd(nxt, id, novel_id())), id, tmod, novel_id())
             case UnQualifiedPattern => EmptyNode
         }
     }
 
     let nfa = Start(gen_nfa(pat, End), novel_id())
-    Some(deal_literal(nfa))
+    Some(nfa)
 }
 
 
 func evalNfa(str: String): Result<Unit, String>  {
     let runes = List<Rune>.fromArray(str.toRuneArray())
+    // println(runes)
     Token.fromRunes(runes).andThen(SyntaxExpr.fromTokens).andThen(SyntaxExpr.resolveLinks).andThen(nominalToSymbolicPattern).map {
         l => l.map {
             x => match (x) {

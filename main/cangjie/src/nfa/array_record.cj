@@ -7,7 +7,7 @@ extend Rune {
     func toInt(): Int {
         match {
             case this.isAscii() =>
-                let arr = Array<Byte>(1, item: 0)
+                let arr = Array<Byte>(1, repeat: 0)
                 Rune.intoUtf8Array(this, arr, 0)
                 Int.parse("${arr[0]}")
             case _ => -1
@@ -50,7 +50,7 @@ protected class BoolArrayRecord {
         Rec.nl
     }
 
-    let _dest: Array<Bool> = Array(128, item: false)
+    let _dest: Array<Bool> = Array(128, repeat: false)
 
     public prop dest: Array<Bool> {
         get() {

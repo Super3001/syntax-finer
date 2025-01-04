@@ -14,7 +14,9 @@
       "native-link-option": "",
       "requires": [],
       "c_libs": {},
-      "isTestPkg": false,
+      "hasTestFiles": false,
+      "hasProdFiles": true,
+      "hasTestsInProdFiles": false,
       "accessLevel": "public"
     },
     {
@@ -31,7 +33,9 @@
       "native-link-option": "",
       "requires": [],
       "c_libs": {},
-      "isTestPkg": false,
+      "hasTestFiles": false,
+      "hasProdFiles": true,
+      "hasTestsInProdFiles": false,
       "accessLevel": "public"
     },
     {
@@ -48,7 +52,9 @@
       "native-link-option": "",
       "requires": [],
       "c_libs": {},
-      "isTestPkg": false,
+      "hasTestFiles": false,
+      "hasProdFiles": true,
+      "hasTestsInProdFiles": false,
       "accessLevel": "public"
     },
     {
@@ -68,7 +74,9 @@
         "simple_finer.ext"
       ],
       "c_libs": {},
-      "isTestPkg": false,
+      "hasTestFiles": false,
+      "hasProdFiles": true,
+      "hasTestsInProdFiles": false,
       "accessLevel": "public"
     },
     {
@@ -89,7 +97,9 @@
         "simple_finer.nfa"
       ],
       "c_libs": {},
-      "isTestPkg": false,
+      "hasTestFiles": false,
+      "hasProdFiles": true,
+      "hasTestsInProdFiles": false,
       "accessLevel": "public"
     },
     {
@@ -110,7 +120,9 @@
         "simple_finer.regex"
       ],
       "c_libs": {},
-      "isTestPkg": false,
+      "hasTestFiles": false,
+      "hasProdFiles": true,
+      "hasTestsInProdFiles": false,
       "accessLevel": "public"
     }
   ],
