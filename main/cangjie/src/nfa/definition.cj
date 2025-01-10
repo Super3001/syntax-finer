@@ -10,8 +10,6 @@ public enum TMod {
     | Dict
     | List
     | Str
-    | Intt
-    | Booll
     | Undefined(String)
 }
 
@@ -24,8 +22,6 @@ extend TMod <: ToString {
             case Dict => "Dict"
             case List => "List"
             case Str => "Str"
-            case Intt => "Int"
-            case Booll => "Bool"
             case Undefined(s) => "Tmod{${s}}(Undefined!)"
         }
     }
@@ -214,15 +210,38 @@ protected enum NfaEntry {
     }
 }
 
-protected enum MatchResult {
+extend NfaEntry <: ToString {
+    public func toString(): String {
+        this.getSymbol() + " -> Nfa{${this.getNfa().getId()} nodes}"
+    }
+}
+
+extend NfaEntry {
+    public func stringifyNfa(): String {
+        return this.getSymbol() + " -> " + this.getNfa().stringifyNfa()
+    }
+}
+
+protected enum MatchItem {
     | Char(Rune)
     | Chars(String)
-    | Intt(Int)
-    | Booll(Bool)
     | BOS(String)
     | EOS
-    | SOL(String)
+    | BOL(String)
     | EOL
-    | SOD(String)
+    | BOD(String)
     | EOD
 }
+
+protected enum MatchResult {
+    | Some(List<MatchItem>)
+    | None
+
+    protected func add(item: MatchItem) {
+        match (this) {
+            case Some(l) => Some(l.add(item))
+            case None => None
+        }
+    }
+}
+

@@ -130,6 +130,20 @@ extend<A> List<A> {
         x
     }
 
+    public func take(num: Int): (List<A>, List<A>) {
+        var x = this
+        var y = List<A>.Nil
+        for (_ in 0..num) {
+            match(x) {
+                case Nil => break
+                case Cons(hd, tl) =>
+                    y.add(hd)
+                    x = tl
+            }
+        }
+        (y, x)
+    }
+
     public func splitOnce(condition: (A) -> Bool): Option<(List<A>, List<A>)> {
         var x: List<A> = Nil
         var y = this
@@ -188,5 +202,21 @@ extend<A> List<A> where A <: Equatable<A> {
 extend<B> List<List<B>> {
     public func flatten(): List<B> {
         this.reduce ({acc, x => acc.concat(x)}, List<B>.Nil)
+    }
+}
+
+extend List<Rune> {
+    public func takeStr(s: String): Option<(List<Rune>, List<Rune>)> {
+        var x = this
+        var y = List<Rune>.Nil
+        for (ch in s.runes()) {
+            match (x) {
+                case Cons(ch, tail) =>
+                    y.add(ch)
+                    x = tail
+                case _ => return None
+            }
+        }
+        Some((y, x))
     }
 }

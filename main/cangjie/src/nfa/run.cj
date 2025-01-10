@@ -3,40 +3,54 @@ package simple_finer.nfa
 import simple_finer.ext.*
 import std.regex
 
-protected extend NfaEntry {
+extend NfaEntry {
     protected func runOn(l: List<Rune>) {
+
+        var history = List<Rune>.Nil
+        func past(ch: Rune, enable: Bool) {
+            if (enable) {
+                history.add(ch)
+            }
+        }
+        func past(chars: List<Rune>, enable: Bool) {
+            if (enable) {
+                history = chars.concat(history)
+            }
+        }
         
-        func run(node: NfaNode, rest: List<Rune>): Option<List<MatchResult>> {
+        func run(node: NfaNode, rest: List<Rune>, record: Bool): MatchResult {
             match (node) {
-                case Start(nxt, _) => run(nxt, rest)
+                case Start(nxt, _) => run(nxt, rest, record)
                 case End => 
-                    if (!rest.empty()) {
+                    if (!rest.isEmpty()) {
                         return None
                     }
-                    Some(List<MatchResult>.Nil)
+                    Some(List<MatchItem>.Nil)
                 case Single(nxt, ch, _) =>
                     match (rest) {
-                        case Cons(ch, tail) => run(nxt, tail).add(Char(ch))
+                        case Cons(ch, tail) => past(ch, record); run(nxt, tail, record).add(Char(ch))
                         case _ => None
                     }
                 case All(nxt, _) =>
                     match (rest) {
-                        case Cons(any, tail) => run(nxt, tail).add(Char(any))
+                        case Cons(any, tail) => past(any, record); run(nxt, tail, record).add(Char(any))
                         case _ => None
                     }
                 case Sequence(nxt, s, _) =>
-                    if (rest.startsWith(s)) {
-                        run(nxt, rest.skip(s.length)).add(Chars(s))
+                    match (rest.takeStr(s)) {
+                        case Some((fst, snd)) =>
+                            past(fst, record)
+                            run(nxt, snd, record).add(Chars(s))
+                        case None => None
                     }
-                    None
                 case Set(nxt, rec, _) => 
                     match (rest) {
-                        case Cons(head, tail) where rec.contains(head) => run(nxt, tail).add(Char(head))
+                        case Cons(head, tail) where rec.contains(head) => past(head, record); run(nxt, tail, record).add(Char(head))
                         case _ => None
                     }
                 case InvSet(nxt, rec, _) =>
                     match (rest) {
-                        case Cons(head, tail) where !rec.contains(head) => 
+                        case Cons(head, tail) where !rec.contains(head) => past(head, record); run(nxt, tail, record)
                         case _ => None
                     }
                 case Regex(nxt, s, _) => 
@@ -45,13 +59,57 @@ protected extend NfaEntry {
                     let r = regex.Regex(s)
                     match (r.matcher(str).matchStart()) {
                         case Some(matchData) =>
-                            matched = matchData.matchStr()
-                            run(nxt, rest.skip(matched.length)).add(Chars(matched))
+                            let matched = matchData.matchStr()
+                            let pair = rest.take(matched.size)
+                            past(pair[0], record)
+                            run(nxt, pair[1], record).add(Chars(matched))
                         case None => None
                     }
+                case Branch(fst, snd, _) => 
+                    match (run(snd, rest, record)) {
+                        case Some(res) => Some(res)
+                        case None => run(fst, rest, record)
+                    }
+                case Merge(nxt) => run(nxt, rest, record)
+                case Forward(near, far, id) => 
+                    match (run(near, rest, record)) {
+                        case Some(res) => Some(res)
+                        case None => run(far, rest, record)
+                    }
+                case Backward(nxt, conn, id) => 
+                    match (run(conn.dest, rest, record)) {
+                        case Some(res) => Some(res)
+                        case None => run(nxt, rest, record)
+                    }
+                case AssertAhead(nxt, anxt, _) =>
+                    match (run(anxt, rest, false)) {
+                        case Some(_) => run(nxt, rest, record)
+                        case None => None
+                    }
+                case AssertBack(nxt, anxt, _) =>
+                    match (run(anxt, history, false)) {
+                        case Some(_) => run(nxt, rest, record)
+                        case None => None
+                    }
+                case AssertEnd(_) => Some(List<MatchItem>.Nil)
+                case EmptyNode => None
                 case Tracker(nxt, name, mod, _) => 
                     match (mod) {
-                        case File => 
+                        case File => run(nxt, rest, record).add(BOD("file"))
+                        case F => run(nxt, rest, record).add(BOD(name))
+                        case Dict => run(nxt, rest, record).add(BOD(name))
+                        case List => run(nxt, rest, record).add(BOL(name))
+                        case Str => run(nxt, rest, record).add(BOS(name))
+                        case Undefined(s) => throw Exception("nfa runtime error: modifier undefined: ${s}")
+                    }
+                case TrackerEnd(nxt, mod, _) =>
+                    match (mod) {
+                        case File => run(nxt, rest, record).add(EOD)
+                        case F => run(nxt, rest, record).add(EOD)
+                        case Dict => run(nxt, rest, record).add(EOD)
+                        case List => run(nxt, rest, record).add(EOL)
+                        case Str => run(nxt, rest, record).add(EOS)
+                        case Undefined(s) => throw Exception("nfa runtime error: modifier undefined: ${s}")
                     }
             }
         }

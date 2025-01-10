@@ -56,7 +56,7 @@ extend TMod {
 
 func nominalToSymbolicPattern(expr: List<SyntaxExpr>): Result<List<SyntaxEntry>, String> {
     let _mapNominal = HashMap<String, SyntaxExpr>()
-    let _mapSymbolic = HashMap<String, SymbolicPattern>()
+    let _mapSymbolic = HashMap<String, SyntaxEntry>()
     let _testSet = HashSet<String>()
     
     /*
@@ -120,7 +120,6 @@ func nominalToSymbolicPattern(expr: List<SyntaxExpr>): Result<List<SyntaxEntry>,
                         if (let Some(old) <- _mapNominal.put(name, hd)) {
                             throw Exception("SyntaxDef name collision: ${old}")
                         }
-                    add_name(name)
                     case ImportExpr(_) => throw Exception("SyntaxImport should have been already removed here")
                 }
                 x = tl
@@ -148,14 +147,14 @@ func nominalToSymbolicPattern(expr: List<SyntaxExpr>): Result<List<SyntaxEntry>,
                 case NamePattern(s) =>
                     var ret: SymbolicPattern = UnQualifiedPattern
                     if (let Some(qualified) <- _mapSymbolic.get(s)) {
-                        ret = qualified
+                        ret = qualified.pattern()
                     }
                     else if (let Some(expr) <- _mapNominal.get(s)) {
                         // circular reference detection
                         testAndSetFunc(s)
                         let entry = entryFromExpr(expr)
                         unsetFunc(s)
-                        _mapSymbolic.put(s, entry.pattern())
+                        _mapSymbolic.put(s, entry)
                         ret = entry.pattern()
                     }
                     else {
@@ -268,18 +267,6 @@ extend NfaEntry {
     static func generateSeparatedFiles() {}
 
     static func generateLinkedAll() {}
-}
-
-extend NfaEntry <: ToString {
-    public func toString(): String {
-        this.getSymbol() + " -> Nfa{${this.getNfa().getId()} nodes}"
-    }
-}
-
-extend NfaEntry {
-    public func stringifyNfa(): String {
-        return this.getSymbol() + " -> " + this.getNfa().stringifyNfa()
-    }
 }
 
 func dump(entry: NfaEntry) {

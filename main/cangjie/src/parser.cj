@@ -423,7 +423,7 @@ let syntaxDefExpr = nameToken.and(modifierToken.opt()).and(defSymbolToken).map {
 }.and(orPattern).map {
     x: ((Token, Option<Token>), SyntaxPattern) => match(x) {
         case ((Name(s), Some(Modifier(m))), p) => SyntaxDefExpr(s, Some(m), p)
-        case ((Name(s), None), p) => SyntaxDefExpr(s, None, p)
+        case ((Name(s), None), p) => SyntaxDefExpr(s, Option<String>.None, p)
         case _ => throw Exception()
     }
 }
