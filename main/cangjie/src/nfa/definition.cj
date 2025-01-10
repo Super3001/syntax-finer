@@ -52,7 +52,7 @@ protected enum NfaNode {
     | EmptyNode
     | End
     | Tracker(NfaNode, Idklass, TMod, Int) // name number constant
-    | TrackerEnd(NfaNode, Idklass, Int) // end of the tracker name
+    | TrackerEnd(NfaNode, TMod, Int) // end of the tracker name
 
     public func getId(): Int {
         match (this) {
@@ -127,7 +127,7 @@ extend NfaNode <: ToString {
             case EmptyNode => "<-1> EmptyNode."
             case End => "<0> End."
             case Tracker(nxt, name, mod, id) => "<${id}> Tracker{${name}, ${mod}} -> <${nxt.getId()}>"
-            case TrackerEnd(nxt, name, id) => "<${id}> TrackerEnd{~(${name})}"
+            case TrackerEnd(nxt, mod, id) => "<${id}> TrackerEnd{~(${mod})}"
         }
     }
 }
@@ -168,10 +168,61 @@ extend NfaNode {
                 case EmptyNode => "\n${tabSpace}()."
                 case End => "\n<0> End."
                 case Tracker(nxt, name, mod, id) => "\n${tabSpace}<${id}> Tracker{${name}, ${mod}} -> " + tabIn() + nfa2string(nxt)
-                case TrackerEnd(nxt, name, id) => tabOut() + "\n${tabSpace}<${id}> TrackerEnd{${name}} -> " + nfa2string(nxt)
+                case TrackerEnd(nxt, mod, id) => tabOut() + "\n${tabSpace}<${id}> TrackerEnd{${mod}} -> " + nfa2string(nxt)
             }
         }
 
         nfa2string(this)
     }
+}
+
+protected enum NfaEntry {
+    | FileEntry(String, NfaNode)
+    | SimpleEntry(String, NfaNode)
+    | UndefinedEntry(String, String, NfaNode)
+
+    func isFileEntry(): Bool {
+        match(this) {
+            case FileEntry(_, _) => true
+            case _ => false
+        }
+    }
+
+    func getName(): String {
+        match (this) {
+            case FileEntry(name, _) => name
+            case SimpleEntry(name, _) => name
+            case UndefinedEntry(name, _, _) => name
+        }
+        
+    } 
+
+    func getNfa(): NfaNode {
+        match (this) {
+            case FileEntry(_, nfa) => nfa
+            case SimpleEntry(_, nfa) => nfa
+            case UndefinedEntry(_, _, nfa) => nfa
+        }
+    }
+
+    func getSymbol(): String {
+        match (this) {
+            case SimpleEntry(name, nfa) => '<${name}>'
+            case FileEntry(name, nfa) => '[qualified:file] <${name}>'
+            case UndefinedEntry(modifier, name, nfa) => '[undefined:${modifier}] <${name}>'
+        } 
+    }
+}
+
+protected enum MatchResult {
+    | Char(Rune)
+    | Chars(String)
+    | Intt(Int)
+    | Booll(Bool)
+    | BOS(String)
+    | EOS
+    | SOL(String)
+    | EOL
+    | SOD(String)
+    | EOD
 }

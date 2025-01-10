@@ -210,7 +210,7 @@ extend SyntaxEntry <: ToString {
     }
 }
 
-func printOut(l: List<SyntaxEntry>) {
+func dump(l: List<SyntaxEntry>) {
     println(l.join('\n'))
 }
 
@@ -226,8 +226,8 @@ extend SymbolicPattern <: ToString {
             case StarPattern(p) => "StarPattern{${p}}"
             case OptPattern(p) => "OptPattern{${p}}"
             case PlusPattern(p) => "PlusPattern{${p}}"
-            // case NamePattern(p, id, tmod) => "NamePattern[${id}, ${tmod}]{${p}}"
-            case NamePattern(p, id, tmod) => "${p}"
+            // case NamePattern(p, id, mod) => "NamePattern[${id}, ${mod}]{${p}}"
+            case NamePattern(p, id, mod) => "${p}"
         }
     }
 }
@@ -240,34 +240,6 @@ func evalSymbolic(str: String): Result<Unit, String>  {
 }
 
 
-enum NfaEntry {
-    | FileEntry(String, NfaNode)
-    | SimpleEntry(String, NfaNode)
-    | UndefinedEntry(String, String, NfaNode)
-
-    func isFileEntry(): Bool {
-        match(this) {
-            case FileEntry(_, _) => true
-            case _ => false
-        }
-    } 
-
-    func getNfa(): NfaNode {
-        match (this) {
-            case FileEntry(_, nfa) => nfa
-            case SimpleEntry(_, nfa) => nfa
-            case UndefinedEntry(_, _, nfa) => nfa
-        }
-    }
-
-    func getSymbol(): String {
-        match (this) {
-            case SimpleEntry(name, nfa) => '<${name}>'
-            case FileEntry(name, nfa) => '[qualified:file] <${name}>'
-            case UndefinedEntry(modifier, name, nfa) => '[undefined:${modifier}] <${name}>'
-        } 
-    }
-}
 
 extend NfaNode {
     static func fromPattern(pat: SymbolicPattern): Result<NfaNode, String> {
@@ -307,7 +279,7 @@ extend NfaEntry {
     }
 }
 
-func printOut(entry: NfaEntry) {
+func dump(entry: NfaEntry) {
     println(entry.stringifyNfa())
 }
 
@@ -421,8 +393,8 @@ func generateNfaFunc(pat: SymbolicPattern): Option<NfaNode> {
                 conn.id = one.getId()
                 conn.dest = one
                 one
-            case NamePattern(p, id, tmod) => 
-                Tracker(gen_nfa(p, TrackerEnd(nxt, id, novel_id())), id, tmod, novel_id())
+            case NamePattern(p, id, mod) => 
+                Tracker(gen_nfa(p, TrackerEnd(nxt, mod, novel_id())), id, mod, novel_id())
             case UnQualifiedPattern => EmptyNode
         }
     }

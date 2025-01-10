@@ -64,7 +64,7 @@ protected class BoolArrayRecord {
         }
     }
 
-    public func runeContains(ch: Rune): Bool {
+    public func contains(ch: Rune): Bool {
         match {
             case ch.isAscii() => this.dest[ch.toInt()]
             case _ => false

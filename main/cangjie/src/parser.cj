@@ -254,7 +254,7 @@ public func evalToken(str: String): Result<Unit, String> {
     Token.fromString(str).map {l => l.reduce({_, tk => println(tk)}, ())}
 }
 
-func printOut(l: List<Token>) {
+func dump(l: List<Token>) {
     println(l.join('\n'))
 }
 
@@ -440,6 +440,6 @@ public func evalExpression(str: String): Result<Unit, String> {
     Token.fromString(str).andThen(SyntaxExpr.fromTokens).map {l => println(l.join('\n'))}
 }
 
-func printOut(l: List<SyntaxExpr>) {
+func dump(l: List<SyntaxExpr>) {
     println(l.join('\n'))
 }

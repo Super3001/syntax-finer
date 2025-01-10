@@ -159,6 +159,21 @@ extend<A> List<A> <: ToString where A <: ToString {
     public func toString() {
         "List: [${this.join(",")}]"
     }
+
+    public func join(sp: String, maxItem!: Int): String {
+        var count = 0
+        var x = this
+        var res = ""
+        while (count < maxItem) {
+            match (x) {
+                case Cons(hd, tl) => 
+                    res = "${res}${sp}${hd}"
+                    x = tl
+                case Nil => break
+            }
+        }
+        res
+    }
 }
 
 extend<A> List<A> where A <: Equatable<A> {
