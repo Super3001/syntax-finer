@@ -13,7 +13,7 @@ enum SymbolicPattern {
     | StarPattern(SymbolicPattern)
     | OptPattern(SymbolicPattern)
     | PlusPattern(SymbolicPattern)
-    | NamePattern(SymbolicPattern, Idklass, TMod)
+    | NamePattern(SymbolicPattern, String, TMod)
     | UnQualifiedPattern
 }
 
@@ -57,6 +57,9 @@ extend TMod {
 func nominalToSymbolicPattern(expr: List<SyntaxExpr>): Result<List<SyntaxEntry>, String> {
     let _mapNominal = HashMap<String, SyntaxExpr>()
     let _mapSymbolic = HashMap<String, SymbolicPattern>()
+    let _testSet = HashSet<String>()
+    
+    /*
     let _mapNameId = HashMap<String, Idklass>()
     let _mapIdName = HashMap<Idklass, String>()
     func init_nameId(): Idklass {
@@ -92,7 +95,7 @@ func nominalToSymbolicPattern(expr: List<SyntaxExpr>): Result<List<SyntaxEntry>,
     func id2name(id: Idklass): String {
         id
     } 
-    let _testSet = HashSet<String>()
+    */
 
     /*
     expr.map { 
@@ -171,10 +174,10 @@ func nominalToSymbolicPattern(expr: List<SyntaxExpr>): Result<List<SyntaxEntry>,
             case SyntaxDefExpr(name, modifier, pat) => 
                 let symbolic = qualifyAndLink(pat)
                 match (modifier) {
-                    case Some("file") => FileEntry(name, NamePattern(symbolic, name2id(name), File))
-                    case Some("f") => FileEntry(name, NamePattern(symbolic, name2id(name), F))
-                    case Some(other) => UndefinedEntry(name, other, NamePattern(symbolic, name2id(name), Undefined(other)))
-                    case None => SimpleEntry(name, NamePattern(symbolic, name2id(name), TMod.default(symbolic)))
+                    case Some("file") => FileEntry(name, NamePattern(symbolic, name, File))
+                    case Some("f") => FileEntry(name, NamePattern(symbolic, name, F))
+                    case Some(other) => UndefinedEntry(name, other, NamePattern(symbolic, name, Undefined(other)))
+                    case None => SimpleEntry(name, NamePattern(symbolic, name, TMod.default(symbolic)))
                 }
             case _ => throw Exception("`entryFromExpr`: unreachable here");
         }
