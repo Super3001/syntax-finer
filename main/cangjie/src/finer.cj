@@ -3,6 +3,7 @@ package simple_finer
 
 import simple_finer.ext.*
 import simple_finer.nfa.*
+import std.fs.File
 
 enum Finer {
     | StringAndSyntaxPath(String, String)
@@ -19,8 +20,18 @@ extend Finer {
         
         let text = List<Rune>.fromArray(obj[0].toRuneArray())
         let entry = obj[1]
-        entry.runOn(text)
+        // println(text)
+        let result = entry.runOn(text)
+        // result.deduplication()
+        println(result)
+        writeToJson(result.toJson())
     }
+
+    static func writeToJson(text: String, filename!: String = "finer_result.json") {
+        let filepath = "text_out\\" + filename
+        File.writeTo(filepath, text.toArray())
+    }
+
 }
 
 

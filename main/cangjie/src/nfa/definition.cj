@@ -233,6 +233,27 @@ protected enum MatchItem {
     | EOD
 }
 
+extend MatchItem <: ToString {
+    public func toString(): String {
+        match (this) {
+            case Char(ch) => "Char{${Context.printable(ch)}}"
+            case Chars(s) => "String{${Context.printable(s)}}"
+            case BOS(name) => "BOS{${name}}"
+            case BOL(name) => "BOL{${name}}"
+            case BOD(name) => "BOD{${name}}"
+            case EOS => "EOS"
+            case EOL => "EOL"
+            case EOD => "EOD"
+        }
+    }
+}
+
+extend MatchItem {
+    public func toJson(indent: String): String {
+        ""
+    }
+}
+
 protected enum MatchResult {
     | Some(List<MatchItem>)
     | None
@@ -241,6 +262,77 @@ protected enum MatchResult {
         match (this) {
             case Some(l) => Some(l.add(item))
             case None => None
+        }
+    }
+
+}
+
+extend MatchResult <: ToString {
+    public func toString(): String {
+        match (this) {
+            case Some(l) => l.join('\n')
+            case None => "MatchResult{None}"
+        }
+    }
+}
+
+extend MatchResult {
+    public func toJson(): String {
+        var tabSpace = ""
+        var startFlag = true
+        func tabIn(): String {
+            tabSpace = tabSpace + "\t"
+            startFlag = true
+            ""
+        }
+        func tabOut(): String {
+            tabSpace = tabSpace[0..tabSpace.size-1]
+            ""
+        }
+        func comma(): String {
+            if (startFlag) {
+                startFlag = false
+                return ""
+            }
+            ","
+        }
+        func lineStart(): String {
+            "${comma()}\n${tabSpace}"
+        }
+        func key(name: String): String {
+            if (name.size > 0) {
+                return '"${name}": '
+            }
+            ''
+        }
+
+        match (this) {
+            case Some(l) =>
+                var out = List<String>.Nil
+                var x = l
+                while (true) {
+                    match (x) {
+                        case Cons(hd, tl) =>
+                            let str = match (hd) {
+                                case Char(ch) => Context.jsonEscapeChar(ch)
+                                case Chars(s) => Context.jsonEscapeString(s)
+                                case BOS(name) => lineStart() + '"${name}": "'
+                                case EOS => '"'
+                                case BOL(name) => lineStart() + key(name) + '[' + tabIn()
+                                case EOL => tabOut() + '\n${tabSpace}]'
+                                case BOD(name) => lineStart() + key(name) + '{' + tabIn()
+                                case EOD => tabOut() + '\n${tabSpace}}'
+                            }
+                            // print(str)
+                            out = out.add(str)
+                            x = tl
+                        case Nil => break
+                    }
+                }
+                // println(out)
+                out.reverse().join('')
+            case None =>
+                '{\n\t"file": null\n}'
         }
     }
 }

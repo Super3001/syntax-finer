@@ -44,10 +44,10 @@ extend TMod {
             case SimplePattern(_) => Str
             case RegexPattern(_) => Str
             case ConcatPattern(_) => Dict
-            case OrPattern(_) => Dict
-            case StarPattern(_) => List
+            case OrPattern(l) => default(l.head())
+            case StarPattern(_) => Dict
             case OptPattern(p) => default(p)
-            case PlusPattern(_) => List
+            case PlusPattern(_) => Dict
             case NamePattern(p, _, _) => default(p)
             case UnQualified => throw Exception("UnQualified SymbolicPattern should not occur at link stage")
         }
@@ -276,10 +276,16 @@ func dump(entry: NfaEntry) {
 
 func generateNfaFunc(pat: SymbolicPattern): Option<NfaNode> {
     var id = 0
+    var uuid = 10000
 
     func novel_id(): Int {
         id += 1
         id
+    }
+
+    func novel_name(): String {
+        uuid += 1
+        uuid.toString()
     }
 
     func reset_id(): Unit {
@@ -379,12 +385,19 @@ func generateNfaFunc(pat: SymbolicPattern): Option<NfaNode> {
                 Forward(one, nxt, novel_id())
             case PlusPattern(p) =>
                 var conn = Connector()
-                let one = gen_nfa(p, Backward(nxt, conn, novel_id()))
+                var _name = novel_name()
+                let back = Backward(TrackerEnd(nxt, TMod.List, novel_id()), conn, novel_id())
+                let one = match (p) {
+                    case NamePattern(inner, name, mod) => 
+                        _name = name
+                        Tracker(gen_nfa(inner, TrackerEnd(back, mod, novel_id())), "", mod, novel_id())
+                    case _ => gen_nfa(p, back)
+                }
                 conn.id = one.getId()
                 conn.dest = one
-                one
-            case NamePattern(p, id, mod) => 
-                Tracker(gen_nfa(p, TrackerEnd(nxt, mod, novel_id())), id, mod, novel_id())
+                Tracker(one, _name, TMod.List, novel_id())
+            case NamePattern(p, name, mod) => 
+                Tracker(gen_nfa(p, TrackerEnd(nxt, mod, novel_id())), name, mod, novel_id())
             case UnQualifiedPattern => EmptyNode
         }
     }
@@ -393,10 +406,13 @@ func generateNfaFunc(pat: SymbolicPattern): Option<NfaNode> {
     Some(nfa)
 }
 
+func fileEntryFromString(str: String): Result<NfaEntry, String> {
+    let runes = List<Rune>.fromArray(str.toRuneArray())
+    Token.fromRunes(runes).andThen(SyntaxExpr.fromTokens).andThen(SyntaxExpr.resolveLinks).andThen(nominalToSymbolicPattern).andThen(NfaEntry.generateFirstFile)
+}
 
 func evalNfa(str: String): Result<Unit, String>  {
     let runes = List<Rune>.fromArray(str.toRuneArray())
-    // println(runes)
     Token.fromRunes(runes).andThen(SyntaxExpr.fromTokens).andThen(SyntaxExpr.resolveLinks).andThen(nominalToSymbolicPattern).map {
         l => l.map {
             x => match (x) {

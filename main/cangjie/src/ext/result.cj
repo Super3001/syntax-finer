@@ -28,4 +28,11 @@ extend<T, E> Result<T, E> <: ResultExt {
             case Err(e) => Err(e)
         }
     }
+
+    public func getOrThrow(msg: String): T {
+        match (this) {
+            case Ok(v) => v
+            case Err(e) => throw Exception(msg)
+        }
+    }
 }

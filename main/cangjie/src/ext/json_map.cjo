@@ -1,0 +1,39 @@
+
+package simple_finer.ext
+
+import std.collection.HashMap
+import std.collection.ArrayList
+
+public enum JsonMap<K, V> {
+    | Dict(HashMap<K, JsonMap<K, V>>)
+    | List(ArrayList<JsonMap<K, V>>)
+    | Plain(V)
+
+    public static func novel_dict(): JsonMap {
+        Dict(HashMap<String, JsonMap>())
+    }
+
+    public static func novel_list(): JsonMap {
+        List(ArrayList<JsonMap>())
+    }
+
+}
+
+extend<K, V> JsonMap<K, V> {
+    public func deduplicationAddAttribute(key: K, value: JsonMap): JsonMap {
+        /*
+        match (this) {
+            case Dict(map) =>
+                if (let Some(exist) <- map.get(key)) {
+                    match (exist) {
+                        case Dict(_) =>
+                            map.put(key, novel_list().append(exist).append(value))
+                    }
+                }
+                map.put(key, value)
+                ...       
+        }
+        */
+    }
+    public func append(obj: JsonMap): Unit {}
+}

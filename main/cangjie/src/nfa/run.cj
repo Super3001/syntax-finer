@@ -4,7 +4,7 @@ import simple_finer.ext.*
 import std.regex
 
 extend NfaEntry {
-    protected func runOn(l: List<Rune>) {
+    protected func runOn(l: List<Rune>): MatchResult {
 
         var history = List<Rune>.Nil
         func past(ch: Rune, enable: Bool) {
@@ -20,12 +20,12 @@ extend NfaEntry {
         
         func run(node: NfaNode, rest: List<Rune>, record: Bool): MatchResult {
             match (node) {
-                case Start(nxt, _) => run(nxt, rest, record)
+                case Start(nxt, _) => run(nxt, rest, record).add(BOD(""))
                 case End => 
                     if (!rest.isEmpty()) {
                         return None
                     }
-                    Some(List<MatchItem>.Nil)
+                    Some(List<MatchItem>.empty().add(EOD))
                 case Single(nxt, ch, _) =>
                     match (rest) {
                         case Cons(ch, tail) => past(ch, record); run(nxt, tail, record).add(Char(ch))
@@ -113,5 +113,7 @@ extend NfaEntry {
                     }
             }
         }
+
+        run(getNfa(), l, true)
     }
 } 

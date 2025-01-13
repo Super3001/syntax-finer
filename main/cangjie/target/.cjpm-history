@@ -22,8 +22,8 @@
     {
       "rootPackageName": "simple_finer",
       "modulePath": ".",
-      "packagePath": "E:\\BaiduSyncdisk\\modeling\\syntax\\main\\cangjie\\src\\context",
-      "fullName": "simple_finer.context",
+      "packagePath": "E:\\BaiduSyncdisk\\modeling\\syntax\\main\\cangjie\\src\\ext",
+      "fullName": "simple_finer.ext",
       "isMacroPackage": false,
       "output-type": "static",
       "compile-option": "",
@@ -41,8 +41,8 @@
     {
       "rootPackageName": "simple_finer",
       "modulePath": ".",
-      "packagePath": "E:\\BaiduSyncdisk\\modeling\\syntax\\main\\cangjie\\src\\ext",
-      "fullName": "simple_finer.ext",
+      "packagePath": "E:\\BaiduSyncdisk\\modeling\\syntax\\main\\cangjie\\src\\context",
+      "fullName": "simple_finer.context",
       "isMacroPackage": false,
       "output-type": "static",
       "compile-option": "",
@@ -50,7 +50,9 @@
       "customized-option": {},
       "link-option": "",
       "native-link-option": "",
-      "requires": [],
+      "requires": [
+        "simple_finer.ext"
+      ],
       "c_libs": {},
       "hasTestFiles": false,
       "hasProdFiles": true,

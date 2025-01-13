@@ -160,6 +160,13 @@ extend<A> List<A> {
         }
         Some((x, y))
     }
+
+    public func head(): A {
+        match (this) {
+            case Cons(hd, _) => hd
+            case Nil => throw Exception("call head() on empty list!")
+        }
+    }
 }
 
 extend<A> List<A> <: ToString where A <: ToString {
