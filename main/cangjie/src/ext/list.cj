@@ -167,6 +167,13 @@ extend<A> List<A> {
             case Nil => throw Exception("call head() on empty list!")
         }
     }
+
+    public func head_or(alt: A): A {
+        match (this) {
+            case Cons(hd, _) => hd
+            case Nil => alt
+        }
+    }
 }
 
 extend<A> List<A> <: ToString where A <: ToString {

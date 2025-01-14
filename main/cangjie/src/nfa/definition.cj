@@ -106,9 +106,9 @@ protected class Connector {
 extend NfaNode <: ToString {
     public func toString(): String {
         match (this) {
-            case Single(nxt, ch, id) => "<${id}> Single{c'${ch}'} -> <${nxt.getId()}>"
+            case Single(nxt, ch, id) => "<${id}> Single{c'${Context.printable(ch)}'} -> <${nxt.getId()}>"
             case All(nxt, id) => "<${id}> All -> <${nxt.getId()}>"
-            case Sequence(nxt, s, id) => "<${id}> Sequence{s'${s}'} -> <${nxt.getId()}>"
+            case Sequence(nxt, s, id) => "<${id}> Sequence{s'${Context.printable(s)}'} -> <${nxt.getId()}>"
             case Set(nxt, rec, id) => "<${id}> Set{${rec.name}} -> <${nxt.getId()}>"
             case InvSet(nxt, rec, id) => "<${id}> InvSet{${rec.name}} -> <${nxt.getId()}>"
             case Regex(nxt, s, id) => "<${id}> Regex{/${s}/} -> <${nxt.getId()}>"
@@ -280,6 +280,7 @@ extend MatchResult {
     public func toJson(): String {
         var tabSpace = ""
         var startFlag = true
+        var validFlag = false
         func tabIn(): String {
             tabSpace = tabSpace + "\t"
             startFlag = true
@@ -305,7 +306,20 @@ extend MatchResult {
             }
             ''
         }
-
+        func validOn(): String {
+            validFlag = true
+            ""
+        }
+        func validOff(): String {
+            validFlag = false
+            ""
+        }
+        func check_valid(content: String): String {
+            if (validFlag) {
+                return content
+            }
+            ""
+        }
         match (this) {
             case Some(l) =>
                 var out = List<String>.Nil
@@ -314,10 +328,10 @@ extend MatchResult {
                     match (x) {
                         case Cons(hd, tl) =>
                             let str = match (hd) {
-                                case Char(ch) => Context.jsonEscapeChar(ch)
-                                case Chars(s) => Context.jsonEscapeString(s)
-                                case BOS(name) => lineStart() + '"${name}": "'
-                                case EOS => '"'
+                                case Char(ch) => check_valid(Context.jsonEscapeChar(ch))
+                                case Chars(s) => check_valid(Context.jsonEscapeString(s))
+                                case BOS(name) => lineStart() + key(name) + '"' + validOn()
+                                case EOS => '"' + validOff()
                                 case BOL(name) => lineStart() + key(name) + '[' + tabIn()
                                 case EOL => tabOut() + '\n${tabSpace}]'
                                 case BOD(name) => lineStart() + key(name) + '{' + tabIn()

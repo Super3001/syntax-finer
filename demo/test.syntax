@@ -13,8 +13,6 @@ Blank ::= '\n' | ' ' | '\t' | '\r'
 
 OneLine ::= /.*/
 
-Modifier ::= '[' WORD ']'
-
 InSimple ::= /(\\\\'|[^'])*/
 
 InRegex ::= /(\\\\\/|[^\/])*/
@@ -51,6 +49,4 @@ Header ::= LineHeader | DotHeader
 
 ImportLine ::= 'import ' OneLine
 
-SyntaxLine ::= Identifier Modifier? DefSymbol Pattern Blank*
-
-SyntaxFile[file] ::= Header* Blank* Comment* ImportLine* SyntaxLine*
+SyntaxLine ::= Identifier DefSymbol Pattern Blank*

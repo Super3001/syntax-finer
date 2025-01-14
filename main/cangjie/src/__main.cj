@@ -34,6 +34,8 @@ main() {
 
     while (true) {
         println("please input .syntax file:")
+        // Console.stdIn.readln().okOr("Invalid Input!").andThen(readFile).andThen(evalNfa)
+
         let entry = Console.stdIn.readln().okOr("Invalid Input!").andThen(readFile).andThen(fileEntryFromString).getOrThrow("")
         println("please input text file:")
         let text = Console.stdIn.readln().okOr("Invalid Input!").andThen(readFile).getOrThrow("")
@@ -44,3 +46,4 @@ main() {
 
 // E:/BaiduSyncdisk/modeling/syntax/demo/base.syntax
 // E:/BaiduSyncdisk/modeling/syntax/demo/syntaxDef.syntax
+// E:/BaiduSyncdisk/modeling/syntax/demo/test.syntax

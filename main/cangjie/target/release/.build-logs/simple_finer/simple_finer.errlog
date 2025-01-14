@@ -1,34 +1,34 @@
 [33mwarning[0m: unused function:'generateSeparatedFiles'
-   [36m==>[0m E:\BaiduSyncdisk\modeling\syntax\main\cangjie\src\generator.cj:267:5:
+   [36m==>[0m E:\BaiduSyncdisk\modeling\syntax\main\cangjie\src\generator.cj:268:5:
     [36m| [0m
-[36m267[0m [36m| [0m    static func generateSeparatedFiles() {}[0m
+[36m268[0m [36m| [0m    static func generateSeparatedFiles() {}[0m
     [36m| [0m    [33m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ unused function[0m
     [36m| [0m
     [36m#[0m [0mnote[0m: this warning can be suppressed by setting the compiler option `-Woff unused`
 
 [33mwarning[0m: unused function:'generateLinkedAll'
-   [36m==>[0m E:\BaiduSyncdisk\modeling\syntax\main\cangjie\src\generator.cj:269:5:
+   [36m==>[0m E:\BaiduSyncdisk\modeling\syntax\main\cangjie\src\generator.cj:270:5:
     [36m| [0m
-[36m269[0m [36m| [0m    static func generateLinkedAll() {}[0m
+[36m270[0m [36m| [0m    static func generateLinkedAll() {}[0m
     [36m| [0m    [33m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ unused function[0m
     [36m| [0m
     [36m#[0m [0mnote[0m: this warning can be suppressed by setting the compiler option `-Woff unused`
 
 [33mwarning[0m: unused function:'reset_id'
-   [36m==>[0m E:\BaiduSyncdisk\modeling\syntax\main\cangjie\src\generator.cj:291:5:
+   [36m==>[0m E:\BaiduSyncdisk\modeling\syntax\main\cangjie\src\generator.cj:292:5:
     [36m| [0m
-[36m291[0m [36m| [0m      func reset_id(): Unit {[0m
+[36m292[0m [36m| [0m      func reset_id(): Unit {[0m
     [36m| [0m [33m_[0m[33m____^[0m
-[36m292[0m [36m| [0m[33m|[0m         id = 0[0m
-[36m293[0m [36m| [0m[33m|[0m     }[0m
+[36m293[0m [36m| [0m[33m|[0m         id = 0[0m
+[36m294[0m [36m| [0m[33m|[0m     }[0m
     [36m| [0m[33m|[0m[33m_[0m[33m____^ unused function[0m
     [36m| [0m
     [36m#[0m [0mnote[0m: this warning can be suppressed by setting the compiler option `-Woff unused`
 
 [33mwarning[0m: unused variable:'base_id'
-   [36m==>[0m E:\BaiduSyncdisk\modeling\syntax\main\cangjie\src\generator.cj:296:45:
+   [36m==>[0m E:\BaiduSyncdisk\modeling\syntax\main\cangjie\src\generator.cj:297:45:
     [36m| [0m
-[36m296[0m [36m| [0m    func regexFunc(nxt: NfaNode, s: String, base_id: Int): (NfaNode, Int) {[0m
+[36m297[0m [36m| [0m    func regexFunc(nxt: NfaNode, s: String, base_id: Int): (NfaNode, Int) {[0m
     [36m| [0m                                            [33m^^^^^^^ unused variable[0m
     [36m| [0m
     [36m#[0m [0mnote[0m: this warning can be suppressed by setting the compiler option `-Woff unused`

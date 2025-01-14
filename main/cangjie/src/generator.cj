@@ -48,7 +48,7 @@ extend TMod {
             case StarPattern(_) => Dict
             case OptPattern(p) => default(p)
             case PlusPattern(_) => Dict
-            case NamePattern(p, _, _) => default(p)
+            case NamePattern(p, _, _) => Dict
             case UnQualified => throw Exception("UnQualified SymbolicPattern should not occur at link stage")
         }
     }
@@ -162,6 +162,7 @@ func nominalToSymbolicPattern(expr: List<SyntaxExpr>): Result<List<SyntaxEntry>,
                     }
                     ret
                 case ConcatPattern(l) => ConcatPattern(l.map(qualifyAndLink))
+                // case ConcatPattern(l) => ConcatPattern(groupedQualifyAndLink(l))
                 case OrPattern(l) => OrPattern(l.map(qualifyAndLink))
                 case StarPattern(p) => StarPattern(qualifyAndLink(p))
                 case OptPattern(p) => OptPattern(qualifyAndLink(p))

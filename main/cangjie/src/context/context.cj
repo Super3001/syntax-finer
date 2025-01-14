@@ -31,6 +31,7 @@ protected class Context {
             case r'\n' => "\\n"
             case r'\t' => "\\t"
             case r'\r' => "\\r"
+            case r'\0' => "<EOF>"
             case _ => c.toString()
         }
     }

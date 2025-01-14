@@ -1,5 +1,6 @@
 package simple_finer.nfa
 
+import simple_finer.context.Context
 import simple_finer.ext.*
 import std.regex
 
@@ -17,8 +18,9 @@ extend NfaEntry {
                 history = chars.concat(history)
             }
         }
-        
+
         func run(node: NfaNode, rest: List<Rune>, record: Bool): MatchResult {
+            println("${Context.printable(rest.head_or(r'\0'))} |> ${node}")
             match (node) {
                 case Start(nxt, _) => run(nxt, rest, record).add(BOD(""))
                 case End => 
@@ -28,7 +30,7 @@ extend NfaEntry {
                     Some(List<MatchItem>.empty().add(EOD))
                 case Single(nxt, ch, _) =>
                     match (rest) {
-                        case Cons(ch, tail) => past(ch, record); run(nxt, tail, record).add(Char(ch))
+                        case Cons(ch2, tail) where ch2 == ch => past(ch, record); run(nxt, tail, record).add(Char(ch))
                         case _ => None
                     }
                 case All(nxt, _) =>

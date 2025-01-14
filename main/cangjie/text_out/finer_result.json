@@ -1,57 +1,825 @@
 
 {
 	"file": {
-		"LineFull": [
-			{
-				"LineSpace": {
-					"LineBlank": "\n",
-					"LINE": "LINE ::= /\\S.*/"
-				},
-				"NL": "\n\n"
-			},
-			{
-				"LineSpace": {
-					"LineBlank": "",
-					"LINE": "WORD ::= /\\w+/"
-				},
-				"NL": "\n\n"
-			},
-			{
-				"LineSpace": {
-					"LineBlank": "",
-					"LINE": "NL ::= '\\n' | '\\r\\n'"
-				},
-				"NL": "\n\n"
-			},
-			{
-				"LineSpace": {
-					"LineBlank": "",
-					"LINE": "LineBlank ::= /\\s*/"
-				},
-				"NL": "\n\n"
-			},
-			{
-				"LineSpace": {
-					"LineBlank": "",
-					"LINE": "LineSpace ::= LineBlank LINE"
-				},
-				"NL": "\n\n"
-			},
-			{
-				"LineSpace": {
-					"LineBlank": "",
-					"LINE": "LineFull ::= LineSpace NL"
-				},
-				"NL": "\n\n"
-			},
-			{
-				"LineSpace": {
-					"LineBlank": "",
-					"LINE": "File[file] ::= LineFull* LineBlank"
-				},
-				"NL": "\n"
-			}
+		"Blank": [
+			"\n"
 		],
-		"LineBlank": ""
+		"SyntaxLine": [
+			{
+				"Identifier": "DefSymbol",
+				"DefSymbol": " ::= ",
+				"Pattern": {
+					"OrPattern": {
+						"ConcatPattern": {
+							"BasicPattern": {
+								"SimplePattern": {
+									"InSimple": " ::= "
+								}
+							}
+						}
+					}
+				},
+				"Blank": [
+					"\n",
+					"\n"
+				]
+			},
+			{
+				"Identifier": "Identifier",
+				"DefSymbol": " ::= ",
+				"Pattern": {
+					"RegexpPattern": {
+						"InRegex": "\\w+"
+					}
+				},
+				"Blank": [
+					"\n",
+					"\n"
+				]
+			},
+			{
+				"Identifier": "NL",
+				"DefSymbol": " ::= ",
+				"Pattern": {
+					"OrPattern": {
+						"ConcatPattern": {
+							"BasicPattern": {
+								"SimplePattern": {
+									"InSimple": "\\n"
+								}
+							}
+						},
+						"OrPatternCont": [
+							{
+								"ConcatPattern": {
+									"BasicPattern": {
+										"SimplePattern": {
+											"InSimple": "\\r\\n"
+										}
+									}
+								}
+							}
+						]
+					}
+				},
+				"Blank": [
+					"\n",
+					"\n"
+				]
+			},
+			{
+				"Identifier": "WORD",
+				"DefSymbol": " ::= ",
+				"Pattern": {
+					"RegexpPattern": {
+						"InRegex": "\\w+"
+					}
+				},
+				"Blank": [
+					"\n",
+					"\n"
+				]
+			},
+			{
+				"Identifier": "LINE",
+				"DefSymbol": " ::= ",
+				"Pattern": {
+					"RegexpPattern": {
+						"InRegex": "\\S.*"
+					}
+				},
+				"Blank": [
+					"\n",
+					"\n"
+				]
+			},
+			{
+				"Identifier": "Blank",
+				"DefSymbol": " ::= ",
+				"Pattern": {
+					"OrPattern": {
+						"ConcatPattern": {
+							"BasicPattern": {
+								"SimplePattern": {
+									"InSimple": "\\n"
+								}
+							}
+						},
+						"OrPatternCont": [
+							{
+								"ConcatPattern": {
+									"BasicPattern": {
+										"SimplePattern": {
+											"InSimple": " "
+										}
+									}
+								}
+							},
+							{
+								"ConcatPattern": {
+									"BasicPattern": {
+										"SimplePattern": {
+											"InSimple": "\\t"
+										}
+									}
+								}
+							},
+							{
+								"ConcatPattern": {
+									"BasicPattern": {
+										"SimplePattern": {
+											"InSimple": "\\r"
+										}
+									}
+								}
+							}
+						]
+					}
+				},
+				"Blank": [
+					"\n",
+					"\n"
+				]
+			},
+			{
+				"Identifier": "OneLine",
+				"DefSymbol": " ::= ",
+				"Pattern": {
+					"RegexpPattern": {
+						"InRegex": ".*"
+					}
+				},
+				"Blank": [
+					"\n",
+					"\n"
+				]
+			},
+			{
+				"Identifier": "Modifier",
+				"DefSymbol": " ::= ",
+				"Pattern": {
+					"OrPattern": {
+						"ConcatPattern": {
+							"BasicPattern": {
+								"SimplePattern": {
+									"InSimple": "["
+								}
+							},
+							"ConcatPatternCont": [
+								{
+									"BasicPattern": {
+										"NamePattern": {
+											"Identifier": "WORD"
+										}
+									}
+								},
+								{
+									"BasicPattern": {
+										"SimplePattern": {
+											"InSimple": "]"
+										}
+									}
+								}
+							]
+						}
+					}
+				},
+				"Blank": [
+					"\n",
+					"\n"
+				]
+			},
+			{
+				"Identifier": "InSimple",
+				"DefSymbol": " ::= ",
+				"Pattern": {
+					"RegexpPattern": {
+						"InRegex": "(\\\\\\\\'|[^'])*"
+					}
+				},
+				"Blank": [
+					"\n",
+					"\n"
+				]
+			},
+			{
+				"Identifier": "InRegex",
+				"DefSymbol": " ::= ",
+				"Pattern": {
+					"RegexpPattern": {
+						"InRegex": "(\\\\\\\\\\/|[^\\/])*"
+					}
+				},
+				"Blank": [
+					"\n",
+					"\n"
+				]
+			},
+			{
+				"Identifier": "SimplePattern",
+				"DefSymbol": " ::= ",
+				"Pattern": {
+					"OrPattern": {
+						"ConcatPattern": {
+							"BasicPattern": {
+								"SimplePattern": {
+									"InSimple": "\\'"
+								}
+							},
+							"ConcatPatternCont": [
+								{
+									"BasicPattern": {
+										"NamePattern": {
+											"Identifier": "InSimple"
+										}
+									}
+								},
+								{
+									"BasicPattern": {
+										"SimplePattern": {
+											"InSimple": "\\'"
+										}
+									}
+								}
+							]
+						}
+					}
+				},
+				"Blank": [
+					"\n",
+					"\n"
+				]
+			},
+			{
+				"Identifier": "RegexpPattern",
+				"DefSymbol": " ::= ",
+				"Pattern": {
+					"OrPattern": {
+						"ConcatPattern": {
+							"BasicPattern": {
+								"SimplePattern": {
+									"InSimple": "/"
+								}
+							},
+							"ConcatPatternCont": [
+								{
+									"BasicPattern": {
+										"NamePattern": {
+											"Identifier": "InRegex"
+										}
+									}
+								},
+								{
+									"BasicPattern": {
+										"SimplePattern": {
+											"InSimple": "/"
+										}
+									}
+								}
+							]
+						}
+					}
+				},
+				"Blank": [
+					"\n",
+					"\n"
+				]
+			},
+			{
+				"Identifier": "NamePattern",
+				"DefSymbol": " ::= ",
+				"Pattern": {
+					"OrPattern": {
+						"ConcatPattern": {
+							"BasicPattern": {
+								"NamePattern": {
+									"Identifier": "Identifier"
+								}
+							}
+						}
+					}
+				},
+				"Blank": [
+					"\n",
+					"\n"
+				]
+			},
+			{
+				"Identifier": "StarPattern",
+				"DefSymbol": " ::= ",
+				"Pattern": {
+					"OrPattern": {
+						"ConcatPattern": {
+							"BasicPattern": {
+								"NamePattern": {
+									"Identifier": "Identifier"
+								}
+							},
+							"ConcatPatternCont": [
+								{
+									"BasicPattern": {
+										"SimplePattern": {
+											"InSimple": "*"
+										}
+									}
+								}
+							]
+						}
+					}
+				},
+				"Blank": [
+					"\n",
+					"\n"
+				]
+			},
+			{
+				"Identifier": "OptPattern",
+				"DefSymbol": " ::= ",
+				"Pattern": {
+					"OrPattern": {
+						"ConcatPattern": {
+							"BasicPattern": {
+								"NamePattern": {
+									"Identifier": "Identifier"
+								}
+							},
+							"ConcatPatternCont": [
+								{
+									"BasicPattern": {
+										"SimplePattern": {
+											"InSimple": "?"
+										}
+									}
+								}
+							]
+						}
+					}
+				},
+				"Blank": [
+					"\n",
+					"\n"
+				]
+			},
+			{
+				"Identifier": "BasicPattern",
+				"DefSymbol": " ::= ",
+				"Pattern": {
+					"OrPattern": {
+						"ConcatPattern": {
+							"BasicPattern": {
+								"NamePattern": {
+									"Identifier": "SimplePattern"
+								}
+							}
+						},
+						"OrPatternCont": [
+							{
+								"ConcatPattern": {
+									"BasicPattern": {
+										"NamePattern": {
+											"Identifier": "NamePattern"
+										}
+									}
+								}
+							},
+							{
+								"ConcatPattern": {
+									"BasicPattern": {
+										"NamePattern": {
+											"Identifier": "StarPattern"
+										}
+									}
+								}
+							},
+							{
+								"ConcatPattern": {
+									"BasicPattern": {
+										"NamePattern": {
+											"Identifier": "OptPattern"
+										}
+									}
+								}
+							}
+						]
+					}
+				},
+				"Blank": [
+					"\n",
+					"\n"
+				]
+			},
+			{
+				"Identifier": "ConcatPatternCont",
+				"DefSymbol": " ::= ",
+				"Pattern": {
+					"OrPattern": {
+						"ConcatPattern": {
+							"BasicPattern": {
+								"SimplePattern": {
+									"InSimple": " "
+								}
+							},
+							"ConcatPatternCont": [
+								{
+									"BasicPattern": {
+										"NamePattern": {
+											"Identifier": "BasicPattern"
+										}
+									}
+								}
+							]
+						}
+					}
+				},
+				"Blank": [
+					"\n",
+					"\n"
+				]
+			},
+			{
+				"Identifier": "ConcatPattern",
+				"DefSymbol": " ::= ",
+				"Pattern": {
+					"OrPattern": {
+						"ConcatPattern": {
+							"BasicPattern": {
+								"NamePattern": {
+									"Identifier": "BasicPattern"
+								}
+							},
+							"ConcatPatternCont": [
+								{
+									"BasicPattern": {
+										"StarPattern": {
+											"Identifier": "ConcatPatternCont"
+										}
+									}
+								}
+							]
+						}
+					}
+				},
+				"Blank": [
+					"\n",
+					"\n"
+				]
+			},
+			{
+				"Identifier": "OrPatternCont",
+				"DefSymbol": " ::= ",
+				"Pattern": {
+					"OrPattern": {
+						"ConcatPattern": {
+							"BasicPattern": {
+								"SimplePattern": {
+									"InSimple": " | "
+								}
+							},
+							"ConcatPatternCont": [
+								{
+									"BasicPattern": {
+										"NamePattern": {
+											"Identifier": "ConcatPattern"
+										}
+									}
+								}
+							]
+						}
+					}
+				},
+				"Blank": [
+					"\n",
+					"\n"
+				]
+			},
+			{
+				"Identifier": "OrPattern",
+				"DefSymbol": " ::= ",
+				"Pattern": {
+					"OrPattern": {
+						"ConcatPattern": {
+							"BasicPattern": {
+								"NamePattern": {
+									"Identifier": "ConcatPattern"
+								}
+							},
+							"ConcatPatternCont": [
+								{
+									"BasicPattern": {
+										"StarPattern": {
+											"Identifier": "OrPatternCont"
+										}
+									}
+								}
+							]
+						}
+					}
+				},
+				"Blank": [
+					"\n",
+					"\n"
+				]
+			},
+			{
+				"Identifier": "Pattern",
+				"DefSymbol": " ::= ",
+				"Pattern": {
+					"OrPattern": {
+						"ConcatPattern": {
+							"BasicPattern": {
+								"NamePattern": {
+									"Identifier": "OrPattern"
+								}
+							}
+						},
+						"OrPatternCont": [
+							{
+								"ConcatPattern": {
+									"BasicPattern": {
+										"NamePattern": {
+											"Identifier": "RegexpPattern"
+										}
+									}
+								}
+							}
+						]
+					}
+				},
+				"Blank": [
+					"\n",
+					"\n"
+				]
+			},
+			{
+				"Identifier": "Comment",
+				"DefSymbol": " ::= ",
+				"Pattern": {
+					"OrPattern": {
+						"ConcatPattern": {
+							"BasicPattern": {
+								"SimplePattern": {
+									"InSimple": "//"
+								}
+							},
+							"ConcatPatternCont": [
+								{
+									"BasicPattern": {
+										"NamePattern": {
+											"Identifier": "OneLine"
+										}
+									}
+								},
+								{
+									"BasicPattern": {
+										"StarPattern": {
+											"Identifier": "Blank"
+										}
+									}
+								}
+							]
+						}
+					}
+				},
+				"Blank": [
+					"\n",
+					"\n"
+				]
+			},
+			{
+				"Identifier": "LineHeader",
+				"DefSymbol": " ::= ",
+				"Pattern": {
+					"OrPattern": {
+						"ConcatPattern": {
+							"BasicPattern": {
+								"SimplePattern": {
+									"InSimple": "["
+								}
+							},
+							"ConcatPatternCont": [
+								{
+									"BasicPattern": {
+										"NamePattern": {
+											"Identifier": "OneLine"
+										}
+									}
+								},
+								{
+									"BasicPattern": {
+										"SimplePattern": {
+											"InSimple": "]"
+										}
+									}
+								}
+							]
+						}
+					}
+				},
+				"Blank": [
+					"\n",
+					"\n"
+				]
+			},
+			{
+				"Identifier": "DotHeader",
+				"DefSymbol": " ::= ",
+				"Pattern": {
+					"OrPattern": {
+						"ConcatPattern": {
+							"BasicPattern": {
+								"SimplePattern": {
+									"InSimple": "."
+								}
+							},
+							"ConcatPatternCont": [
+								{
+									"BasicPattern": {
+										"NamePattern": {
+											"Identifier": "WORD"
+										}
+									}
+								},
+								{
+									"BasicPattern": {
+										"SimplePattern": {
+											"InSimple": " "
+										}
+									}
+								},
+								{
+									"BasicPattern": {
+										"NamePattern": {
+											"Identifier": "OneLine"
+										}
+									}
+								}
+							]
+						}
+					}
+				},
+				"Blank": [
+					"\n",
+					"\n"
+				]
+			},
+			{
+				"Identifier": "Header",
+				"DefSymbol": " ::= ",
+				"Pattern": {
+					"OrPattern": {
+						"ConcatPattern": {
+							"BasicPattern": {
+								"NamePattern": {
+									"Identifier": "LineHeader"
+								}
+							}
+						},
+						"OrPatternCont": [
+							{
+								"ConcatPattern": {
+									"BasicPattern": {
+										"NamePattern": {
+											"Identifier": "DotHeader"
+										}
+									}
+								}
+							}
+						]
+					}
+				},
+				"Blank": [
+					"\n",
+					"\n"
+				]
+			},
+			{
+				"Identifier": "ImportLine",
+				"DefSymbol": " ::= ",
+				"Pattern": {
+					"OrPattern": {
+						"ConcatPattern": {
+							"BasicPattern": {
+								"SimplePattern": {
+									"InSimple": "import "
+								}
+							},
+							"ConcatPatternCont": [
+								{
+									"BasicPattern": {
+										"NamePattern": {
+											"Identifier": "OneLine"
+										}
+									}
+								}
+							]
+						}
+					}
+				},
+				"Blank": [
+					"\n",
+					"\n"
+				]
+			},
+			{
+				"Identifier": "SyntaxLine",
+				"DefSymbol": " ::= ",
+				"Pattern": {
+					"OrPattern": {
+						"ConcatPattern": {
+							"BasicPattern": {
+								"NamePattern": {
+									"Identifier": "Identifier"
+								}
+							},
+							"ConcatPatternCont": [
+								{
+									"BasicPattern": {
+										"OptPattern": {
+											"Identifier": "Modifier"
+										}
+									}
+								},
+								{
+									"BasicPattern": {
+										"NamePattern": {
+											"Identifier": "DefSymbol"
+										}
+									}
+								},
+								{
+									"BasicPattern": {
+										"NamePattern": {
+											"Identifier": "Pattern"
+										}
+									}
+								},
+								{
+									"BasicPattern": {
+										"StarPattern": {
+											"Identifier": "Blank"
+										}
+									}
+								}
+							]
+						}
+					}
+				},
+				"Blank": [
+					"\n",
+					"\n"
+				]
+			},
+			{
+				"Identifier": "SyntaxFile",
+				"Modifier": {
+					"WORD": "file"
+				},
+				"DefSymbol": " ::= ",
+				"Pattern": {
+					"OrPattern": {
+						"ConcatPattern": {
+							"BasicPattern": {
+								"StarPattern": {
+									"Identifier": "Header"
+								}
+							},
+							"ConcatPatternCont": [
+								{
+									"BasicPattern": {
+										"StarPattern": {
+											"Identifier": "Blank"
+										}
+									}
+								},
+								{
+									"BasicPattern": {
+										"StarPattern": {
+											"Identifier": "Comment"
+										}
+									}
+								},
+								{
+									"BasicPattern": {
+										"StarPattern": {
+											"Identifier": "ImportLine"
+										}
+									}
+								},
+								{
+									"BasicPattern": {
+										"StarPattern": {
+											"Identifier": "SyntaxLine"
+										}
+									}
+								}
+							]
+						}
+					}
+				},
+				"Blank": [
+					"\n"
+				]
+			}
+		]
 	}
 }
