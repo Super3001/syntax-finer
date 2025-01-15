@@ -15,6 +15,7 @@ extend Finer {
     func fine() { 
         let obj = match (this) {
             case StringAndNfa(text, entry) => (text, entry)
+            case StringAndSyntaxPath(text, path) => (text, readFile(path).andThen(fileEntryFromString).getOrThrow())
             case _ => throw Exception("Not implemented")
         }
         

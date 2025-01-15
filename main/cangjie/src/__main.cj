@@ -36,9 +36,9 @@ main() {
         println("please input .syntax file:")
         // Console.stdIn.readln().okOr("Invalid Input!").andThen(readFile).andThen(evalNfa)
 
-        let entry = Console.stdIn.readln().okOr("Invalid Input!").andThen(readFile).andThen(fileEntryFromString).getOrThrow("")
+        let entry = Console.stdIn.readln().okOr("Invalid Input!").andThen(readFile).andThen(fileEntryFromString).getOrThrow()
         println("please input text file:")
-        let text = Console.stdIn.readln().okOr("Invalid Input!").andThen(readFile).getOrThrow("")
+        let text = Console.stdIn.readln().okOr("Invalid Input!").andThen(readFile).getOrThrow()
         Finer.StringAndNfa(text, entry).fine()
     }
     ()
